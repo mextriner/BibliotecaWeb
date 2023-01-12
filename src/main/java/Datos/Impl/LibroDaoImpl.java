@@ -5,6 +5,7 @@
  */
 package Datos.Impl;
 
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -12,6 +13,7 @@ import javax.persistence.PersistenceContext;
  *
  * @author Alumno Mañana
  */
+@Stateless
 public class LibroDaoImpl {
     @PersistenceContext(unitName="com.ceep_BibliotecaWeb_war_1.0-SNAPSHOTPU")
     EntityManager em;
