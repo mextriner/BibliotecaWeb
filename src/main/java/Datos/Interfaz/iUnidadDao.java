@@ -5,10 +5,20 @@
  */
 package Datos.Interfaz;
 
+import Dominio.Unidad;
+import java.util.List;
+
 /**
  *
  * @author Alumno Mañana
  */
 public interface iUnidadDao {
-    
+    public List<Unidad> findAllUnidad();
+    public Unidad findByIdUnidad(Unidad unidad);
+    public Unidad findByEstado(Unidad unidad);
+    public Unidad findByProveedoridProveedor(Unidad unidad);
+    public Unidad findByLibroISBN(Unidad unidad);
+    public void insertarUnidad(Unidad unidad);
+    public void updateUnidad(Unidad unidad);
+    public void deleteUnidad(Unidad unidad);
 }

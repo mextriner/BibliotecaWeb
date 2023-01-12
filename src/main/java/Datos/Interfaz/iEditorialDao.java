@@ -5,10 +5,20 @@
  */
 package Datos.Interfaz;
 
+import Dominio.Editorial;
+import java.util.List;
+
 /**
  *
  * @author Alumno Mañana
  */
 public interface iEditorialDao {
+    public List<Editorial> findAllEditorial();
+    public Editorial findByIdEditorial(Editorial editorial);
+    public Editorial findByNombre(Editorial editorial);
+    public Editorial findByDireccion(Editorial editorial);
     
+    public void insertarEditorial(Editorial editorial);
+    public void updateEditorial(Editorial editorial);
+    public void deleteEditorial(Editorial editorial);
 }

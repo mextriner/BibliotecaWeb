@@ -14,12 +14,12 @@ import java.util.List;
  */
 public interface iAutorDao {
     public List<Autor> findAllAutor();
-    public Autor findAutorById(Autor pautor);
-    public Autor findAutorByName(Autor pautor);
-    public Autor findAutorBySurname(Autor pautor);
-    public Autor findAutorByNacionalidad(Autor pautor);
-    public Autor findAutorByNacimiento(Autor pautor);
-    public void insertarAutor(Autor pautor);
-    public void updateAutor (Autor pautor);
-    public void deleteAutor(Autor pautor);
+    public Autor findAutorById(Autor autor);
+    public Autor findAutorByName(Autor autor);
+    public Autor findAutorBySurname(Autor autor);
+    public Autor findAutorByNacionalidad(Autor autor);
+    public Autor findAutorByNacimiento(Autor autor);
+    public void insertarAutor(Autor autor);
+    public void updateAutor (Autor autor);
+    public void deleteAutor(Autor autor);
 }
