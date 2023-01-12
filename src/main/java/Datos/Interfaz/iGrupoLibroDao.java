@@ -16,7 +16,7 @@ public interface iGrupoLibroDao {
     public List<Grupolibro> findAllGrupoLibro();
     public Grupolibro findByIdGrupo(Grupolibro grupoLibro);
     public Grupolibro findByNombre(Grupolibro grupoLibro);
-    public void insertarAutor(Grupolibro grupoLibro);
-    public void updateAutor (Grupolibro grupoLibro);
-    public void deleteAutor(Grupolibro grupoLibro);
+    public void insertarGrupoLibro(Grupolibro grupoLibro);
+    public void updateGrupoLibro(Grupolibro grupoLibro);
+    public void deleteGrupoLibro(Grupolibro grupoLibro);
 }
