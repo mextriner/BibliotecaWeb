@@ -18,7 +18,7 @@ public interface iLibroDao {
     public Libro findByTitulo(Libro libro);
     public Libro findByFechaPublicacion(Libro libro);
     public Libro findByBestSeller(Libro libro);
-    public void insertarAutor(Libro libro);
-    public void updateAutor (Libro libro);
-    public void deleteAutor(Libro libro);
+    public void insertarLibro(Libro libro);
+    public void updateLibro(Libro libro);
+    public void deleteLibro(Libro libro);
 }
