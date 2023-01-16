@@ -15,7 +15,7 @@ import java.util.List;
 public interface iGrupoLibroDao {
     public List<Grupolibro> findAllGrupoLibro();
     public Grupolibro findByIdGrupo(Grupolibro grupoLibro);
-    public Grupolibro findByNombre(Grupolibro grupoLibro);
+    public List<Grupolibro> findByNombre(Grupolibro grupoLibro);
     public void insertarGrupoLibro(Grupolibro grupoLibro);
     public void updateGrupoLibro(Grupolibro grupoLibro);
     public void deleteGrupoLibro(Grupolibro grupoLibro);

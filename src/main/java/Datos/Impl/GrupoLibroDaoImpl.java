@@ -33,10 +33,10 @@ public class GrupoLibroDaoImpl implements iGrupoLibroDao{
     }
     
     @Override
-    public Grupolibro findByNombre(Grupolibro grupoLibro){
+    public List<Grupolibro> findByNombre(Grupolibro grupoLibro){
         Query query = em.createQuery("grupolibro.findByNombre");
         query.setParameter("nombre", grupoLibro.getNombre());
-        return (Grupolibro) query.getSingleResult();
+        return query.getResultList();
     }
     
     @Override

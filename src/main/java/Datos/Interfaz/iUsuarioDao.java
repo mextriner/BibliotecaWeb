@@ -15,10 +15,10 @@ import java.util.List;
 public interface iUsuarioDao {
     public List<Usuario> findAllUsuario();
     public Usuario findByIdUsuario(Usuario usuario);
-    public Usuario findByNombre(Usuario usuario);
-    public Usuario findByApellido(Usuario usuario);
-    public Usuario findByDireccion(Usuario usuario);
-    public Usuario findByFechaNAc(Usuario usuario);
+    public List<Usuario> findByNombre(Usuario usuario);
+    public List<Usuario> findByApellido(Usuario usuario);
+    public List<Usuario> findByDireccion(Usuario usuario);
+    public List<Usuario> findByFechaNAc(Usuario usuario);
     public void insertarUsuario(Usuario usuario);
     public void updateUsuario(Usuario usuario);
     public void deleteUsuario(Usuario usuario);

@@ -33,24 +33,24 @@ public class LibroDaoImpl implements iLibroDao{
     }
     
     @Override
-    public Libro findByTitulo(Libro libro){
+    public List<Libro> findByTitulo(Libro libro){
         Query query = em.createQuery("Libro.findByTitulo");
         query.setParameter("titulo", libro.getTitulo());
-        return (Libro) query.getSingleResult();
+        return query.getResultList();
     }
     
     @Override
-    public Libro findByFechaPublicacion(Libro libro){
+    public List<Libro> findByFechaPublicacion(Libro libro){
          Query query = em.createQuery("Libro.findByFechaPublicacion");
         query.setParameter("fechaPublicacion", libro.getFechaPublicacion());
-        return (Libro) query.getSingleResult();
+        return query.getResultList();
     }
     
     @Override
-    public Libro findByBestSeller(Libro libro){
+    public List<Libro> findByBestSeller(Libro libro){
          Query query = em.createQuery("Libro.findByFechaNac");
         query.setParameter("bestSeller", libro.getBestSeller());
-        return (Libro) query.getSingleResult();
+        return query.getResultList();
     }
     
     @Override

@@ -5,16 +5,60 @@
  */
 package Datos.Impl;
 
+import Datos.Interfaz.iProveedorDao;
+import Dominio.Proveedor;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
  * @author Alumno Mañana
  */
 @Stateless
-public class ProveedorDaoImpl {
+public class ProveedorDaoImpl implements iProveedorDao{
     @PersistenceContext(unitName="com.ceep_BibliotecaWeb_war_1.0-SNAPSHOTPU")
     EntityManager em;
+    
+    @Override
+    public List<Proveedor> findAllProveedor(){
+        return em.createNamedQuery("Proveedor.findAll").getResultList();
+        
+    }
+    
+    @Override
+    public Proveedor findByIdProveedor(Proveedor proveedor){
+        return em.find(Proveedor.class, proveedor.getIdProveedor());
+    }
+    
+    @Override
+    public List<Proveedor> findByNombre(Proveedor proveedor){
+        Query query = em.createQuery("Proveedor.findByNombre");
+        query.setParameter("nombre", proveedor.getNombre());
+        return query.getResultList();
+    }
+    
+    @Override
+    public List<Proveedor> findByDireccion(Proveedor proveedor){
+        Query query = em.createQuery("Autor.findByDireccion");
+        query.setParameter("direccion", proveedor.getNombre());
+        return query.getResultList();
+    }
+    
+    @Override
+    public void insertarProveedor(Proveedor proveedor){
+        em.persist(proveedor);
+    }
+    
+    @Override
+    public void updateProveedor(Proveedor proveedor){
+        em.merge(proveedor);
+    }
+    
+    @Override
+    public void deleteroveedor(Proveedor proveedor){
+        em.remove(em.merge(proveedor));
+    }
 }

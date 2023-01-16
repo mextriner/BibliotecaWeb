@@ -15,9 +15,9 @@ import java.util.List;
 public interface iUnidadDao {
     public List<Unidad> findAllUnidad();
     public Unidad findByIdUnidad(Unidad unidad);
-    public Unidad findByEstado(Unidad unidad);
-    public Unidad findByProveedoridProveedor(Unidad unidad);
-    public Unidad findByLibroISBN(Unidad unidad);
+    public List<Unidad> findByEstado(Unidad unidad);
+    public List<Unidad> findByProveedoridProveedor(Unidad unidad);
+    public List<Unidad> findByLibroISBN(Unidad unidad);
     public void insertarUnidad(Unidad unidad);
     public void updateUnidad(Unidad unidad);
     public void deleteUnidad(Unidad unidad);

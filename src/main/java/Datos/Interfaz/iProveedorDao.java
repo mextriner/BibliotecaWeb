@@ -15,8 +15,8 @@ import java.util.List;
 public interface iProveedorDao {
     public List<Proveedor> findAllProveedor();
     public Proveedor findByIdProveedor(Proveedor proveedor);
-    public Proveedor findByNombre(Proveedor proveedor);
-    public Proveedor findByDireccion(Proveedor proveedor);
+    public List<Proveedor> findByNombre(Proveedor proveedor);
+    public List<Proveedor> findByDireccion(Proveedor proveedor);
     public void insertarProveedor(Proveedor proveedor);
     public void updateProveedor(Proveedor proveedor);
     public void deleteroveedor(Proveedor proveedor);

@@ -35,18 +35,18 @@ public class EditorialDaoImpl implements iEditorialDao{
     }
     
     @Override
-    public Editorial findByNombre(Editorial editorial){
+    public List<Editorial> findByNombre(Editorial editorial){
         Query query = em.createQuery("Editorial.findByNombre");
         query.setParameter("nombre", editorial.getNombre());
-        return (Editorial) query.getSingleResult();
+        return query.getResultList();
         
     }
     
     @Override
-    public Editorial findByDireccion(Editorial editorial){
+    public List<Editorial> findByDireccion(Editorial editorial){
         Query query = em.createQuery("Editorial.findByDireccion");
         query.setParameter("direccion", editorial.getDireccion());
-        return (Editorial) query.getSingleResult();
+        return query.getResultList();
         
     }
     

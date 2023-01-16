@@ -29,36 +29,36 @@ public class AutorDaoImpl implements iAutorDao{
     }
     
     @Override
-    public Autor findAutorById(Autor autor){
+    public Autor findById(Autor autor){
         return em.find(Autor.class, autor.getIdAutor());
     }
     
     @Override
-    public Autor findAutorByName(Autor autor){
+    public List<Autor> findByName(Autor autor){
         Query query = em.createQuery("Autor.findByNombre");
         query.setParameter("nombre", autor.getNombre());
-        return (Autor) query.getSingleResult();
+        return query.getResultList();
     }
     
     @Override
-    public Autor findAutorBySurname(Autor autor){
+    public List<Autor> findBySurname(Autor autor){
         Query query = em.createQuery("Autor.findByApellido");
         query.setParameter("apellido", autor.getApellido());
-        return (Autor) query.getSingleResult();
+        return query.getResultList();
     }
     
     @Override
-    public Autor findAutorByNacionalidad(Autor autor){
+    public List<Autor> findByNacionalidad(Autor autor){
          Query query = em.createQuery("Autor.findByNacionalidad");
         query.setParameter("nacionalidad", autor.getNacionalidad());
-        return (Autor) query.getSingleResult();
+        return query.getResultList();
     }
     
     @Override
-    public Autor findAutorByNacimiento(Autor autor){
+    public List<Autor> findByNacimiento(Autor autor){
          Query query = em.createQuery("Autor.findByFechaNac");
         query.setParameter("fechaNac", autor.getFechaNac());
-        return (Autor) query.getSingleResult();
+        return query.getResultList();
     }
     
     @Override
@@ -73,6 +73,6 @@ public class AutorDaoImpl implements iAutorDao{
     
     @Override
     public void deleteAutor(Autor autor){
-         em.remove(em.merge(autor));
+        em.remove(em.merge(autor));
     }
 }

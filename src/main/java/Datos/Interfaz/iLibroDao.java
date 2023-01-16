@@ -15,9 +15,9 @@ import java.util.List;
 public interface iLibroDao {
     public List<Libro> findAllLibro();
     public Libro findByIsbn(Libro libro);
-    public Libro findByTitulo(Libro libro);
-    public Libro findByFechaPublicacion(Libro libro);
-    public Libro findByBestSeller(Libro libro);
+    public List<Libro> findByTitulo(Libro libro);
+    public List<Libro> findByFechaPublicacion(Libro libro);
+    public List<Libro> findByBestSeller(Libro libro);
     public void insertarLibro(Libro libro);
     public void updateLibro(Libro libro);
     public void deleteLibro(Libro libro);
