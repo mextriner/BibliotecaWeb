@@ -30,7 +30,8 @@ public class UnidadDaoImpl implements iUnidadDao{
     
     @Override
     public Unidad findByIdUnidad(Unidad unidad){
-        return em.find(Unidad.class, unidad.getUnidadPK().getIdUnidad());
+        
+        return em.find(Unidad.class, unidad.getUnidadPK());
     }
     
     @Override

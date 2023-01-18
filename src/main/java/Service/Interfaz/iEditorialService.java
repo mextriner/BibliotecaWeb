@@ -5,6 +5,8 @@
  */
 package Service.Interfaz;
 
+import Dominio.Editorial;
+import java.util.List;
 import javax.ejb.Local;
 
 /**
@@ -13,5 +15,17 @@ import javax.ejb.Local;
  */
 @Local
 public interface iEditorialService {
+    public List<Editorial> findAllEditorial();
     
+    public Editorial findByIdEditorial(Editorial editorial);
+    
+    public List<Editorial> findByNombre(Editorial editorial);
+    
+    public List<Editorial> findByDireccion(Editorial editorial);
+    
+    public void insertarEditorial(Editorial editorial);
+    
+    public void updateEditorial(Editorial editorial);
+    
+    public void deleteEditorial(Editorial editorial);
 }

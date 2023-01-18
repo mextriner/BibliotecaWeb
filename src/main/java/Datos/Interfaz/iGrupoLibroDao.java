@@ -19,4 +19,6 @@ public interface iGrupoLibroDao {
     public void insertarGrupoLibro(Grupolibro grupoLibro);
     public void updateGrupoLibro(Grupolibro grupoLibro);
     public void deleteGrupoLibro(Grupolibro grupoLibro);
+    
+    
 }
