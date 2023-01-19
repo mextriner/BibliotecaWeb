@@ -5,6 +5,7 @@
  */
 package Datos.Interfaz;
 
+import Dominio.Grupolibro;
 import Dominio.Libro;
 import java.util.List;
 

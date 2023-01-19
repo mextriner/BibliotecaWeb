@@ -53,6 +53,7 @@ public class LibroDaoImpl implements iLibroDao{
         return query.getResultList();
     }
     
+    
     @Override
     public void insertarLibro(Libro libro){
         em.persist(libro);

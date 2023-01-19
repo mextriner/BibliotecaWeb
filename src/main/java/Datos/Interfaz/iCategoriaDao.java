@@ -14,10 +14,16 @@ import java.util.List;
  */
 public interface iCategoriaDao {
     public List<Categoria> findAllCategoria();
+    
     public Categoria findByIdCategoria(Categoria categoria);
+    
     public Categoria findByNombre(Categoria categoria);
+    
     public Categoria findByDescripcion(Categoria categoria);
+    
     public void insertarCategoria(Categoria categoria);
+    
     public void updateCategoria (Categoria categoria);
+    
     public void deleteCategoria(Categoria categoria);
 }
