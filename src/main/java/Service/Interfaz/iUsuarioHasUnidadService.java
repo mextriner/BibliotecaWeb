@@ -4,10 +4,27 @@
  */
 package Service.Interfaz;
 
+import Dominio.UsuarioHasUnidad;
+import java.util.List;
+import javax.ejb.Local;
+
 /**
  *
  * @author Maximo
  */
+@Local
 public interface iUsuarioHasUnidadService {
-    
+
+    public List<UsuarioHasUnidad> findPrestamoByidUsuario(UsuarioHasUnidad usuariohasunidad);
+
+    public List<UsuarioHasUnidad> findPrestamoByidUnidad(UsuarioHasUnidad usuariohasunidad);
+
+    public List<UsuarioHasUnidad> findByFecha(UsuarioHasUnidad usuariohasunidad);
+
+    public void insertarUsuarioHasUnidad(UsuarioHasUnidad usuariohasunidad);
+
+    public void updateUsuarioHasUnidad(UsuarioHasUnidad usuariohasunidad);
+
+    public void deleteUsuarioHasUnidad(UsuarioHasUnidad usuariohasunidad);
+
 }
