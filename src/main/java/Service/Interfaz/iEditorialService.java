@@ -6,6 +6,7 @@
 package Service.Interfaz;
 
 import Dominio.Editorial;
+import Dominio.Libro;
 import java.util.List;
 import javax.ejb.Local;
 
@@ -22,6 +23,8 @@ public interface iEditorialService {
     public List<Editorial> findByNombre(Editorial editorial);
     
     public List<Editorial> findByDireccion(Editorial editorial);
+    
+    public List<Libro> findLibroByEditorial(Editorial editorial);
     
     public void insertarEditorial(Editorial editorial);
     

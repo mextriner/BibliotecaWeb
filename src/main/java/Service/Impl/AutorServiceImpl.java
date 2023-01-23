@@ -7,6 +7,7 @@ package Service.Impl;
 
 import Datos.Interfaz.iAutorDao;
 import Dominio.Autor;
+import Dominio.Libro;
 import Service.Interfaz.iAutorService;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -57,6 +58,10 @@ public class AutorServiceImpl implements iAutorService{
         return autorDao.findByNacimiento(autor);
     }
     
+    @Override
+    public List<Libro> findLibroByAutor(Autor autor){
+        return autorDao.findLibroByAutor(autor);
+    }
     
     @Override
     public void insertarAutor(Autor autor){

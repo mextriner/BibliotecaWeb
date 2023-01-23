@@ -6,6 +6,7 @@
 package Service.Interfaz;
 
 import Dominio.Categoria;
+import Dominio.Libro;
 import java.util.List;
 import javax.ejb.Local;
 
@@ -23,6 +24,8 @@ public interface iCategoriaService {
     public Categoria findByNombre(Categoria categoria);
     
     public Categoria findByDescripcion(Categoria categoria);
+    
+    public List<Libro> findLibroByCategoria(Categoria categoria);
     
     public void insertarCategoria(Categoria categoria);
     

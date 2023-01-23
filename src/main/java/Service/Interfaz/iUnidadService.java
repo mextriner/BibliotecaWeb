@@ -5,6 +5,8 @@
  */
 package Service.Interfaz;
 
+import Dominio.Unidad;
+import java.util.List;
 import javax.ejb.Local;
 
 /**
@@ -14,4 +16,20 @@ import javax.ejb.Local;
 @Local
 public interface iUnidadService {
     
+    public List<Unidad> findAllUnidad();
+
+    public Unidad findByIdUnidad(Unidad unidad);
+
+    public List<Unidad> findByEstado(Unidad unidad);
+
+    public List<Unidad> findProveedorByUnidad(Unidad unidad);
+
+    public List<Unidad> findByLibroISBN(Unidad unidad);
+
+    public void insertarUnidad(Unidad unidad);
+
+    public void updateUnidad(Unidad unidad);
+
+    public void deleteUnidad(Unidad unidad);
+
 }

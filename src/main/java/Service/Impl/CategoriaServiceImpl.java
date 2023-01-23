@@ -7,6 +7,7 @@ package Service.Impl;
 
 import Datos.Interfaz.iCategoriaDao;
 import Dominio.Categoria;
+import Dominio.Libro;
 import Service.Interfaz.iCategoriaService;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -41,6 +42,11 @@ public class CategoriaServiceImpl implements iCategoriaService{
     @Override
     public Categoria findByDescripcion(Categoria categoria){
         return categoriaDao.findByDescripcion(categoria);
+    }
+    
+    @Override
+    public List<Libro> findLibroByCategoria(Categoria categoria){
+        return categoriaDao.findLibroByCategoria(categoria);
     }
     
     @Override

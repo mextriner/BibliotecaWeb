@@ -5,8 +5,6 @@
  */
 package Datos.Interfaz;
 
-import Dominio.Unidad;
-import Dominio.Usuario;
 import Dominio.UsuarioHasUnidad;
 import java.util.List;
 
@@ -16,13 +14,15 @@ import java.util.List;
  */
 public interface iUsuarioHasUnidadDao {
 
-    public List<UsuarioHasUnidad> findByUsuarioidUsuario(UsuarioHasUnidad usuariohasunidad);
+    public List<UsuarioHasUnidad> findPrestamoByidUsuario(UsuarioHasUnidad usuariohasunidad);
 
-    public List<UsuarioHasUnidad> findByUnidadidUnidad(UsuarioHasUnidad usuariohasunidad);
+    public List<UsuarioHasUnidad> findPrestamoByidUnidad(UsuarioHasUnidad usuariohasunidad);
 
     public List<UsuarioHasUnidad> findByFecha(UsuarioHasUnidad usuariohasunidad);
     
-    public List<Usuario> findUsuarioByUnidad(UsuarioHasUnidad usuariohasunidad);
-    
-    public List<Unidad> findUnidadByUsuario(UsuarioHasUnidad usuariohasunidad);
+    public void insertarUsuarioHasUnidad(UsuarioHasUnidad usuariohasunidad);
+
+    public void updateUsuarioHasUnidad(UsuarioHasUnidad usuariohasunidad);
+
+    public void deleteUsuarioHasUnidad(UsuarioHasUnidad usuariohasunidad);
 }

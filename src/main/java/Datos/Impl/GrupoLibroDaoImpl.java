@@ -41,7 +41,7 @@ public class GrupoLibroDaoImpl implements iGrupoLibroDao{
     }
     
     @Override
-    public List<Libro> findLibroBySaga(Grupolibro grupoLibro){
+    public List<Libro> findLibroByGrupo(Grupolibro grupoLibro){
         return grupoLibro.getLibroList();
     }
     

@@ -6,6 +6,7 @@
 package Service.Interfaz;
 
 import Dominio.Grupolibro;
+import Dominio.Libro;
 import java.util.List;
 import javax.ejb.Local;
 
@@ -21,6 +22,8 @@ public interface iGrupolibroService {
     public Grupolibro findByIdGrupo(Grupolibro grupoLibro);
     
     public List<Grupolibro> findByNombre(Grupolibro grupoLibro);
+    
+    public List<Libro> findLibroByGrupo(Grupolibro grupoLibro);
     
     public void insertarGrupoLibro(Grupolibro grupoLibro);
     

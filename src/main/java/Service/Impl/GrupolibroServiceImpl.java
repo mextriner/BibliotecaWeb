@@ -20,33 +20,41 @@ import javax.inject.Inject;
 public class GrupolibroServiceImpl implements iGrupolibroService{
     
     @Inject
-    iGrupoLibroDao grupolibroDao; 
+    private iGrupoLibroDao grupolibroDao; 
     
+    
+    @Override
     public List<Grupolibro> findAllGrupoLibro(){
         return grupolibroDao.findAllGrupoLibro();
     }
     
+    @Override
     public Grupolibro findByIdGrupo(Grupolibro grupoLibro){
         return grupolibroDao.findByIdGrupo(grupoLibro);
     }
     
+    @Override
     public List<Grupolibro> findByNombre(Grupolibro grupoLibro){
         return grupolibroDao.findByNombre(grupoLibro);
     }
     
-    public List<Libro> findLibroBySaga(Grupolibro grupoLibro){
-        return grupolibroDao.findLibroBySaga(grupoLibro);
+    @Override
+    public List<Libro> findLibroByGrupo(Grupolibro grupoLibro){
+        return grupolibroDao.findLibroByGrupo(grupoLibro);
     }
     
+    @Override
     public void insertarGrupoLibro(Grupolibro grupoLibro){
-        
+        grupolibroDao.insertarGrupoLibro(grupoLibro);
     }
     
+    @Override
     public void updateGrupoLibro(Grupolibro grupoLibro){
-        
+        grupolibroDao.updateGrupoLibro(grupoLibro);
     }
     
+    @Override
     public void deleteGrupoLibro(Grupolibro grupoLibro){
-        
+        grupolibroDao.deleteGrupoLibro(grupoLibro);
     }
 }

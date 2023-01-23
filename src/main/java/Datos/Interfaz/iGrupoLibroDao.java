@@ -20,7 +20,7 @@ public interface iGrupoLibroDao {
     
     public List<Grupolibro> findByNombre(Grupolibro grupoLibro);
     
-    public List<Libro> findLibroBySaga(Grupolibro grupoLibro);
+    public List<Libro> findLibroByGrupo(Grupolibro grupoLibro);   
     
     public void insertarGrupoLibro(Grupolibro grupoLibro);
     

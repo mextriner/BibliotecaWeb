@@ -8,9 +8,8 @@ package Datos.Impl;
 import Datos.Interfaz.iLibroDao;
 import Dominio.Autor;
 import Dominio.Categoria;
-import Dominio.Editorial;
-import Dominio.Grupolibro;
 import Dominio.Libro;
+import Dominio.Unidad;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -67,7 +66,11 @@ public class LibroDaoImpl implements iLibroDao{
         return libro.getCategoriaList();
     }
     
-    
+    @Override
+    public List<Unidad> findUidadByLibro(Libro libro){
+        return libro.getUnidadList();
+    }
+      
     @Override
     public void insertarLibro(Libro libro){
         em.persist(libro);

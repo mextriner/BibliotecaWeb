@@ -7,6 +7,7 @@ package Service.Impl;
 
 import Datos.Interfaz.iEditorialDao;
 import Dominio.Editorial;
+import Dominio.Libro;
 import Service.Interfaz.iEditorialService;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -20,7 +21,7 @@ import javax.inject.Inject;
 public class EditorialServiceImpl implements iEditorialService{
     
     @Inject
-    iEditorialDao editorialDao;
+    private iEditorialDao editorialDao;
     
     @Override
     public List<Editorial> findAllEditorial(){
@@ -41,6 +42,10 @@ public class EditorialServiceImpl implements iEditorialService{
         return editorialDao.findByDireccion(editorial);
     }
     
+    @Override
+    public List<Libro> findLibroByEditorial(Editorial editorial){
+        return editorialDao.findLibroByEditorial(editorial);
+    }
     
     @Override
     public void insertarEditorial(Editorial editorial){

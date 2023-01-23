@@ -14,13 +14,20 @@ import java.util.List;
  * @author Alumno Mañana
  */
 public interface iEditorialDao {
+
     public List<Editorial> findAllEditorial();
+
     public Editorial findByIdEditorial(Editorial editorial);
+
     public List<Editorial> findByNombre(Editorial editorial);
+
     public List<Editorial> findByDireccion(Editorial editorial);
+
     public List<Libro> findLibroByEditorial(Editorial editorial);
-    
+
     public void insertarEditorial(Editorial editorial);
+
     public void updateEditorial(Editorial editorial);
+
     public void deleteEditorial(Editorial editorial);
 }

@@ -10,6 +10,7 @@ import Dominio.Categoria;
 import Dominio.Editorial;
 import Dominio.Grupolibro;
 import Dominio.Libro;
+import Dominio.Unidad;
 import java.util.List;
 
 /**
@@ -31,6 +32,8 @@ public interface iLibroDao {
     public List<Autor> findAutorByLibro(Libro libro);
 
     public List<Categoria> findCategoriaByLibro(Libro libro);
+    
+    public List<Unidad> findUidadByLibro(Libro libro);
 
     public void insertarLibro(Libro libro);
 
