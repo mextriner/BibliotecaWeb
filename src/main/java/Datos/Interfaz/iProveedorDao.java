@@ -6,6 +6,7 @@
 package Datos.Interfaz;
 
 import Dominio.Proveedor;
+import Dominio.Unidad;
 import java.util.List;
 
 /**
@@ -13,11 +14,20 @@ import java.util.List;
  * @author Alumno Mañana
  */
 public interface iProveedorDao {
+
     public List<Proveedor> findAllProveedor();
+
     public Proveedor findByIdProveedor(Proveedor proveedor);
+
     public List<Proveedor> findByNombre(Proveedor proveedor);
+
     public List<Proveedor> findByDireccion(Proveedor proveedor);
+
+    public List<Unidad> findUnidadByProveedor(Proveedor proveedor);
+
     public void insertarProveedor(Proveedor proveedor);
+
     public void updateProveedor(Proveedor proveedor);
+
     public void deleteroveedor(Proveedor proveedor);
 }

@@ -6,6 +6,10 @@
 package Datos.Impl;
 
 import Datos.Interfaz.iLibroDao;
+import Dominio.Autor;
+import Dominio.Categoria;
+import Dominio.Editorial;
+import Dominio.Grupolibro;
 import Dominio.Libro;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -51,6 +55,16 @@ public class LibroDaoImpl implements iLibroDao{
          Query query = em.createQuery("Libro.findByFechaNac");
         query.setParameter("bestSeller", libro.getBestSeller());
         return query.getResultList();
+    }
+    
+    @Override
+    public List<Autor> findAutorByLibro(Libro libro){
+        return libro.getAutorList();
+    }
+    
+    @Override
+    public List<Categoria> findCategoriaByLibro(Libro libro){
+        return libro.getCategoriaList();
     }
     
     

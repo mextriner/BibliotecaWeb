@@ -7,6 +7,7 @@ package Service.Impl;
 
 import Datos.Interfaz.iCategoriaDao;
 import Dominio.Categoria;
+import Service.Interfaz.iCategoriaService;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -17,7 +18,7 @@ import javax.inject.Inject;
  */
 
 @Stateless
-public class CategoriaServiceImpl implements iCategoriaDao{
+public class CategoriaServiceImpl implements iCategoriaService{
     @Inject
     private iCategoriaDao categoriaDao;
     

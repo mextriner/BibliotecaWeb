@@ -7,6 +7,7 @@ package Datos.Impl;
 
 import Datos.Interfaz.iGrupoLibroDao;
 import Dominio.Grupolibro;
+import Dominio.Libro;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -37,6 +38,11 @@ public class GrupoLibroDaoImpl implements iGrupoLibroDao{
         Query query = em.createQuery("grupolibro.findByNombre");
         query.setParameter("nombre", grupoLibro.getNombre());
         return query.getResultList();
+    }
+    
+    @Override
+    public List<Libro> findLibroBySaga(Grupolibro grupoLibro){
+        return grupoLibro.getLibroList();
     }
     
     @Override

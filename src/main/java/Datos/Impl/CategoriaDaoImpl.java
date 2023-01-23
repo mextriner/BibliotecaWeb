@@ -7,6 +7,7 @@ package Datos.Impl;
 
 import Datos.Interfaz.iCategoriaDao;
 import Dominio.Categoria;
+import Dominio.Libro;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -45,6 +46,11 @@ public class CategoriaDaoImpl implements iCategoriaDao{
         Query query = em.createQuery("Categoria.findByDescripcion");
         query.setParameter("descripcion", categoria.getDescripcion());
         return (Categoria) query.getSingleResult();
+    }
+    
+    @Override
+    public List<Libro> findLibroByCategoria(Categoria categoria){
+        return categoria.getLibroList();
     }
     
     @Override

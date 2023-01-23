@@ -42,7 +42,7 @@ public class UnidadDaoImpl implements iUnidadDao{
     }
     
     @Override
-    public List<Unidad> findByProveedoridProveedor(Unidad unidad){
+    public List<Unidad> findProveedorByUnidad(Unidad unidad){
         Query query = em.createQuery("Unidad.findByProveedoridProveedor");
         query.setParameter("unidad", unidad.getProveedor());
         return query.getResultList();
@@ -50,7 +50,7 @@ public class UnidadDaoImpl implements iUnidadDao{
     
     @Override
     public List<Unidad> findByLibroISBN(Unidad unidad){
-        Query query = em.createQuery("Unidad.findByProveedoridProveedor");
+        Query query = em.createQuery("Unidad.findByLibroISBN");
         query.setParameter("unidad", unidad.getProveedor());
         return query.getResultList();
     }

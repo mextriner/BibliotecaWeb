@@ -6,6 +6,7 @@
 package Datos.Interfaz;
 
 import Dominio.Categoria;
+import Dominio.Libro;
 import java.util.List;
 
 /**
@@ -20,6 +21,8 @@ public interface iCategoriaDao {
     public Categoria findByNombre(Categoria categoria);
     
     public Categoria findByDescripcion(Categoria categoria);
+    
+    public List<Libro> findLibroByCategoria(Categoria categoria);
     
     public void insertarCategoria(Categoria categoria);
     

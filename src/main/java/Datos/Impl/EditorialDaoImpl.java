@@ -7,6 +7,7 @@ package Datos.Impl;
 
 import Datos.Interfaz.iEditorialDao;
 import Dominio.Editorial;
+import Dominio.Libro;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -48,6 +49,11 @@ public class EditorialDaoImpl implements iEditorialDao{
         query.setParameter("direccion", editorial.getDireccion());
         return query.getResultList();
         
+    }
+    
+    @Override
+    public List<Libro> findLibroByEditorial(Editorial editorial){
+        return editorial.getLibroList();
     }
     
     @Override

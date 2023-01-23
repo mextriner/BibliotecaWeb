@@ -7,6 +7,7 @@ package Datos.Impl;
 
 import Datos.Interfaz.iAutorDao;
 import Dominio.Autor;
+import Dominio.Libro;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.*;
@@ -59,6 +60,11 @@ public class AutorDaoImpl implements iAutorDao{
          Query query = em.createQuery("Autor.findByFechaNac");
         query.setParameter("fechaNac", autor.getFechaNac());
         return query.getResultList();
+    }
+    
+    @Override
+    public List<Libro> findLibroByAutor(Autor autor){
+        return autor.getLibroList();
     }
     
     @Override

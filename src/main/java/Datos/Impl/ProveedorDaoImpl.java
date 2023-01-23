@@ -7,6 +7,7 @@ package Datos.Impl;
 
 import Datos.Interfaz.iProveedorDao;
 import Dominio.Proveedor;
+import Dominio.Unidad;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -42,10 +43,16 @@ public class ProveedorDaoImpl implements iProveedorDao{
     
     @Override
     public List<Proveedor> findByDireccion(Proveedor proveedor){
-        Query query = em.createQuery("Autor.findByDireccion");
+        Query query = em.createQuery("Proveedor.findByDireccion");
         query.setParameter("direccion", proveedor.getNombre());
         return query.getResultList();
     }
+    
+    @Override
+    public List<Unidad> findUnidadByProveedor(Proveedor proveedor){        
+        return proveedor.getUnidadList();
+    }
+
     
     @Override
     public void insertarProveedor(Proveedor proveedor){

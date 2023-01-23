@@ -6,6 +6,7 @@
 package Datos.Interfaz;
 
 import Dominio.Grupolibro;
+import Dominio.Libro;
 import java.util.List;
 
 /**
@@ -18,6 +19,8 @@ public interface iGrupoLibroDao {
     public Grupolibro findByIdGrupo(Grupolibro grupoLibro);
     
     public List<Grupolibro> findByNombre(Grupolibro grupoLibro);
+    
+    public List<Libro> findLibroBySaga(Grupolibro grupoLibro);
     
     public void insertarGrupoLibro(Grupolibro grupoLibro);
     

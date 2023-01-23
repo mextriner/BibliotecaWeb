@@ -13,12 +13,20 @@ import java.util.List;
  * @author Alumno Mañana
  */
 public interface iUnidadDao {
+
     public List<Unidad> findAllUnidad();
+
     public Unidad findByIdUnidad(Unidad unidad);
+
     public List<Unidad> findByEstado(Unidad unidad);
-    public List<Unidad> findByProveedoridProveedor(Unidad unidad);
+
+    public List<Unidad> findProveedorByUnidad(Unidad unidad);
+
     public List<Unidad> findByLibroISBN(Unidad unidad);
+
     public void insertarUnidad(Unidad unidad);
+
     public void updateUnidad(Unidad unidad);
+
     public void deleteUnidad(Unidad unidad);
 }

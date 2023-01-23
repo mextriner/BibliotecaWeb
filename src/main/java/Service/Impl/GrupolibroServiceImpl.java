@@ -8,6 +8,7 @@ package Service.Impl;
 
 import Datos.Interfaz.iGrupoLibroDao;
 import Dominio.Grupolibro;
+import Dominio.Libro;
 import Service.Interfaz.iGrupolibroService;
 import java.util.List;
 import javax.inject.Inject;
@@ -31,6 +32,10 @@ public class GrupolibroServiceImpl implements iGrupolibroService{
     
     public List<Grupolibro> findByNombre(Grupolibro grupoLibro){
         return grupolibroDao.findByNombre(grupoLibro);
+    }
+    
+    public List<Libro> findLibroBySaga(Grupolibro grupoLibro){
+        return grupolibroDao.findLibroBySaga(grupoLibro);
     }
     
     public void insertarGrupoLibro(Grupolibro grupoLibro){
