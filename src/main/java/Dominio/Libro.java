@@ -12,8 +12,10 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -63,13 +65,14 @@ public class Libro implements Serializable {
     @Column(name = "portada")
     private byte[] portada;
     @ManyToMany(mappedBy = "libroList")
+    private List<Categoria> categoriaList;
+    @ManyToMany(mappedBy = "libroList")
     private List<Grupolibro> grupolibroList;
     @ManyToMany(mappedBy = "libroList")
     private List<Autor> autorList;
-    @ManyToMany(mappedBy = "libroList")
-    private List<Categoria> categoriaList;
-    @ManyToMany(mappedBy = "libroList")
-    private List<Editorial> editorialList;
+    @JoinColumn(name = "idEditorial", referencedColumnName = "idEditorial")
+    @ManyToOne(optional = false)
+    private Editorial idEditorial;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "libro")
     private List<Unidad> unidadList;
 
@@ -128,6 +131,15 @@ public class Libro implements Serializable {
     }
 
     @XmlTransient
+    public List<Categoria> getCategoriaList() {
+        return categoriaList;
+    }
+
+    public void setCategoriaList(List<Categoria> categoriaList) {
+        this.categoriaList = categoriaList;
+    }
+
+    @XmlTransient
     public List<Grupolibro> getGrupolibroList() {
         return grupolibroList;
     }
@@ -145,22 +157,12 @@ public class Libro implements Serializable {
         this.autorList = autorList;
     }
 
-    @XmlTransient
-    public List<Categoria> getCategoriaList() {
-        return categoriaList;
+    public Editorial getIdEditorial() {
+        return idEditorial;
     }
 
-    public void setCategoriaList(List<Categoria> categoriaList) {
-        this.categoriaList = categoriaList;
-    }
-
-    @XmlTransient
-    public List<Editorial> getEditorialList() {
-        return editorialList;
-    }
-
-    public void setEditorialList(List<Editorial> editorialList) {
-        this.editorialList = editorialList;
+    public void setIdEditorial(Editorial idEditorial) {
+        this.idEditorial = idEditorial;
     }
 
     @XmlTransient

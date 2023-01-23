@@ -36,7 +36,6 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Grupolibro.findAll", query = "SELECT g FROM Grupolibro g"),
     @NamedQuery(name = "Grupolibro.findByIdGrupo", query = "SELECT g FROM Grupolibro g WHERE g.idGrupo = :idGrupo"),
     @NamedQuery(name = "Grupolibro.findByNombre", query = "SELECT g FROM Grupolibro g WHERE g.nombre = :nombre")})
-    
 public class Grupolibro implements Serializable {
 
     private static final long serialVersionUID = 1L;
