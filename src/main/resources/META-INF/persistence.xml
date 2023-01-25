@@ -13,7 +13,11 @@
     <class>Dominio.UsuarioHasUnidad</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
+<<<<<<< Updated upstream
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/bibliotecaweb?zeroDateTimeBehavior=CONVERT_TO_NULL"/>
+=======
+      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/biblitecaweb?zeroDateTimeBehavior=CONVERT_TO_NULL"/>
+>>>>>>> Stashed changes
       <property name="javax.persistence.jdbc.user" value="root"/>
       <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
       <property name="javax.persistence.jdbc.password" value="1234"/>
