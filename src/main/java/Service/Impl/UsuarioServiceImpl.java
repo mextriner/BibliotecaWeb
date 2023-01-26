@@ -57,6 +57,16 @@ public class UsuarioServiceImpl implements iUsuarioService{
         return usuarioDao.findByFechaNAc(usuario);
     }
     
+    @Override
+    public boolean existUsuario (Usuario usuario){
+        boolean ex = false;
+        for(int i = 0; i < findAllUsuario().size(); i++){
+            if(findAllUsuario().get(i).getIdUsuario().equals(usuario.getIdUsuario())){
+                ex = true;
+            }
+        }
+        return ex;
+    }
     
     @Override
     public void insertarUsuario(Usuario usuario){

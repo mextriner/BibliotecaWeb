@@ -29,6 +29,8 @@ public interface iUsuarioService {
     
     public List<Usuario> findByFechaNAc(Usuario usuario);
     
+    public boolean existUsuario (Usuario usuario);
+    
     public void insertarUsuario(Usuario usuario);
     
     public void updateUsuario(Usuario usuario);
