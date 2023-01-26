@@ -55,8 +55,8 @@ public class UsuarioDaoImpl implements iUsuarioDao{
     
     @Override
     public List<Usuario> findByFechaNAc(Usuario usuario){
-        Query query = em.createQuery("Usuario.findByFechaNAc");
-        query.setParameter("usuario", usuario.getFechaNAc());
+        Query query = em.createQuery("Usuario.findByFechaNac");
+        query.setParameter("usuario", usuario.getFechaNac());
         return query.getResultList();
     }
     

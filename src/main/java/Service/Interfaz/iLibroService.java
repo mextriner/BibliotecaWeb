@@ -33,7 +33,7 @@ public interface iLibroService {
 
     public List<Categoria> findCategoriaByLibro(Libro libro);
     
-    public List<Unidad> findUidadByLibro(Libro libro);
+    public List<Unidad> findUnidadByLibro(Libro libro);
 
     public void insertarLibro(Libro libro);
 

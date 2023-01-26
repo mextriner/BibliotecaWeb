@@ -34,10 +34,11 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Usuario.findAll", query = "SELECT u FROM Usuario u"),
     @NamedQuery(name = "Usuario.findByIdUsuario", query = "SELECT u FROM Usuario u WHERE u.idUsuario = :idUsuario"),
+    @NamedQuery(name = "Usuario.findByClave", query = "SELECT u FROM Usuario u WHERE u.clave = :clave"),
     @NamedQuery(name = "Usuario.findByNombre", query = "SELECT u FROM Usuario u WHERE u.nombre = :nombre"),
     @NamedQuery(name = "Usuario.findByApellido", query = "SELECT u FROM Usuario u WHERE u.apellido = :apellido"),
     @NamedQuery(name = "Usuario.findByDireccion", query = "SELECT u FROM Usuario u WHERE u.direccion = :direccion"),
-    @NamedQuery(name = "Usuario.findByFechaNAc", query = "SELECT u FROM Usuario u WHERE u.fechaNAc = :fechaNAc")})
+    @NamedQuery(name = "Usuario.findByFechaNac", query = "SELECT u FROM Usuario u WHERE u.fechaNac = :fechaNac")})
 public class Usuario implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -49,24 +50,21 @@ public class Usuario implements Serializable {
     private String idUsuario;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 45)
+    @Size(min = 1, max = 20)
+    @Column(name = "clave")
+    private String clave;
+    @Size(max = 45)
     @Column(name = "nombre")
     private String nombre;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 45)
+    @Size(max = 45)
     @Column(name = "apellido")
     private String apellido;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 45)
+    @Size(max = 45)
     @Column(name = "direccion")
     private String direccion;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "fechaNAc")
+    @Column(name = "fechaNac")
     @Temporal(TemporalType.DATE)
-    private Date fechaNAc;
+    private Date fechaNac;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario")
     private List<UsuarioHasUnidad> usuarioHasUnidadList;
 
@@ -77,12 +75,9 @@ public class Usuario implements Serializable {
         this.idUsuario = idUsuario;
     }
 
-    public Usuario(String idUsuario, String nombre, String apellido, String direccion, Date fechaNAc) {
+    public Usuario(String idUsuario, String clave) {
         this.idUsuario = idUsuario;
-        this.nombre = nombre;
-        this.apellido = apellido;
-        this.direccion = direccion;
-        this.fechaNAc = fechaNAc;
+        this.clave = clave;
     }
 
     public String getIdUsuario() {
@@ -91,6 +86,14 @@ public class Usuario implements Serializable {
 
     public void setIdUsuario(String idUsuario) {
         this.idUsuario = idUsuario;
+    }
+
+    public String getClave() {
+        return clave;
+    }
+
+    public void setClave(String clave) {
+        this.clave = clave;
     }
 
     public String getNombre() {
@@ -117,12 +120,12 @@ public class Usuario implements Serializable {
         this.direccion = direccion;
     }
 
-    public Date getFechaNAc() {
-        return fechaNAc;
+    public Date getFechaNac() {
+        return fechaNac;
     }
 
-    public void setFechaNAc(Date fechaNAc) {
-        this.fechaNAc = fechaNAc;
+    public void setFechaNac(Date fechaNac) {
+        this.fechaNac = fechaNac;
     }
 
     @XmlTransient

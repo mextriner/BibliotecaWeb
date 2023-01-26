@@ -67,7 +67,7 @@ public class LibroDaoImpl implements iLibroDao{
     }
     
     @Override
-    public List<Unidad> findUidadByLibro(Libro libro){
+    public List<Unidad> findUnidadByLibro(Libro libro){
         return libro.getUnidadList();
     }
       

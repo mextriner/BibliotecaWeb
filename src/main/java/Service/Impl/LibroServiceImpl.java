@@ -58,8 +58,8 @@ public class LibroServiceImpl implements iLibroService {
     }
 
     @Override
-    public List<Unidad> findUidadByLibro(Libro libro){
-        return libroDao.findUidadByLibro(libro);
+    public List<Unidad> findUnidadByLibro(Libro libro){
+        return libroDao.findUnidadByLibro(libro);
     }
 
     @Override
