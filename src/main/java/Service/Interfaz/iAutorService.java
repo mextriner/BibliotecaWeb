@@ -30,6 +30,8 @@ public interface iAutorService {
     public List<Autor> findByNacimiento(Autor autor);
     
     public List<Libro> findLibroByAutor(Autor autor);
+    
+    public boolean existAutor(Autor autor);
 
     public void insertarAutor(Autor autor);
     
