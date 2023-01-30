@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <persistence version="2.0" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
-  <persistence-unit name="com.ceep_BibliotecaWeb_war_1.0-SNAPSHOTPU" transaction-type="RESOURCE_LOCAL">
+  <persistence-unit name="bibliotecaweb" transaction-type="RESOURCE_LOCAL">
+    <jta-data-source>jdbc/bibliotecaweb</jta-data-source>
     <class>Dominio.Sagas</class>
     <class>Dominio.Libro</class>
     <class>Dominio.Categoria</class>
@@ -12,12 +13,8 @@
     <class>Dominio.Usuario</class>
     <class>Dominio.UsuarioHasUnidad</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
-    <properties>
-<<<<<<< Updated upstream
+    <properties>        
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/bibliotecaweb?zeroDateTimeBehavior=CONVERT_TO_NULL"/>
-=======
-      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/biblitecaweb?zeroDateTimeBehavior=CONVERT_TO_NULL"/>
->>>>>>> Stashed changes
       <property name="javax.persistence.jdbc.user" value="root"/>
       <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
       <property name="javax.persistence.jdbc.password" value="1234"/>

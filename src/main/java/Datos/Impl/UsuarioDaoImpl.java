@@ -19,7 +19,7 @@ import javax.persistence.Query;
  */
 @Stateless
 public class UsuarioDaoImpl implements iUsuarioDao{
-    @PersistenceContext(unitName="com.ceep_BibliotecaWeb_war_1.0-SNAPSHOTPU")
+    @PersistenceContext(unitName="bibliotecaweb")
     EntityManager em;
     
     @Override

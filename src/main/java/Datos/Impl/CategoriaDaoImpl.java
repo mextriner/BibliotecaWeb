@@ -21,7 +21,7 @@ import javax.persistence.Query;
 @Stateless
 public class CategoriaDaoImpl implements iCategoriaDao{
     
-    @PersistenceContext(unitName="com.ceep_BibliotecaWeb_war_1.0-SNAPSHOTPU")
+    @PersistenceContext(unitName="bibliotecaweb")
     EntityManager em;
     
     @Override

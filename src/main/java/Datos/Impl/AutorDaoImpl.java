@@ -21,7 +21,7 @@ import javax.persistence.*;
 @Stateless
 public class AutorDaoImpl implements iAutorDao{
     
-    @PersistenceContext(unitName="com.ceep_BibliotecaWeb_war_1.0-SNAPSHOTPU")
+    @PersistenceContext(unitName="bibliotecaweb")
     EntityManager em;
      
     @Override

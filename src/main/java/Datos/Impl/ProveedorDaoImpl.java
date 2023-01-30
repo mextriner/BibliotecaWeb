@@ -20,7 +20,7 @@ import javax.persistence.Query;
  */
 @Stateless
 public class ProveedorDaoImpl implements iProveedorDao{
-    @PersistenceContext(unitName="com.ceep_BibliotecaWeb_war_1.0-SNAPSHOTPU")
+    @PersistenceContext(unitName="bibliotecaweb")
     EntityManager em;
     
     @Override
