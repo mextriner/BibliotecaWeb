@@ -92,7 +92,7 @@
                                 <c:forEach items="${usuarios}" var="usuario">
                                     
                                     <div class="swiper-slide">
-                                        <div class="card" style="width: 18rem;">
+                                        <div class="card" style="width: 25em;">
                                             <img src="img/teemo.jpg" class="card-img-top" alt="...">
                                             <div class="card-body">
                                                 <p class="card-text"><strong>${usuario.idUsuario} ${usuario.clave}</strong> con su veneno y su cegado es, sin

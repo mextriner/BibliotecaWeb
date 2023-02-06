@@ -38,4 +38,5 @@ com\maximo\Service\Impl\GrupolibroServiceImpl.class
 com\maximo\Datos\Interfaz\iGrupoLibroDao.class
 com\maximo\Web\UsuarioServlet.class
 com\maximo\Datos\Interfaz\iEditorialDao.class
+com\maximo\Web\EditorialServlet.class
 com\maximo\Service\Interfaz\iUsuarioService.class
