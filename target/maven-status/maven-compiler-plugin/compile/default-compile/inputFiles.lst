@@ -8,6 +8,7 @@ C:\Users\Alumno Mañana\Documents\NetBeansProjects\BibliotecaWeb\src\main\java\co
 C:\Users\Alumno Mañana\Documents\NetBeansProjects\BibliotecaWeb\src\main\java\com\maximo\Service\Interfaz\iGrupolibroService.java
 C:\Users\Alumno Mañana\Documents\NetBeansProjects\BibliotecaWeb\src\main\java\com\maximo\Service\Impl\UsuarioHasUnidadImpl.java
 C:\Users\Alumno Mañana\Documents\NetBeansProjects\BibliotecaWeb\src\main\java\com\maximo\Service\Interfaz\iUsuarioService.java
+C:\Users\Alumno Mañana\Documents\NetBeansProjects\BibliotecaWeb\src\main\java\com\maximo\Web\LibroServlet.java
 C:\Users\Alumno Mañana\Documents\NetBeansProjects\BibliotecaWeb\src\main\java\com\maximo\Datos\Impl\UsuarioDaoImpl.java
 C:\Users\Alumno Mañana\Documents\NetBeansProjects\BibliotecaWeb\src\main\java\com\maximo\Datos\Impl\UnidadDaoImpl.java
 C:\Users\Alumno Mañana\Documents\NetBeansProjects\BibliotecaWeb\src\main\java\com\maximo\Dominio\Categoria.java
@@ -21,6 +22,7 @@ C:\Users\Alumno Mañana\Documents\NetBeansProjects\BibliotecaWeb\src\main\java\co
 C:\Users\Alumno Mañana\Documents\NetBeansProjects\BibliotecaWeb\src\main\java\com\maximo\Service\Interfaz\iEditorialService.java
 C:\Users\Alumno Mañana\Documents\NetBeansProjects\BibliotecaWeb\src\main\java\com\maximo\Service\Impl\GrupolibroServiceImpl.java
 C:\Users\Alumno Mañana\Documents\NetBeansProjects\BibliotecaWeb\src\main\java\com\maximo\Service\Interfaz\iLibroService.java
+C:\Users\Alumno Mañana\Documents\NetBeansProjects\BibliotecaWeb\src\main\java\com\maximo\Web\FkLibroServlet.java
 C:\Users\Alumno Mañana\Documents\NetBeansProjects\BibliotecaWeb\src\main\java\com\maximo\Service\Interfaz\iUsuarioHasUnidadService.java
 C:\Users\Alumno Mañana\Documents\NetBeansProjects\BibliotecaWeb\src\main\java\com\maximo\Service\Impl\UsuarioServiceImpl.java
 C:\Users\Alumno Mañana\Documents\NetBeansProjects\BibliotecaWeb\src\main\java\com\maximo\Datos\Interfaz\iUsuarioDao.java

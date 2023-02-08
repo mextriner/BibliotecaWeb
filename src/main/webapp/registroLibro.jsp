@@ -7,31 +7,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<c:></c:>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -89,7 +64,7 @@
             <div class="container-fluid bg-dark">
                 <!--en esta linea se reparten los elementos-->
 
-                <form method="POST" action="insertarLibro.php" enctype="multipart/form-data" >
+                <form method="POST" action="Libro?accion=insertar" enctype="multipart/form-data" >
 
                     <div class="row  d-flex justify-content-center">
 
@@ -121,7 +96,7 @@
                             </div>
                             <div class="mb-3">
                                 <label for="exampleFormControlInput1" class="form-label">Número de Unidades</label>
-                                <input type="text" class="form-control" name="Unidades" placeholder="Unidades">
+                                <input type="number" class="form-control" name="Unidades" placeholder="Unidades">
                             </div>
                         </div>
                         <div class="col-sm-12 col-md-4 mt-3 mb-3 text-light">
@@ -129,7 +104,7 @@
                                 <label class="form-check-label" for="flexCheckDefault">
                                     Bestseller
                                 </label>
-                                <input class="form-check-input" type="checkbox" value="True" name="bestseller" id="flexCheckDefault">
+                                <input class="form-check-input" type="checkbox" value="1" name="bestseller" id="flexCheckDefault">
 
                             </div>
                             <div class="mb-4">
@@ -143,7 +118,7 @@
                                     <select name="editorial" class="form-select">
                                         <option selected>Seleccione Editorial</option>
                                         <c:forEach items="${editoriales}" var="editorial">
-                                            <option>${editorial.idEditorial} ${editorial.nombre}</option>
+                                            <option>${editorial.idEditorial}-${editorial.nombre}</option>
                                         </c:forEach>
                                     </select>
                                 </div>
