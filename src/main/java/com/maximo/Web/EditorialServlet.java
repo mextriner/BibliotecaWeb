@@ -93,7 +93,7 @@ public class EditorialServlet extends HttpServlet {
 //        sesion.setAttribute("saldoTotal", calcularTotal(clientes));
         
         // 4. Redigir el flujo desde el controlador a un JSP
-       List<Editorial> editoriales = editorialService.findAllEditorial();
+        List<Editorial> editoriales = editorialService.findAllEditorial();
         System.out.println("Editorial: "+ editoriales);
         request.setAttribute("editoriales", editoriales);
         request.getRequestDispatcher("/listarEditorial.jsp").forward(request, response);

@@ -52,20 +52,16 @@ public class Libro implements Serializable {
     @Size(min = 1, max = 45)
     @Column(name = "titulo")
     private String titulo;
-    @Basic(optional = false)
-    @NotNull
     @Column(name = "fechaPublicacion")
     @Temporal(TemporalType.DATE)
     private Date fechaPublicacion;
-    @Basic(optional = false)
-    @NotNull
     @Column(name = "bestSeller")
-    private short bestSeller;
+    private Short bestSeller;
     @Lob
     @Column(name = "portada")
-    private byte[] portada;
+    private String portada;
     @Lob
-    @Size(max = 65535)
+    @Size(max = 140)
     @Column(name = "descripcion")
     private String descripcion;
     @ManyToMany(mappedBy = "libroList")
@@ -87,13 +83,29 @@ public class Libro implements Serializable {
         this.isbn = isbn;
     }
 
-    public Libro(String isbn, String titulo, Date fechaPublicacion, short bestSeller) {
+    public Libro(String isbn, String titulo) {
+        this.isbn = isbn;
+        this.titulo = titulo;
+    }
+
+    public Libro(String isbn, String titulo, Date fechaPublicacion, Short bestSeller, Editorial editorialidEditorial) {
         this.isbn = isbn;
         this.titulo = titulo;
         this.fechaPublicacion = fechaPublicacion;
         this.bestSeller = bestSeller;
+        this.editorialidEditorial = editorialidEditorial;
     }
 
+    public Libro(String isbn, String titulo, Date fechaPublicacion, Short bestSeller, String portada, String descripcion, Editorial editorialidEditorial) {
+        this.isbn = isbn;
+        this.titulo = titulo;
+        this.fechaPublicacion = fechaPublicacion;
+        this.bestSeller = bestSeller;
+        this.portada = portada;
+        this.descripcion = descripcion;
+        this.editorialidEditorial = editorialidEditorial;
+    }
+    
     public String getIsbn() {
         return isbn;
     }
@@ -118,19 +130,19 @@ public class Libro implements Serializable {
         this.fechaPublicacion = fechaPublicacion;
     }
 
-    public short getBestSeller() {
+    public Short getBestSeller() {
         return bestSeller;
     }
 
-    public void setBestSeller(short bestSeller) {
+    public void setBestSeller(Short bestSeller) {
         this.bestSeller = bestSeller;
     }
 
-    public byte[] getPortada() {
+    public String getPortada() {
         return portada;
     }
 
-    public void setPortada(byte[] portada) {
+    public void setPortada(String portada) {
         this.portada = portada;
     }
 

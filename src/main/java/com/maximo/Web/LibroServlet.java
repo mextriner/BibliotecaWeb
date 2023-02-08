@@ -8,17 +8,26 @@ package com.maximo.Web;
 import com.maximo.Dominio.Editorial;
 import com.maximo.Dominio.Libro;
 import com.maximo.Service.Interfaz.iLibroService;
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.Month;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
 import java.util.Formatter;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.inject.Inject;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -28,30 +37,14 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Alumno Mañana
  */
-@WebServlet(name = "LibroServlet", urlPatterns = {"/Libro"})
+@WebServlet("/Libro")
+@MultipartConfig
 public class LibroServlet extends HttpServlet {
+    
 
     @Inject
     iLibroService libroService;
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+    
    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -76,14 +69,8 @@ public class LibroServlet extends HttpServlet {
             }
     }
 
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+    
+    
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -125,46 +112,31 @@ public class LibroServlet extends HttpServlet {
         
         String isbn = request.getParameter("ISBN");
         String titulo = request.getParameter("Titulo");
-        String portada = request.getParameter("foto");
+        
+        
+        String foto = (String)(request.getParameter("foto"));
         
         String f = request.getParameter("Fecha");
-        SimpleDateFormat formato = new SimpleDateFormat("yyyy/MM/dd");
-        f = formato.format(f);
-        Date fecha = Formatter.parse(f);
-        
-        
+        String fe [] = f.split("-");
+        LocalDate fec = LocalDate.of(Integer.valueOf(fe[0]), Integer.valueOf(fe[1]),Integer.valueOf(fe[2]));
+        ZoneId defaultZoneId = ZoneId.systemDefault();
+        Date fecha = Date.from(fec.atStartOfDay(defaultZoneId).toInstant());
         
         String unidades = request.getParameter("Unidades");
-        
         String descripcion = request.getParameter("descripcion");
         String editorial = request.getParameter("editorial");
         
         
-        short bestseller = 0;
+        short bestseller = Short.valueOf(request.getParameter("bestseller"));
         
-        if (Short.valueOf(request.getParameter("bestseller")) == 1){
-            bestseller = 1;
-        }
-        
-        Libro libro = new Libro(isbn,titulo,fecha,bestseller);
-        
-        //Libro libro = new Libro(isbn);
-        
-        String edit[] = editorial.split("-");
-        Editorial ed = new Editorial (Integer.valueOf(edit[0]));
-        libro.setEditorialidEditorial(ed);
-        
-        libro.setDescripcion(descripcion);
+        Editorial ed = new Editorial (Integer.valueOf(editorial));
+        Libro libro = new Libro(isbn, titulo, fecha, bestseller, foto, descripcion, ed);
         
         libroService.insertarLibro(libro);
         this.accionDefault(request, response);
         
     }
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
+    
     @Override
     public String getServletInfo() {
         return "Short description";

@@ -60,13 +60,13 @@ public class Editorial implements Serializable {
         this.idEditorial = idEditorial;
     }
 
-    public Editorial(Integer idEditorial, String nombre, String direccion) {
-        this.idEditorial = idEditorial;
+    public Editorial(String nombre, String direccion) {
         this.nombre = nombre;
         this.direccion = direccion;
     }
-    
-    public Editorial(String nombre, String direccion) {
+
+    public Editorial(Integer idEditorial, String nombre, String direccion) {
+        this.idEditorial = idEditorial;
         this.nombre = nombre;
         this.direccion = direccion;
     }
