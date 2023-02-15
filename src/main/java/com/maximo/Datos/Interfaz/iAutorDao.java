@@ -17,7 +17,7 @@ public interface iAutorDao {
 
     public List<Autor> findAllAutor();
 
-    public Autor findById(Autor autor);
+    public Autor findByIdAutor(Autor autor);
 
     public List<Autor> findByName(Autor autor);
 

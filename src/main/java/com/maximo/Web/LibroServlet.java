@@ -10,7 +10,9 @@ import com.maximo.Dominio.Libro;
 import com.maximo.Service.Interfaz.iLibroService;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
+import java.nio.file.FileSystems;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Date;
@@ -21,6 +23,7 @@ import java.time.Month;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
+import java.util.Collection;
 import java.util.Formatter;
 import java.util.List;
 import java.util.logging.Level;
@@ -32,6 +35,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 
 /**
  *
@@ -61,6 +65,9 @@ public class LibroServlet extends HttpServlet {
                     case "eliminar":
                         //this.eliminarCliente(request, response);
                         break;
+                    case "listar":
+                        this.listarLibro(request, response);
+                        break;
                     default:
                         //this.accionDefault(request, response);
                 }
@@ -86,6 +93,9 @@ public class LibroServlet extends HttpServlet {
                     case "eliminar":
                         //this.eliminarCliente(request, response);
                         break;
+                    case "listar":
+                        this.listarLibro(request, response);
+                        break;
                     default:
                         //this.accionDefault(request, response);
                 }
@@ -97,7 +107,7 @@ public class LibroServlet extends HttpServlet {
     
     
     
-    private void accionDefault(HttpServletRequest request, HttpServletResponse response)
+    private void listarLibro(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
         List<Libro> libros = libroService.findAllLibro();
@@ -113,8 +123,16 @@ public class LibroServlet extends HttpServlet {
         String isbn = request.getParameter("ISBN");
         String titulo = request.getParameter("Titulo");
         
+        /*Part origen = (request.getPart("foto"));
+        String nom = Paths.get(origen.getSubmittedFileName()).getFileName().toString();
+        File destino = Paths.get(origen.toString().replace(":", "")).toFile();
+        destino.renameTo(new File("\\BibliotecaWeb\\img\\"+nom));*/
         
-        String foto = (String)(request.getParameter("foto"));
+        Part origen = (request.getPart("foto"));
+        String or = getFilename(origen);
+        File ar = new File(or);
+        ar.renameTo(new File("/BibliotecaWeb/img/"+ar));
+        String foto = ar.toPath().toString();
         
         String f = request.getParameter("Fecha");
         String fe [] = f.split("-");
@@ -133,9 +151,21 @@ public class LibroServlet extends HttpServlet {
         Libro libro = new Libro(isbn, titulo, fecha, bestseller, foto, descripcion, ed);
         
         libroService.insertarLibro(libro);
-        this.accionDefault(request, response);
+        this.listarLibro(request, response);
         
     }
+    
+    private static String getFilename(Part part) {
+        String r = null;
+        for (String cd : part.getHeader("content-disposition").split(";")) {
+            if (cd.trim().startsWith("filename")) {
+                String filename = cd.substring(cd.indexOf('=') + 1).trim().replace("\"", "");
+                r = filename.substring(filename.lastIndexOf('/') + 1).substring(filename.lastIndexOf('\\') + 1); // MSIE fix.
+            }
+        }
+    return r;
+    }
+    
     
     @Override
     public String getServletInfo() {

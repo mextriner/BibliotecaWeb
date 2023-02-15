@@ -52,6 +52,12 @@ public class UsuarioHasUnidad implements Serializable {
         this.fecha = fecha;
     }
 
+    public UsuarioHasUnidad(Date fecha, Unidad unidadidUnidad, Usuario usuarioidUsuario) {
+        this.fecha = fecha;
+        this.unidadidUnidad = unidadidUnidad;
+        this.usuarioidUsuario = usuarioidUsuario;
+    }
+
     public Date getFecha() {
         return fecha;
     }

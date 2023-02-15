@@ -92,7 +92,7 @@
                             </div>
                             <div class="mb-3">
                                 <label for="formFile" class="form-label">Portada</label>
-                                <input class="form-control" type="text" name="foto" placeholder="Ruta de imagen" id="formFile">
+                                <input type="file" class="form-control" name="foto" placeholder="Ruta de imagen" id="formFile">
                             </div>
                             <div class="mb-3">
                                 <label for="exampleFormControlInput1" class="form-label">Número de Unidades</label>

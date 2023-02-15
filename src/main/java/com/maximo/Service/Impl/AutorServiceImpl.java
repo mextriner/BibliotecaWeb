@@ -29,8 +29,8 @@ public class AutorServiceImpl implements iAutorService {
     }
 
     @Override
-    public Autor findById(Autor autor) {
-        return autorDao.findById(autor);
+    public Autor findByIdAutor(Autor autor) {
+        return autorDao.findByIdAutor(autor);
     }
 
     @Override

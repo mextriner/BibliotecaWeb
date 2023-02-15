@@ -30,7 +30,7 @@ public class AutorDaoImpl implements iAutorDao{
     }
     
     @Override
-    public Autor findById(Autor autor){
+    public Autor findByIdAutor(Autor autor){
         return em.find(Autor.class, autor.getIdAutor());
     }
     

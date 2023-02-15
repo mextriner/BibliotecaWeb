@@ -22,8 +22,8 @@
         <div class="container-fluid bg-dark" style="padding:0">
             <nav class="navbar navbar-expand-lg navbar-light "  style="margin: 5px ;">
                 <div class="container-fluid">
-                    <a class="navbar-brand" href="https://www.leagueoflegends.com/es-es/"><img
-                            src="img/bibliLogoRec.png" alt="" style="width:50% ;"></a>
+                    <a class="navbar-brand" href="Libro?accion=listar"><img
+                            src="foto/bibliLogoRec.png" alt="" style="width:50% ;"></a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                         data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
