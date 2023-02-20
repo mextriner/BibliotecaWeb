@@ -122,12 +122,7 @@ public class LibroServlet extends HttpServlet {
         
         String isbn = request.getParameter("ISBN");
         String titulo = request.getParameter("Titulo");
-        
-        /*Part origen = (request.getPart("foto"));
-        String nom = Paths.get(origen.getSubmittedFileName()).getFileName().toString();
-        File destino = Paths.get(origen.toString().replace(":", "")).toFile();
-        destino.renameTo(new File("\\BibliotecaWeb\\img\\"+nom));*/
-        
+                
         Part origen = (request.getPart("foto"));
         String or = getFilename(origen);
         File ar = new File(or);

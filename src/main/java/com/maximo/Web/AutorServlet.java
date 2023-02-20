@@ -5,8 +5,14 @@
  */
 package com.maximo.Web;
 
+import com.maximo.Dominio.Autor;
+import com.maximo.Service.Interfaz.iAutorService;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
+import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -17,72 +23,85 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Alumno Mañana
  */
-@WebServlet(name = "AutorServlet", urlPatterns = {"/AutorServlet"})
+@WebServlet(name = "AutorServlet", urlPatterns = {"/Autor"})
 public class AutorServlet extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet AutorServlet</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet AutorServlet at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
-    }
+    @Inject
+    iAutorService autorService;
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+
+        String accion = request.getParameter("accion");
+        if (accion != null) {
+            switch (accion) {
+                case "insertar":
+                    this.insertarAutor(request, response);
+                    break;
+                case "editar":
+                    //this.editarCliente(request, response);
+                    break;
+                case "eliminar":
+                    //this.eliminarCliente(request, response);
+                    break;
+                case "listar":
+                    //this.listarLibro(request, response);
+                    break;
+                default:
+                //this.accionDefault(request, response);
+                }
+        } else {
+            //this.accionDefault(request, response);
+        }
     }
 
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        String accion = request.getParameter("accion");
+        if (accion != null) {
+            switch (accion) {
+                case "insertar":
+                    this.insertarAutor(request, response);
+                    break;
+                case "editar":
+                    //this.editarCliente(request, response);
+                    break;
+                case "eliminar":
+                    //this.eliminarCliente(request, response);
+                    break;
+                case "listar":
+                    //this.listarLibro(request, response);
+                    break;
+                default:
+                //this.accionDefault(request, response);
+                }
+        } else {
+            //this.accionDefault(request, response);
+        }
+    }
+    
+    private void insertarAutor(HttpServletRequest request, HttpServletResponse response) 
+    throws ServletException, IOException {
+        
+        String nombre = request.getParameter("nombre");
+        String apellido = request.getParameter("apellido");
+        String nacionalidad = request.getParameter("nacionalidad");
+
+        String f = request.getParameter("fecha");
+        String fe[] = f.split("-");
+        LocalDate fec = LocalDate.of(Integer.valueOf(fe[0]), Integer.valueOf(fe[1]), Integer.valueOf(fe[2]));
+        ZoneId defaultZoneId = ZoneId.systemDefault();
+        Date fecha = Date.from(fec.atStartOfDay(defaultZoneId).toInstant());
+        
+        Autor autor = new Autor(nombre,apellido,nacionalidad,fecha);
+        autorService.insertarAutor(autor);
+        response.sendRedirect("index.jsp");
     }
 
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
     @Override
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
 }

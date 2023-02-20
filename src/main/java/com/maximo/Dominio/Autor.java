@@ -81,6 +81,10 @@ public class Autor implements Serializable {
         this.apellido = apellido;
     }
 
+    public Autor(String nombre, String apellido, String nacionalidad, Date fecha) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     public Integer getIdAutor() {
         return idAutor;
     }

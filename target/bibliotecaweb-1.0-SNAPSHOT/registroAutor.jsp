@@ -1,12 +1,4 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
-
-
-
-
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -65,15 +57,11 @@
             <div class="container-fluid bg-dark">
                 <!--en esta linea se reparten los elementos-->
 
-                <form method="POST" action="" enctype="multipart/form-data" >
+                <form method="POST" action="Autor?accion=insertar" enctype="multipart/form-data" >
 
                     <div class="row  d-flex justify-content-center">
-
                         <div class="col-md-4 col-sm-12 mb-3 mt-4">
-                            <h1 style="font-size: 30px; ;"><strong>REGISTRAR AUTOR</strong> <i class="fa-solid fa-feather"></i></h1>
-
-                            <label for="exampleFormControlInput1" class="form-label">Libro</label>
-                            <input type="text" class="form-control" name="Titulo" placeholder="Título">
+                            <h1 style="font-size: 30px;"><strong>REGISTRAR AUTOR</strong> <i class="fa-solid fa-feather"></i></h1>
                         </div>
                     </div>
                     <div class="row d-flex justify-content-center">
@@ -93,12 +81,12 @@
                             </div>
                             <div class="mb-3">
                                 <label for="exampleFormControlInput1" class="form-label">Nacionalidad</label>
-                                <input type="text" class="form-control" name="nacionalidad" placeholder="Apellido del autor">
+                                <input type="text" class="form-control" name="nacionalidad" placeholder="Nacionalidad">
                             </div>
 
                             <div class="mb-3">
                                 <label for="exampleFormControlInput1" class="form-label">Fecha de Nacimiento</label>
-                                <input type="date" class="form-control" name="Fecha" placeholder="Fecha">
+                                <input type="date" class="form-control" name="fecha" placeholder="Fecha de nacimiento">
                             </div>
                         </div>
                     </div>

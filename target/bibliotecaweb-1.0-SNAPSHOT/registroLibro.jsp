@@ -1,12 +1,4 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
-
-
-
-
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -65,9 +57,9 @@
             <div class="container-fluid bg-dark">
                 <!--en esta linea se reparten los elementos-->
 
-                <form method="POST" action="Libro?accion=insertar" enctype="multipart/form-data" >
+                <form method="POST" action="Libro?accion=insertar" enctype="multipart/form-data">
 
-                    <div class="row  d-flex justify-content-center">
+                    <div class="row d-flex justify-content-center">
 
                         <div class="col-md-4 col-sm-12 mb-3 mt-4">
                             <h1 style="font-size: 30px; ;"><strong>REGISTRO</strong></h1>
