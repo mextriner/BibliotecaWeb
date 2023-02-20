@@ -16,10 +16,10 @@
         <div>
 
             <!--LA BARRA DE NAVEGACION-->
-            <div class="container-fluid bg-dark" style="padding:0">
-                <nav class="navbar navbar-expand-lg navbar-light " style="margin: 5px ;">
+            <div class="container-fluid bg-secondary" style="padding:0;width:100%;">
+                <nav class="navbar navbar-expand-lg navbar-light ">
                     <div class="container-fluid">
-                        <a class="navbar-brand" href="https://www.leagueoflegends.com/es-es/"><img src="img/bibliLogoRec.png" alt="" style="width:50% ;"></a>
+                        <a class="navbar-brand" href="Libro?accion=listar"><img src="foto/bibliLogoRec.png" alt="" style="width:35% ;"></a>
                         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                             <div class="bg-ligth">
                                 <span class="navbar-toggler-icon"></span>
@@ -27,28 +27,65 @@
 
                         </button>
                         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                            <ul class="navbar-nav me-auto mb-2 mb-lg-0 d-flex justify-content-center">
-                                <li class="nav-item">
-                                    <a class="nav-link active text-light" aria-current="page" href="#">Inicio</a>
-                                </li>
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle text-light" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                        ¿Tienes cuenta?
+                            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+                                <li class="nav-item dropdown" style="margin-left:5px;">
+                                    <a class="nav-link dropdown-toggle text-light" href="" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        ¿Tienes cuenta? <i class="fa-solid fa-user"></i>
                                     </a>
                                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                        <li><a class="dropdown-item" href="#">Registrarse</a></li>
+                                        <li><a class="dropdown-item" href="registro.jsp">Registrarse</a></li>
                                         <li>
                                             <hr class="dropdown-divider">
                                         </li>
-                                        <li><a class="dropdown-item" href="#">Iniciar Sesión</a></li>
+                                        <li><a class="dropdown-item" href="inicSesion.php">Iniciar Sesión</a></li>
+                                        <li>
+                                            <hr class="dropdown-divider">
+                                        </li>
+                                        <li><a class="dropdown-item" href="gestionPerfil.php">Mi cuenta</a></li>
                                     </ul>
                                 </li>
+                                <li class="nav-item dropdown" style="margin-left:5px;">
+                                    <a class="nav-link text-light" href="tablas.php" id="navbarDropdown" role="button">
+                                        Tablas <i class="fa-sharp fa-solid fa-chart-simple"></i>
+                                    </a>
+                                </li>
+                                <li class="nav-item dropdown" style="margin-left:5px;">
+                                    <a class="nav-link text-light" href="listarLibros.php" id="navbarDropdown" role="button">
+                                        Libros <i class="fa-solid fa-book-bookmark"></i>
+                                    </a>
+                                </li>
+                                <li class="nav-item dropdown" style="margin-left:5px;">
+                                    <a class="nav-link dropdown-toggle text-light" href="" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        INSERTAR <i class="fa-solid fa-circle-plus"></i>
+                                    </a>
+                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <li><a class="dropdown-item" href="NuevoLibro">Registrar Libro</a></li>
+                                        <li>
+                                            <hr class="dropdown-divider">
+                                        </li>
+                                        <li><a class="dropdown-item" href="registroEditorial.jsp">Registrar Editorial</a></li>
+                                    </ul>
+                                </li>
+                                <li class="nav-item dropdown" style="margin-left:5px;">
+                                    <form method="GET" class="d-flex text-light">
+
+                                        <div class="input-group mb-3">
+                                            <input type="text" class="form-control" name="bus" placeholder="Término de búsqueda" aria-label="Recipient's username" aria-describedby="button-addon2">
+
+                                            <button class="btn btn-outline-info" name="buscar" value="yes" type="submit" id="button-addon2">Buscar</button>
+                                        </div>
+
+
+                                    </form>
+                                </li>
+
+
+
                             </ul>
-                            <form class="d-flex">
-                                <div class="input-group mb-3">
-                                    <input type="text" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="button-addon2">
-                                    <button class="btn btn-outline-success" type="button" id="button-addon2">Button</button>
-                                </div>
+                            <form method="post" action="">
+                                <input type="hidden" value="1" name="cerrar">
+                                <button class="btn btn-danger" type="submit" value="1" id="button-addon2">CERAR SESION</button>
                             </form>
                         </div>
                     </div>
@@ -117,7 +154,7 @@
                                 </div>
                             </div>
 
-                             <div class="mb-3">
+                            <div class="mb-3">
                                 <label for="inputState" class="form-label">Autores</label>
                                 <div id="duplica" class="form-floating">
 
