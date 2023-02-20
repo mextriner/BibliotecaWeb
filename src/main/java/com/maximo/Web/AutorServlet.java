@@ -23,7 +23,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Alumno Mañana
  */
-@WebServlet(name = "AutorServlet", urlPatterns = {"/Autor"})
+@WebServlet("/Autor")
 public class AutorServlet extends HttpServlet {
 
     @Inject
@@ -37,7 +37,7 @@ public class AutorServlet extends HttpServlet {
         if (accion != null) {
             switch (accion) {
                 case "insertar":
-                    this.insertarAutor(request, response);
+                    //this.insertarAutor(request, response);
                     break;
                 case "editar":
                     //this.editarCliente(request, response);
@@ -56,6 +56,13 @@ public class AutorServlet extends HttpServlet {
         }
     }
 
+    /**
+     *
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -82,8 +89,8 @@ public class AutorServlet extends HttpServlet {
         }
     }
     
-    private void insertarAutor(HttpServletRequest request, HttpServletResponse response) 
-    throws ServletException, IOException {
+    private void insertarAutor(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         
         String nombre = request.getParameter("nombre");
         String apellido = request.getParameter("apellido");
@@ -97,7 +104,7 @@ public class AutorServlet extends HttpServlet {
         
         Autor autor = new Autor(nombre,apellido,nacionalidad,fecha);
         autorService.insertarAutor(autor);
-        response.sendRedirect("index.jsp");
+        request.getRequestDispatcher("/index.jsp").forward(request, response);
     }
 
     @Override
