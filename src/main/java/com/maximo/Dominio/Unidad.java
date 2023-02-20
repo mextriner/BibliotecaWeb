@@ -25,7 +25,7 @@ import javax.validation.constraints.Size;
 
 /**
  *
- * @author Alumno Mañana
+ * @author Maximo
  */
 @Entity
 @Table(name = "unidad")

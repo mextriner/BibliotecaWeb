@@ -15,6 +15,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -24,15 +25,14 @@ import javax.validation.constraints.Size;
 
 /**
  *
- * @author Alumno Mañana
+ * @author Maximo
  */
 @Entity
 @Table(name = "categoria")
 @NamedQueries({
     @NamedQuery(name = "Categoria.findAll", query = "SELECT c FROM Categoria c"),
     @NamedQuery(name = "Categoria.findByIdCategoria", query = "SELECT c FROM Categoria c WHERE c.idCategoria = :idCategoria"),
-    @NamedQuery(name = "Categoria.findByNombre", query = "SELECT c FROM Categoria c WHERE c.nombre = :nombre"),
-    @NamedQuery(name = "Categoria.findByDescripcion", query = "SELECT c FROM Categoria c WHERE c.descripcion = :descripcion")})
+    @NamedQuery(name = "Categoria.findByNombre", query = "SELECT c FROM Categoria c WHERE c.nombre = :nombre")})
 public class Categoria implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -48,7 +48,8 @@ public class Categoria implements Serializable {
     private String nombre;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 45)
+    @Lob
+    @Size(min = 1, max = 65535)
     @Column(name = "descripcion")
     private String descripcion;
     @JoinTable(name = "libro_has_categoria", joinColumns = {
@@ -66,6 +67,11 @@ public class Categoria implements Serializable {
 
     public Categoria(Integer idCategoria, String nombre, String descripcion) {
         this.idCategoria = idCategoria;
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+    }
+
+    public Categoria(String nombre, String descripcion) {
         this.nombre = nombre;
         this.descripcion = descripcion;
     }

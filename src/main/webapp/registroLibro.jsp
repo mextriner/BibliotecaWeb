@@ -124,10 +124,35 @@
                                 <label for="formFile" class="form-label">Portada</label>
                                 <input type="file" class="form-control" name="foto" placeholder="Ruta de imagen" id="formFile">
                             </div>
-                            <div class="mb-3">
+                            <div class="mb-5">
                                 <label for="exampleFormControlInput1" class="form-label">Número de Unidades</label>
                                 <input type="number" class="form-control" name="Unidades" placeholder="Unidades">
                             </div>
+                            
+                            <div class="mb-3"><a class="text-light" href="#" onclick="duplicarDiv2()"><i class="fa-solid fa-circle-plus"></i></a>
+                                <label for="inputState" class="form-label">Categorías</label>
+                                <div id="categoriaDuplica" class="form-floating">
+
+                                    <select name="categoria[]" class="form-select">
+                                        <option selected>Seleccione Categorías</option>
+                                        <c:forEach items="${categorias}" var="categoria">
+                                            <option value=${categoria.idCategoria}>${categoria.idCategoria} ${categoria.nombre}</option>
+                                        </c:forEach>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="mb-2"id="conten"></div>
+                            
+                            <script>
+                                var originalDiv = document.getElementById("categoriaDuplica");
+
+                                function duplicarDiv2() {
+                                    var divCopia = originalDiv.cloneNode(true);
+                                    // Agrega cualquier modificación adicional que desees hacer a la copia del div
+                                    var contenedor = document.getElementById("conten");
+                                    contenedor.appendChild(divCopia); // Agrega la copia del div al contenedor
+                                }
+                            </script>
                         </div>
                         <div class="col-sm-12 col-md-4 mt-3 mb-3 text-light">
                             <label for="inputState" class="form-label">Bestseller</label>
@@ -143,7 +168,7 @@
                             </div>
                             <div class="mb-3">
                                 <label for="inputState" class="form-label">Editorial</label>
-                                <div id="duplica" class="form-floating">
+                                <div class="form-floating">
 
                                     <select name="editorial" class="form-select">
                                         <option selected>Seleccione Editorial</option>
@@ -154,20 +179,20 @@
                                 </div>
                             </div>
 
-                            <div class="mb-3">
+                            <div class="mb-2"><a class="text-light" href="#" onclick="duplicarDiv()"><i class="fa-solid fa-circle-plus"></i></a>
                                 <label for="inputState" class="form-label">Autores</label>
                                 <div id="duplica" class="form-floating">
 
-                                    <select name="autor" class="form-select">
+                                    <select name="autor[]" class="form-select">
                                         <option selected>Seleccione Autor</option>
-                                        <c:forEach items="${editoriales}" var="editorial">
-                                            <option value=${editorial.idEditorial}."_">${editorial.idEditorial} ${editorial.nombre}</option>
+                                        <c:forEach items="${autores}" var="autor">
+                                            <option value=${autor.idAutor}>${autor.idAutor} ${autor.nombre} ${autor.apellido}</option>
                                         </c:forEach>
                                     </select>
                                 </div>
                             </div>
-                            <div id="contenedor"></div>
-                            <a class="text-light" href="#" onclick="duplicarDiv()"><i class="fa-solid fa-circle-plus"></i></a>
+                            <div class="mb-2"id="contenedor"></div>
+                            
                             <script>
                                 var divOriginal = document.getElementById("duplica");
 
@@ -178,6 +203,7 @@
                                     contenedor.appendChild(divCopia); // Agrega la copia del div al contenedor
                                 }
                             </script>
+                            
 
                         </div>
                     </div>

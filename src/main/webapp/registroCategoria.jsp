@@ -13,7 +13,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Registro</title>
         <link rel="stylesheet" href="lb/css/bootstrap.min.css">
-        <link rel="stylesheet" href="fuentes/css/all.min.css">
+        <link rel="stylesheet" href="swiper/swiper-bundle.min.css" />
+        <link rel="stylesheet" href="lb/fontawesome-free-6.3.0-web/css/all.min.css">
     </head>
     <body class="bg-secondary" style="font-family:monospace;">
 
@@ -98,18 +99,18 @@
             <!--en esta linea se reparten los elementos-->
             <div class="row d-flex justify-content-center">
                 <div class="col-sm-12 col-md-4 mt-3 mb-3 text-light">
-                    <form method="POST" action="Editorial?accion=insertar">
-                        <h1 style="font-size: 30px; ;"><strong>REGISTRO EDITORIAL</strong></h1>
+                    <form method="POST" action="Categoria?accion=insertar">
+                        <h1 style="font-size: 30px; ;"><strong>REGISTRO CATEGORÍA </strong><i class="fa-solid fa-quote-left"></i></h1>
                         <div class="mb-3">
-                            <label for="exampleFormControlInput1" class="form-label">Editorial</label>
-                            <input type="text" class="form-control" name="nombre" placeholder="Nombre">
+                            <label for="exampleFormControlInput1" class="form-label">Categoría</label>
+                            <input type="text" class="form-control" name="nombre" placeholder="Nombre de la categoría">
                         </div>
 
-                        <div class="mb-3">
-                            <label for="exampleFormControlInput1" class="form-label">Dirección</label>
-                            <input type="text" class="form-control" name="direccion" placeholder="Dirección">
+                        <div class="mb-4">
+                            <label for="exampleFormControlInput1" class="form-label">Descripción</label>
+                            <textarea class="form-control" name="descripcion" id="exampleFormControlTextarea1" rows="3"></textarea>
                         </div>
-                        <input type="hidden" name="oculto" value="1">
+                        
                         <div class="mt-5 col-12 d-flex justify-content-center align-item-center">
                             <button class="btn btn-outline-success Hadow rounded border" type="submit">REGISTRARSE</button>
 

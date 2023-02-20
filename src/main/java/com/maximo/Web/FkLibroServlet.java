@@ -5,7 +5,11 @@
  */
 package com.maximo.Web;
 
+import com.maximo.Dominio.Autor;
+import com.maximo.Dominio.Categoria;
 import com.maximo.Dominio.Editorial;
+import com.maximo.Service.Interfaz.iAutorService;
+import com.maximo.Service.Interfaz.iCategoriaService;
 import com.maximo.Service.Interfaz.iEditorialService;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -26,6 +30,13 @@ public class FkLibroServlet extends HttpServlet {
     
     @Inject
     iEditorialService editorialService;
+    
+    @Inject
+    iCategoriaService categoriaService;
+    
+    @Inject
+    iAutorService autorService;
+    
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -55,6 +66,14 @@ public class FkLibroServlet extends HttpServlet {
         List<Editorial> editoriales = editorialService.findAllEditorial();
         System.out.println("Editorial: "+ editoriales);
         request.setAttribute("editoriales", editoriales);
+        
+        
+        List <Categoria> categorias = categoriaService.findAllCategoria();
+        request.setAttribute("categorias",categorias);
+        
+        List <Autor> autores = autorService.findAllAutor();
+        request.setAttribute("autores", autores);
+        
         request.getRequestDispatcher("/registroLibro.jsp").forward(request, response);
     }
 

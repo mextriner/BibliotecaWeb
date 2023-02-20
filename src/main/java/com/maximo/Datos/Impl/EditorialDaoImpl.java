@@ -57,8 +57,7 @@ public class EditorialDaoImpl implements iEditorialDao{
     }
     
     @Override
-    public void insertarEditorial(Editorial editorial){
-        
+    public void insertarEditorial(Editorial editorial){        
         em.persist(editorial);
     }
     

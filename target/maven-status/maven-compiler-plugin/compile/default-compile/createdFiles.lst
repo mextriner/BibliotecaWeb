@@ -17,6 +17,7 @@ com\maximo\Service\Impl\UsuarioServiceImpl.class
 com\maximo\Datos\Impl\AutorDaoImpl.class
 com\maximo\Datos\Interfaz\iCategoriaDao.class
 com\maximo\Dominio\Editorial.class
+com\maximo\Web\CategoriaServlet.class
 com\maximo\Service\Interfaz\iUsuarioHasUnidadService.class
 com\maximo\Datos\Interfaz\iLibroDao.class
 com\maximo\Service\Interfaz\iAutorService.class

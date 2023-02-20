@@ -120,6 +120,9 @@ public class LibroServlet extends HttpServlet {
     private void insertarLibro(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
+        String categorias = request.getParameter("categoria");
+        String [] autores = request.getParameter("autor").split("_");
+        
         String isbn = request.getParameter("ISBN");
         String titulo = request.getParameter("Titulo");
                 
@@ -144,6 +147,8 @@ public class LibroServlet extends HttpServlet {
         
         Editorial ed = new Editorial (Integer.valueOf(editorial));
         Libro libro = new Libro(isbn, titulo, fecha, bestseller, foto, descripcion, ed);
+        
+
         
         libroService.insertarLibro(libro);
         this.listarLibro(request, response);

@@ -22,7 +22,7 @@ import javax.validation.constraints.NotNull;
 
 /**
  *
- * @author Alumno Mañana
+ * @author Maximo
  */
 @Entity
 @Table(name = "usuario_has_unidad")
@@ -50,12 +50,6 @@ public class UsuarioHasUnidad implements Serializable {
 
     public UsuarioHasUnidad(Date fecha) {
         this.fecha = fecha;
-    }
-
-    public UsuarioHasUnidad(Date fecha, Unidad unidadidUnidad, Usuario usuarioidUsuario) {
-        this.fecha = fecha;
-        this.unidadidUnidad = unidadidUnidad;
-        this.usuarioidUsuario = usuarioidUsuario;
     }
 
     public Date getFecha() {

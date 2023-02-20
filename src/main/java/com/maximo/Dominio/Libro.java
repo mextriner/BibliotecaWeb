@@ -28,7 +28,7 @@ import javax.validation.constraints.Size;
 
 /**
  *
- * @author Alumno Mañana
+ * @author Maximo
  */
 @Entity
 @Table(name = "libro")
@@ -37,7 +37,8 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "Libro.findByIsbn", query = "SELECT l FROM Libro l WHERE l.isbn = :isbn"),
     @NamedQuery(name = "Libro.findByTitulo", query = "SELECT l FROM Libro l WHERE l.titulo = :titulo"),
     @NamedQuery(name = "Libro.findByFechaPublicacion", query = "SELECT l FROM Libro l WHERE l.fechaPublicacion = :fechaPublicacion"),
-    @NamedQuery(name = "Libro.findByBestSeller", query = "SELECT l FROM Libro l WHERE l.bestSeller = :bestSeller")})
+    @NamedQuery(name = "Libro.findByBestSeller", query = "SELECT l FROM Libro l WHERE l.bestSeller = :bestSeller"),
+    @NamedQuery(name = "Libro.findByPortada", query = "SELECT l FROM Libro l WHERE l.portada = :portada")})
 public class Libro implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -57,11 +58,11 @@ public class Libro implements Serializable {
     private Date fechaPublicacion;
     @Column(name = "bestSeller")
     private Short bestSeller;
-    @Lob
+    @Size(max = 140)
     @Column(name = "portada")
     private String portada;
     @Lob
-    @Size(max = 140)
+    @Size(max = 65535)
     @Column(name = "descripcion")
     private String descripcion;
     @ManyToMany(mappedBy = "libroList")
@@ -88,14 +89,6 @@ public class Libro implements Serializable {
         this.titulo = titulo;
     }
 
-    public Libro(String isbn, String titulo, Date fechaPublicacion, Short bestSeller, Editorial editorialidEditorial) {
-        this.isbn = isbn;
-        this.titulo = titulo;
-        this.fechaPublicacion = fechaPublicacion;
-        this.bestSeller = bestSeller;
-        this.editorialidEditorial = editorialidEditorial;
-    }
-
     public Libro(String isbn, String titulo, Date fechaPublicacion, Short bestSeller, String portada, String descripcion, Editorial editorialidEditorial) {
         this.isbn = isbn;
         this.titulo = titulo;
@@ -105,7 +98,11 @@ public class Libro implements Serializable {
         this.descripcion = descripcion;
         this.editorialidEditorial = editorialidEditorial;
     }
+
     
+    
+    
+
     public String getIsbn() {
         return isbn;
     }
