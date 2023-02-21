@@ -20,6 +20,7 @@ import javax.servlet.annotation.WebInitParam;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -56,6 +57,9 @@ public class UsuarioServlet extends HttpServlet {
             switch (accion) {
                 case "insertar":
                     this.insertarUsuario(request, response);
+                    break;
+                case "sesion":
+                    this.iniciarSesion(request, response);
                     break;
                 case "editar":
                     //this.editarCliente(request, response);
@@ -102,5 +106,34 @@ public class UsuarioServlet extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
+    private void iniciarSesion(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        String user = request.getParameter("usuario");
+        String clave = request.getParameter("clave");
+        HttpSession sesion = request.getSession();
+
+        if (sesion.getAttribute("usuario") == null) {
+            if (user != null && clave != null) {
+                Usuario usuario = new Usuario(user);
+                if (usuarioService.findByIdUsuario(usuario) != null) {
+                    usuario = usuarioService.findByIdUsuario(usuario);
+                    if (usuario.getClave() == clave) {
+                        sesion.setAttribute("usuario", user);
+                    }else{
+                        request.getRequestDispatcher("Libro?accion=listar").forward(request, response);
+                    }
+                }else{
+                    request.getRequestDispatcher("Libro?accion=listar").forward(request, response);
+                }
+            }else{
+                request.getRequestDispatcher("Libro?accion=listar").forward(request, response);
+            }
+        }else{
+            request.getRequestDispatcher("Libro?accion=listar").forward(request, response);
+
+        }
+
+    }
 
 }
