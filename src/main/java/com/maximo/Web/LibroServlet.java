@@ -5,6 +5,8 @@
  */
 package com.maximo.Web;
 
+import com.maximo.Dominio.Autor;
+import com.maximo.Dominio.Categoria;
 import com.maximo.Dominio.Editorial;
 import com.maximo.Dominio.Libro;
 import com.maximo.Service.Interfaz.iLibroService;
@@ -120,10 +122,21 @@ public class LibroServlet extends HttpServlet {
     private void insertarLibro(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        String categorias = request.getParameter("categoria");
-        String [] autores = request.getParameter("autor").split("_");
+        List<Categoria> c = null;
+        List<Autor> a = null;
         
-        String isbn = request.getParameter("ISBN");
+        
+        String [] categorias = request.getParameterValues("categoria");
+        for(String i: categorias){
+            c.add(new Categoria(Integer.valueOf(i)));
+        }
+        
+        String [] autores = request.getParameterValues("autor");
+        for(String i: autores){
+            a.add(new Autor(Integer.valueOf(i)));
+        }
+        
+        String isbn = request.getParameter("ISBN");     
         String titulo = request.getParameter("Titulo");
                 
         Part origen = (request.getPart("foto"));
@@ -148,7 +161,8 @@ public class LibroServlet extends HttpServlet {
         Editorial ed = new Editorial (Integer.valueOf(editorial));
         Libro libro = new Libro(isbn, titulo, fecha, bestseller, foto, descripcion, ed);
         
-
+        libro.setAutorList(a);
+        libro.setCategoriaList(c);
         
         libroService.insertarLibro(libro);
         this.listarLibro(request, response);

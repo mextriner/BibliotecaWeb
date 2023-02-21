@@ -133,7 +133,7 @@
                                 <label for="inputState" class="form-label">Categorías</label>
                                 <div id="categoriaDuplica" class="form-floating">
 
-                                    <select name="categoria[]" class="form-select">
+                                    <select name="categoria" class="form-select">
                                         <option selected>Seleccione Categorías</option>
                                         <c:forEach items="${categorias}" var="categoria">
                                             <option value=${categoria.idCategoria}>${categoria.idCategoria} ${categoria.nombre}</option>
@@ -183,7 +183,7 @@
                                 <label for="inputState" class="form-label">Autores</label>
                                 <div id="duplica" class="form-floating">
 
-                                    <select name="autor[]" class="form-select">
+                                    <select name="autor" class="form-select">
                                         <option selected>Seleccione Autor</option>
                                         <c:forEach items="${autores}" var="autor">
                                             <option value=${autor.idAutor}>${autor.idAutor} ${autor.nombre} ${autor.apellido}</option>
@@ -194,13 +194,13 @@
                             <div class="mb-2"id="contenedor"></div>
                             
                             <script>
-                                var divOriginal = document.getElementById("duplica");
+                                var divOrigina = document.getElementById("duplica");
 
                                 function duplicarDiv() {
-                                    var divCopia = divOriginal.cloneNode(true);
+                                    var divCopiado = divOrigina.cloneNode(true);
                                     // Agrega cualquier modificación adicional que desees hacer a la copia del div
                                     var contenedor = document.getElementById("contenedor");
-                                    contenedor.appendChild(divCopia); // Agrega la copia del div al contenedor
+                                    contenedor.appendChild(divCopiado); // Agrega la copia del div al contenedor
                                 }
                             </script>
                             
