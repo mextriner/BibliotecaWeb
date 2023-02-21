@@ -9,7 +9,9 @@ import com.maximo.Dominio.Autor;
 import com.maximo.Dominio.Categoria;
 import com.maximo.Dominio.Editorial;
 import com.maximo.Dominio.Libro;
+import com.maximo.Dominio.Unidad;
 import com.maximo.Service.Interfaz.iLibroService;
+import com.maximo.Service.Interfaz.iUnidadService;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -24,6 +26,7 @@ import java.time.LocalDate;
 import java.time.Month;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.Formatter;
@@ -50,6 +53,9 @@ public class LibroServlet extends HttpServlet {
 
     @Inject
     iLibroService libroService;
+    
+    @Inject
+    iUnidadService unidadService;
     
    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -122,8 +128,8 @@ public class LibroServlet extends HttpServlet {
     private void insertarLibro(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        List<Categoria> c = null;
-        List<Autor> a = null;
+        List<Categoria> c = new ArrayList<>();
+        List<Autor> a = new ArrayList<>();
         
         
         String [] categorias = request.getParameterValues("categoria");
@@ -151,7 +157,7 @@ public class LibroServlet extends HttpServlet {
         ZoneId defaultZoneId = ZoneId.systemDefault();
         Date fecha = Date.from(fec.atStartOfDay(defaultZoneId).toInstant());
         
-        String unidades = request.getParameter("Unidades");
+        int unidades = Integer.valueOf(request.getParameter("Unidades"));
         String descripcion = request.getParameter("descripcion");
         String editorial = request.getParameter("editorial");
         
@@ -164,6 +170,9 @@ public class LibroServlet extends HttpServlet {
         libro.setAutorList(a);
         libro.setCategoriaList(c);
         
+        /*for(int i = 0 ; i < unidades ; i++){
+            unidadService.insertarUnidad(new Unidad("disponible","administración",libro));
+        }*/
         libroService.insertarLibro(libro);
         this.listarLibro(request, response);
         

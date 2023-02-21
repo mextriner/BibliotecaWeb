@@ -89,6 +89,7 @@ public class Autor implements Serializable {
     }
 
     
+    
     public Integer getIdAutor() {
         return idAutor;
     }

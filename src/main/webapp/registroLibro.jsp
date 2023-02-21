@@ -128,8 +128,10 @@
                                 <label for="exampleFormControlInput1" class="form-label">Número de Unidades</label>
                                 <input type="number" class="form-control" name="Unidades" placeholder="Unidades">
                             </div>
-                            
-                            <div class="mb-3"><a class="text-light" href="#" onclick="duplicarDiv2()"><i class="fa-solid fa-circle-plus"></i></a>
+
+                            <div class="mb-3">
+                                <a style="font-size:20px;" class="text-light" href="#" onclick="duplicarDiv2()"><i class="fa-solid fa-circle-plus"></i></a>
+
                                 <label for="inputState" class="form-label">Categorías</label>
                                 <div id="categoriaDuplica" class="form-floating">
 
@@ -142,7 +144,7 @@
                                 </div>
                             </div>
                             <div class="mb-2"id="conten"></div>
-                            
+
                             <script>
                                 var originalDiv = document.getElementById("categoriaDuplica");
 
@@ -151,6 +153,19 @@
                                     // Agrega cualquier modificación adicional que desees hacer a la copia del div
                                     var contenedor = document.getElementById("conten");
                                     contenedor.appendChild(divCopia); // Agrega la copia del div al contenedor
+                                    var nuevoBoton = document.createElement("a");
+                                    var nuevoIcono = document.createElement("i");
+                                    nuevoIcono.className = "fa-solid fa-circle-minus";
+                                    nuevoBoton.appendChild(nuevoIcono);
+                                    nuevoBoton.onclick = function () {
+                                        eliminarDiv(this);
+                                    }
+                                    divCopia.appendChild(nuevoBoton);
+                                }
+
+                                function eliminarDiv(btn) {
+                                    var divAEliminar = btn.parentNode;
+                                    divAEliminar.remove();
                                 }
                             </script>
                         </div>
@@ -179,7 +194,8 @@
                                 </div>
                             </div>
 
-                            <div class="mb-2"><a class="text-light" href="#" onclick="duplicarDiv()"><i class="fa-solid fa-circle-plus"></i></a>
+                            <div class="mb-2">
+                                <a style="font-size:20px;" class="text-light" href="#" onclick="duplicarDiv()"><i class="fa-solid fa-circle-plus"></i></a>
                                 <label for="inputState" class="form-label">Autores</label>
                                 <div id="duplica" class="form-floating">
 
@@ -192,7 +208,7 @@
                                 </div>
                             </div>
                             <div class="mb-2"id="contenedor"></div>
-                            
+
                             <script>
                                 var divOrigina = document.getElementById("duplica");
 
@@ -201,9 +217,23 @@
                                     // Agrega cualquier modificación adicional que desees hacer a la copia del div
                                     var contenedor = document.getElementById("contenedor");
                                     contenedor.appendChild(divCopiado); // Agrega la copia del div al contenedor
+                                    //var contenedor2 = document.createElement("div");
+                                    var nuevoBoton = document.createElement("a");
+                                    var nuevoIcono = document.createElement("i");
+                                    nuevoIcono.className = "fa-solid fa-circle-minus";
+                                    nuevoBoton.appendChild(nuevoIcono);
+                                    nuevoBoton.onclick = function () {
+                                        eliminarDiv(this);
+                                    }
+                                    divCopiado.appendChild(nuevoBoton);
+                                }
+
+                                function eliminarDiv(btn) {
+                                    var divAEliminar = btn.parentNode;
+                                    divAEliminar.remove();
                                 }
                             </script>
-                            
+
 
                         </div>
                     </div>

@@ -99,10 +99,6 @@ public class Libro implements Serializable {
         this.editorialidEditorial = editorialidEditorial;
     }
 
-    
-    
-    
-
     public String getIsbn() {
         return isbn;
     }

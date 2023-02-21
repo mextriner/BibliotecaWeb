@@ -76,6 +76,8 @@ public class Categoria implements Serializable {
         this.descripcion = descripcion;
     }
 
+    
+    
     public Integer getIdCategoria() {
         return idCategoria;
     }

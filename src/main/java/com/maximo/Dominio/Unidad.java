@@ -47,9 +47,7 @@ public class Unidad implements Serializable {
     @Size(min = 1, max = 15)
     @Column(name = "estado")
     private String estado;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 45)
+    @Size(max = 45)
     @Column(name = "proveedor")
     private String proveedor;
     @JoinColumn(name = "libro_ISBN", referencedColumnName = "ISBN")
@@ -65,10 +63,20 @@ public class Unidad implements Serializable {
         this.idUnidad = idUnidad;
     }
 
-    public Unidad(Integer idUnidad, String estado, String proveedor) {
-        this.idUnidad = idUnidad;
+    public Unidad(String estado, Libro libroISBN) {
+        this.estado = estado;
+        this.libroISBN = libroISBN;
+    }
+
+    public Unidad(String estado, String proveedor, Libro libroISBN) {
         this.estado = estado;
         this.proveedor = proveedor;
+        this.libroISBN = libroISBN;
+    }
+
+    public Unidad(Integer idUnidad, String estado) {
+        this.idUnidad = idUnidad;
+        this.estado = estado;
     }
 
     public Integer getIdUnidad() {
