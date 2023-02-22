@@ -180,7 +180,7 @@
                                 </form>
                             </li>
                         </ul>
-                        <form method="post" action="">
+                        <form method="post" action="CerrarSesion">
                             <input type="hidden" value="1" name="cerrar">
                             <button class="btn btn-danger" type="submit" value="1" id="button-addon2">CERAR SESION</button>
                         </form>
