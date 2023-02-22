@@ -1,6 +1,11 @@
 
+<%@page import="com.maximo.Dominio.Usuario"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
+<%
+    Usuario usuario = (Usuario)request.getAttribute("usuario");
+%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -22,7 +27,6 @@
 
 <body class="bg-secondary">
     <!--LA BARRA DE NAVEGACION-->
-        <!--LA BARRA DE NAVEGACION-->
     <div class="container-fluid bg-secondary" style="padding:0;width:100%;">
         <nav class="navbar navbar-expand-lg navbar-light ">
             <div class="container-fluid">
@@ -115,25 +119,25 @@
                     </div>
                     <div class="mb-3">
                         <label for="exampleFormControlInput1" class="form-label">Usuario</label>
-                        <input type="text" class="form-control" name="usuario" value='<?php echo $resultado["idUsuario"] ?>'>
+                        <input type="text" class="form-control" name="usuario" value="<%= usuario.getIdUsuario() %>">
                     </div>
                     <div class="mb-3">
                         <label for="exampleFormControlInput1" class="form-label">Nombre</label>
-                        <input type="text" class="form-control" name="nombre" value='<?php echo $resultado["nombre"] ?>'>
+                        <input type="text" class="form-control" name="nombre" value="<%= usuario.getNombre() %>">
                     </div>
 
                     <div class="mb-3">
                         <label for="exampleFormControlInput1" class="form-label">Apellidos</label>
-                        <input type="text" class="form-control" name="apellido" value='<?php echo $resultado["apellido"] ?>'>
+                        <input type="text" class="form-control" name="apellido" value="<%= usuario.getApellido() %>">
                     </div>
 
                     <div class="mb-3">
                         <label for="exampleFormControlInput1" class="form-label">Direccion</label>
-                        <input type="text" class="form-control" name="direccion" value='<?php echo $resultado["direccion"] ?>'>
+                        <input type="text" class="form-control" name="direccion" value="<%= usuario.getDireccion() %>">
                     </div>
                     <div class="mt-5 mb-5 pb-3">
                         <label for="exampleFormControlInput1" class="form-label">Fecha de Nacimiento</label>
-                        <input type="date" class="form-control" name="fechaNac" value='<?php echo $resultado["fechaNac"] ?>'>
+                        <input type="date" class="form-control" name="fechaNac" value="<%= usuario.getFechaNac() %>">
                     </div>
 
                     <div class="mt-5 col-12 d-flex justify-content-center align-item-center">

@@ -106,33 +106,50 @@ public class UsuarioServlet extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+    
+    private void editarUsuario(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        /*String u = (String)request.getAttribute("usuario");
+        Usuario usuario = new Usuario(u);
+        usuario = usuarioService.findByIdUsuario(usuario);*/
+    }
 
     private void iniciarSesion(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        String msj = "";
         String user = request.getParameter("usuario");
         String clave = request.getParameter("clave");
         HttpSession sesion = request.getSession();
 
         if (sesion.getAttribute("usuario") == null) {
-            if (user != null && clave != null) {
+            if (!user.equals("") && !clave.equals("")) {
                 Usuario usuario = new Usuario(user);
                 if (usuarioService.findByIdUsuario(usuario) != null) {
                     usuario = usuarioService.findByIdUsuario(usuario);
-                    if (usuario.getClave() == clave) {
+                    if (usuario.getClave().equals(clave)) {
                         sesion.setAttribute("usuario", user);
+                        request.getRequestDispatcher("Libro?accion=listar").forward(request, response);          
                     }else{
-                        request.getRequestDispatcher("Libro?accion=listar").forward(request, response);
+                        msj = "La contraseña no es correcta";
+                        request.setAttribute("mensaje", msj);
+                        request.getRequestDispatcher("inicioSesion.jsp").forward(request, response);
                     }
                 }else{
-                    request.getRequestDispatcher("Libro?accion=listar").forward(request, response);
+                    msj = "El usuario no existe";
+                    request.setAttribute("mensaje", msj);
+                    request.getRequestDispatcher("inicioSesion.jsp").forward(request, response);
                 }
             }else{
-                request.getRequestDispatcher("Libro?accion=listar").forward(request, response);
+                msj = "Las credenciales no pueden estar vacías";
+                request.setAttribute("mensaje", msj);
+                request.getRequestDispatcher("inicioSesion.jsp").forward(request, response);
             }
         }else{
+            msj = "La sesión ya está iniciada";
+            request.setAttribute("mensaje", msj);
             request.getRequestDispatcher("Libro?accion=listar").forward(request, response);
-
         }
+        
 
     }
 

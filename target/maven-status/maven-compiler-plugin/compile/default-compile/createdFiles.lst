@@ -2,6 +2,7 @@ com\maximo\Datos\Impl\EditorialDaoImpl.class
 com\maximo\Datos\Interfaz\iUsuarioHasUnidadDao.class
 com\maximo\Dominio\Autor.class
 com\maximo\Service\Impl\LibroServiceImpl.class
+com\maximo\Web\cargarModifica.class
 com\maximo\Service\Impl\UsuarioHasUnidadImpl.class
 com\maximo\Datos\Impl\CategoriaDaoImpl.class
 com\maximo\Service\Interfaz\iEditorialService.class
