@@ -113,20 +113,20 @@
 
                             <div class="mb-3">
                                 <label for="exampleFormControlInput1" class="form-label">ISBN</label>
-                                <input type="text" class="form-control" name="ISBN" placeholder="00 0000 000 0">
+                                <input type="text" class="form-control" name="ISBN" placeholder="00 0000 000 0" required>
                             </div>
 
                             <div class="mb-3">
                                 <label for="exampleFormControlInput1" class="form-label">Fecha Publicación</label>
-                                <input type="date" class="form-control" name="Fecha" placeholder="Fecha">
+                                <input type="date" class="form-control" name="Fecha" placeholder="Fecha" required>
                             </div>
                             <div class="mb-3">
                                 <label for="formFile" class="form-label">Portada</label>
-                                <input type="file" class="form-control" name="foto" placeholder="Ruta de imagen" id="formFile">
+                                <input type="file" class="form-control" name="foto" placeholder="Ruta de imagen" id="formFile"> required
                             </div>
                             <div class="mb-5">
                                 <label for="exampleFormControlInput1" class="form-label">Número de Unidades</label>
-                                <input type="number" class="form-control" name="Unidades" placeholder="Unidades">
+                                <input type="number" class="form-control" name="Unidades" placeholder="Unidades" required>
                             </div>
 
                             <div class="mb-3">
@@ -135,8 +135,8 @@
                                 <label for="inputState" class="form-label">Categorías</label>
                                 <div id="categoriaDuplica" class="form-floating">
 
-                                    <select name="categoria" class="form-select">
-                                        <option selected>Seleccione Categorías</option>
+                                    <select name="categoria" class="form-select" required>
+                                        <option selected></option>
                                         <c:forEach items="${categorias}" var="categoria">
                                             <option value=${categoria.idCategoria}>${categoria.idCategoria} ${categoria.nombre}</option>
                                         </c:forEach>
@@ -172,21 +172,21 @@
                         <div class="col-sm-12 col-md-4 mt-3 mb-3 text-light">
                             <label for="inputState" class="form-label">Bestseller</label>
                             <div class="form-floating mb-4">
-                                <select name="bestseller" class="form-select">
+                                <select name="bestseller" class="form-select" required>
                                     <option value=0>NO</option>
                                     <option value=1>SÍ</option>
                                 </select>
                             </div>
                             <div class="mb-4">
                                 <label for="exampleFormControlInput1" class="form-label">Descripción</label>
-                                <textarea class="form-control" name="descripcion" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                <textarea class="form-control" name="descripcion" id="exampleFormControlTextarea1" rows="3" required></textarea>
                             </div>
                             <div class="mb-3">
                                 <label for="inputState" class="form-label">Editorial</label>
                                 <div class="form-floating">
 
-                                    <select name="editorial" class="form-select">
-                                        <option selected>Seleccione Editorial</option>
+                                    <select name="editorial" class="form-select" required>
+                                        <option selected></option>
                                         <c:forEach items="${editoriales}" var="editorial">
                                             <option value=${editorial.idEditorial}>${editorial.idEditorial} ${editorial.nombre}</option>
                                         </c:forEach>
@@ -199,8 +199,8 @@
                                 <label for="inputState" class="form-label">Autores</label>
                                 <div id="duplica" class="form-floating">
 
-                                    <select name="autor" class="form-select">
-                                        <option selected>Seleccione Autor</option>
+                                    <select name="autor" class="form-select" required>
+                                        <option selected></option>
                                         <c:forEach items="${autores}" var="autor">
                                             <option value=${autor.idAutor}>${autor.idAutor} ${autor.nombre} ${autor.apellido}</option>
                                         </c:forEach>

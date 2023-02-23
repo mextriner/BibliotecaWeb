@@ -112,14 +112,14 @@
         <div class="row d-flex justify-content-center text-center" style="font-family:monospace; color: aliceblue;">
             <h5 style="font-family:monospace; font-size : 46px; color: #ffffff;"><strong>MI CUENTA <i class="fa-solid fa-user"></i></strong></h5>
             <div class="col-sm-12 col-md-4 mt-3 mb-3 text-light bg-dark p-5" style="border-radius: 5%;">
-                <form class="mb-5" method="post" action="actualizarUsuario.php">
+                <form class="mb-5" method="post" action="Usuario?accion=editar">
                     <div class="mb-3">
                         <label for="exampleFormControlInput1" class="form-label">Contraseña</label>
-                        <input type="password" class="form-control" name="clave" placeholder="Contraseña">
+                        <input type="password" class="form-control" name="clave" placeholder="Contraseña" required>
                     </div>
                     <div class="mb-3">
                         <label for="exampleFormControlInput1" class="form-label">Usuario</label>
-                        <input type="text" class="form-control" name="usuario" value="<%= usuario.getIdUsuario() %>">
+                        <input type="text" class="form-control" name="usuario" value="<%= usuario.getIdUsuario() %>" required>
                     </div>
                     <div class="mb-3">
                         <label for="exampleFormControlInput1" class="form-label">Nombre</label>
@@ -133,11 +133,11 @@
 
                     <div class="mb-3">
                         <label for="exampleFormControlInput1" class="form-label">Direccion</label>
-                        <input type="text" class="form-control" name="direccion" value="<%= usuario.getDireccion() %>">
+                        <input type="text" class="form-control" name="direccion" value="<%= usuario.getDireccion() %>" required>
                     </div>
                     <div class="mt-5 mb-5 pb-3">
                         <label for="exampleFormControlInput1" class="form-label">Fecha de Nacimiento</label>
-                        <input type="date" class="form-control" name="fechaNac" value="<%= usuario.getFechaNac() %>">
+                        <input type="date" class="form-control" name="fechaNac" value="<%= usuario.getFechaNac() %>" required>
                     </div>
 
                     <div class="mt-5 col-12 d-flex justify-content-center align-item-center">

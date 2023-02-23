@@ -62,7 +62,7 @@ public class UsuarioServlet extends HttpServlet {
                     this.iniciarSesion(request, response);
                     break;
                 case "editar":
-                    //this.editarCliente(request, response);
+                    this.editarUsuario(request, response);
                     break;
                 case "eliminar":
                     //this.eliminarCliente(request, response);
@@ -109,9 +109,22 @@ public class UsuarioServlet extends HttpServlet {
     
     private void editarUsuario(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        /*String u = (String)request.getAttribute("usuario");
-        Usuario usuario = new Usuario(u);
-        usuario = usuarioService.findByIdUsuario(usuario);*/
+        String user = request.getParameter("usuario");
+        String clave = request.getParameter("clave");
+        String nombre = request.getParameter("nombre");
+        String apellido = request.getParameter("apellido");
+        String direccion = request.getParameter("direccion");
+
+        String f = request.getParameter("fechaNac");
+        String fe[] = f.split("-");
+        LocalDate fec = LocalDate.of(Integer.valueOf(fe[0]), Integer.valueOf(fe[1]), Integer.valueOf(fe[2]));
+        ZoneId defaultZoneId = ZoneId.systemDefault();
+        Date fecha = Date.from(fec.atStartOfDay(defaultZoneId).toInstant());
+
+        Usuario usuario = new Usuario(user, clave, nombre, apellido, direccion, fecha);
+        usuarioService.updateUsuario(usuario);
+        request.getRequestDispatcher("Libro?accion=listar").forward(request, response);
+        
     }
 
     private void iniciarSesion(HttpServletRequest request, HttpServletResponse response)
