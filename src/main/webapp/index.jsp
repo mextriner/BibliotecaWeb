@@ -145,12 +145,26 @@
                                 </ul>
                             </li>
                             <li class="nav-item dropdown" style="margin-left:5px;">
-                                <a class="nav-link text-light" href="tablas.php" id="navbarDropdown" role="button">
+                                <a class="nav-link dropdown-toggle text-light" href="" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"">
                                     Tablas <i class="fa-sharp fa-solid fa-chart-simple"></i>
                                 </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <li><a class="dropdown-item" href="Usuario?accion=listar">Usuarios</a></li>
+                                    <li>
+                                        <hr class="dropdown-divider">
+                                    </li>
+                                    <li><a class="dropdown-item" href="inicioSesion.jsp">Libros</a></li>
+                                    <li>
+                                        <hr class="dropdown-divider">
+                                    </li>
+                                    <li><a class="dropdown-item" href="cargarModifica?clase=usuario&usr=<%=user%>">
+                                           Autores
+                                        </a>
+                                    </li>
+                                </ul>
                             </li>
                             <li class="nav-item dropdown" style="margin-left:5px;">
-                                <a class="nav-link text-light" href="listarLibros.php" id="navbarDropdown" role="button">
+                                <a class="nav-link text-light" href="" id="navbarDropdown" role="button">
                                     Libros <i class="fa-solid fa-book-bookmark"></i>
                                 </a>
                             </li>

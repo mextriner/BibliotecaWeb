@@ -34,21 +34,33 @@ public class UsuarioServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<Usuario> usuarios = usuarioService.findAllUsuario();
-        System.out.println("Usuario: " + usuarios);
-        request.setAttribute("usuarios", usuarios);
-        request.getRequestDispatcher("/index.jsp").forward(request, response);
+        String accion = request.getParameter("accion");
+        if (accion != null) {
+            switch (accion) {
+                case "insertar":
+                    this.insertarUsuario(request, response);
+                    break;
+                case "sesion":
+                    this.iniciarSesion(request, response);
+                    break;
+                case "editar":
+                    this.editarUsuario(request, response);
+                    break;
+                case "eliminar":
+                    //this.eliminarCliente(request, response);
+                    break;
+                case "listar":
+                    this.listarUsuario(request, response);
+                    break;
+                default:
+                //this.accionDefault(request, response);
+                }
+        } else {
+            //this.accionDefault(request, response);
+        }
+    
     }
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -68,7 +80,7 @@ public class UsuarioServlet extends HttpServlet {
                     //this.eliminarCliente(request, response);
                     break;
                 case "listar":
-                    //this.listarUsuario(request, response);
+                    this.listarUsuario(request, response);
                     break;
                 default:
                 //this.accionDefault(request, response);
@@ -97,11 +109,7 @@ public class UsuarioServlet extends HttpServlet {
         request.getRequestDispatcher("Libro?accion=listar").forward(request, response);
     }
 
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
+    
     @Override
     public String getServletInfo() {
         return "Short description";
@@ -164,6 +172,15 @@ public class UsuarioServlet extends HttpServlet {
         }
         
 
+    }
+
+    private void listarUsuario(HttpServletRequest request, HttpServletResponse response) 
+        throws ServletException, IOException {
+        
+        List<Usuario> usuarios = usuarioService.findAllUsuario();
+        request.setAttribute("usuarios", usuarios);
+        request.getRequestDispatcher("TablaUsuario.jsp").forward(request, response);
+    
     }
 
 }
