@@ -17,8 +17,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
 import java.nio.file.FileSystems;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -49,136 +51,129 @@ import javax.servlet.http.Part;
 @WebServlet("/Libro")
 @MultipartConfig
 public class LibroServlet extends HttpServlet {
-    
 
     @Inject
     iLibroService libroService;
-    
+
     @Inject
     iUnidadService unidadService;
-    
-   @Override
+
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
         String accion = request.getParameter("accion");
-            if (accion != null){
-                switch (accion){
-                    case "insertar":
-                        this.insertarLibro(request, response);
-                        break;
-                    case "editar":
-                        //this.editarCliente(request, response);
-                        break;
-                    case "eliminar":
-                        //this.eliminarCliente(request, response);
-                        break;
-                    case "listar":
-                        this.listarLibro(request, response);
-                        break;
-                    default:
-                        //this.accionDefault(request, response);
-                }
-            } else {
+        if (accion != null) {
+            switch (accion) {
+                case "insertar":
+                    this.insertarLibro(request, response);
+                    break;
+                case "editar":
+                    //this.editarCliente(request, response);
+                    break;
+                case "eliminar":
+                    //this.eliminarCliente(request, response);
+                    break;
+                case "listar":
+                    this.listarLibro(request, response);
+                    break;
+                default:
                 //this.accionDefault(request, response);
-            }
+                }
+        } else {
+            //this.accionDefault(request, response);
+        }
     }
 
-    
-    
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String accion = request.getParameter("accion");
-            if (accion != null){
-                switch (accion){
-                    case "insertar":
-                        this.insertarLibro(request, response);
-                        break;
-                    case "editar":
-                        //this.editarCliente(request, response);
-                        break;
-                    case "eliminar":
-                        //this.eliminarCliente(request, response);
-                        break;
-                    case "listar":
-                        this.listarLibro(request, response);
-                        break;
-                    default:
-                        //this.accionDefault(request, response);
-                }
-            } else {
-                //this.accionDefault(request, response);
+        if (accion != null) {
+            switch (accion) {
+                case "insertar":
+                    this.insertarLibro(request, response);
+                    break;
+                case "editar":
+                    //this.editarCliente(request, response);
+                    break;
+                case "eliminar":
+                    //this.eliminarCliente(request, response);
+                    break;
+                case "listar":
+                    this.listarLibro(request, response);
+                    break;
+                default:
+                    this.accionDefault(request, response);
             }
+        } else {
+            //this.accionDefault(request, response);
+        }
     }
 
-    
-    
-    
     private void listarLibro(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
         List<Libro> libros = libroService.findAllLibro();
-        System.out.println("libros: "+ libros);
+        System.out.println("libros: " + libros);
         request.setAttribute("libros", libros);
-        request.getRequestDispatcher("/index.jsp").forward(request, response);
-        
+        request.getRequestDispatcher("/TablaLibro.jsp").forward(request, response);
+
     }
-    
+
     private void insertarLibro(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
         List<Categoria> c = new ArrayList<>();
         List<Autor> a = new ArrayList<>();
-        
-        
-        String [] categorias = request.getParameterValues("categoria");
-        for(String i: categorias){
+
+        String[] categorias = request.getParameterValues("categoria");
+        for (String i : categorias) {
             c.add(new Categoria(Integer.valueOf(i)));
         }
-        
-        String [] autores = request.getParameterValues("autor");
-        for(String i: autores){
+
+        String[] autores = request.getParameterValues("autor");
+        for (String i : autores) {
             a.add(new Autor(Integer.valueOf(i)));
         }
-        
-        String isbn = request.getParameter("ISBN");     
+
+        String isbn = request.getParameter("ISBN");
         String titulo = request.getParameter("Titulo");
-                
+
         Part origen = (request.getPart("foto"));
-        String or = getFilename(origen);
+        /*String or = getFilename(origen);
         File ar = new File(or);
         ar.renameTo(new File("/BibliotecaWeb/img/"+ar));
-        String foto = ar.toPath().toString();
-        
+        String foto = ar.toPath().toString();*/
+        String foto = cargarImagen(request, response, origen);
+
         String f = request.getParameter("Fecha");
-        String fe [] = f.split("-");
-        LocalDate fec = LocalDate.of(Integer.valueOf(fe[0]), Integer.valueOf(fe[1]),Integer.valueOf(fe[2]));
+        String fe[] = f.split("-");
+        LocalDate fec = LocalDate.of(Integer.valueOf(fe[0]), Integer.valueOf(fe[1]), Integer.valueOf(fe[2]));
         ZoneId defaultZoneId = ZoneId.systemDefault();
         Date fecha = Date.from(fec.atStartOfDay(defaultZoneId).toInstant());
-        
+
         int unidades = Integer.valueOf(request.getParameter("Unidades"));
         String descripcion = request.getParameter("descripcion");
         String editorial = request.getParameter("editorial");
-        
-        
+
         short bestseller = Short.valueOf(request.getParameter("bestseller"));
-        
-        Editorial ed = new Editorial (Integer.valueOf(editorial));
+
+        Editorial ed = new Editorial(Integer.valueOf(editorial));
         Libro libro = new Libro(isbn, titulo, fecha, bestseller, foto, descripcion, ed);
-        
+
         libro.setAutorList(a);
         libro.setCategoriaList(c);
-        
+
         /*for(int i = 0 ; i < unidades ; i++){
             unidadService.insertarUnidad(new Unidad("disponible","administración",libro));
         }*/
         libroService.insertarLibro(libro);
         this.listarLibro(request, response);
-        
+
     }
-    
-    private static String getFilename(Part part) {
+
+    /*private static String getFilename(Part part) {
         String r = null;
         for (String cd : part.getHeader("content-disposition").split(";")) {
             if (cd.trim().startsWith("filename")) {
@@ -187,12 +182,57 @@ public class LibroServlet extends HttpServlet {
             }
         }
     return r;
+    }*/
+    private String cargarImagen(HttpServletRequest request, HttpServletResponse response, Part origen)
+            throws ServletException, IOException {
+        String UPLOAD_DIR = "../../../img";
+        String applicationPath = new File("").getAbsolutePath() + UPLOAD_DIR;
+        String uploadFilePath = applicationPath + File.separator + UPLOAD_DIR;
+
+        File fileSaveDir = new File(uploadFilePath);
+        if (!fileSaveDir.exists()) {
+            fileSaveDir.mkdirs();
+        }
+
+        // Obtener información sobre el archivo cargado
+        String fileName = getFileName(origen);
+        String contentType = origen.getContentType();
+        long fileSize = origen.getSize();
+
+        // Escribir el archivo en el directorio de destino
+        InputStream fileContent = origen.getInputStream();
+        File targetFile = new File(uploadFilePath + File.separator + fileName);
+        // Para copiar los datos del archivo cargado al archivo en el servidor
+        Files.copy(fileContent, targetFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+
+        PrintWriter out = response.getWriter();
+        out.println("Archivo " + fileName + " subido correctamente al directorio " + uploadFilePath);
+        
+        return targetFile.toPath().toString();
     }
-    
-    
+
+    private String getFileName(Part part) {
+        String contentDisp = part.getHeader("content-disposition");
+        String[] tokens = contentDisp.split(";");
+        for (String token : tokens) {
+            if (token.trim().startsWith("filename")) {
+                return token.substring(token.indexOf("=") + 2, token.length() - 1);
+            }
+        }
+        return "";
+    }
+
     @Override
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
+    private void accionDefault(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        List<Libro> libros = libroService.findAllLibro();
+        System.out.println("libros: " + libros);
+        request.setAttribute("libros", libros);
+        request.getRequestDispatcher("/index.jsp").forward(request, response);
+    }
 
 }

@@ -153,7 +153,7 @@
                                     <li>
                                         <hr class="dropdown-divider">
                                     </li>
-                                    <li><a class="dropdown-item" href="inicioSesion.jsp">Libros</a></li>
+                                    <li><a class="dropdown-item" href="Libro?accion=listar">Libros</a></li>
                                     <li>
                                         <hr class="dropdown-divider">
                                     </li>

@@ -119,7 +119,8 @@
                     </div>
                     <div class="mb-3">
                         <label for="exampleFormControlInput1" class="form-label">Usuario</label>
-                        <input type="text" class="form-control" name="usuario" value="<%= usuario.getIdUsuario() %>" required>
+                        <input type="text" class="form-control" value="<%= usuario.getIdUsuario() %>" required disabled>
+                        <input type="hidden" class="form-control" name="usuario" value="<%= usuario.getIdUsuario() %>">
                     </div>
                     <div class="mb-3">
                         <label for="exampleFormControlInput1" class="form-label">Nombre</label>
