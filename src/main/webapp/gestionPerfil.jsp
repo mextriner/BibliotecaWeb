@@ -110,16 +110,14 @@
     <div class="container-fluid align-item-center">
         <!--en esta linea se reparten los elementos-->
         <div class="row d-flex justify-content-center text-center" style="font-family:monospace; color: aliceblue;">
-            <h5 style="font-family:monospace; font-size : 46px; color: #ffffff;"><strong>MI CUENTA <i class="fa-solid fa-user"></i></strong></h5>
+            <h5 style="font-family:monospace; font-size : 46px; color: #ffffff;"><strong>CUENTA: <%= usuario.getIdUsuario() %><i class="fa-solid fa-user"></i></strong></h5>
             <div class="col-sm-12 col-md-4 mt-3 mb-3 text-light bg-dark p-5" style="border-radius: 5%;">
                 <form class="mb-5" method="post" action="Usuario?accion=editar">
                     <div class="mb-3">
                         <label for="exampleFormControlInput1" class="form-label">Contraseña</label>
                         <input type="password" class="form-control" name="clave" placeholder="Contraseña" required>
                     </div>
-                    <div class="mb-3">
-                        <label for="exampleFormControlInput1" class="form-label">Usuario</label>
-                        <input type="text" class="form-control" value="<%= usuario.getIdUsuario() %>" required disabled>
+                    <div>
                         <input type="hidden" class="form-control" name="usuario" value="<%= usuario.getIdUsuario() %>">
                     </div>
                     <div class="mb-3">

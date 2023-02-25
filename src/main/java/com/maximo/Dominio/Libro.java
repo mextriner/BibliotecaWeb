@@ -12,6 +12,7 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EntityManager;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
@@ -20,6 +21,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -30,6 +33,7 @@ import javax.validation.constraints.Size;
  *
  * @author Maximo
  */
+
 @Entity
 @Table(name = "libro")
 @NamedQueries({
@@ -40,7 +44,7 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "Libro.findByBestSeller", query = "SELECT l FROM Libro l WHERE l.bestSeller = :bestSeller"),
     @NamedQuery(name = "Libro.findByPortada", query = "SELECT l FROM Libro l WHERE l.portada = :portada")})
 public class Libro implements Serializable {
-
+    
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -80,15 +84,8 @@ public class Libro implements Serializable {
     public Libro() {
     }
 
-    public Libro(String isbn) {
-        this.isbn = isbn;
-    }
-
-    public Libro(String isbn, String titulo) {
-        this.isbn = isbn;
-        this.titulo = titulo;
-    }
-
+    
+    
     public Libro(String isbn, String titulo, Date fechaPublicacion, Short bestSeller, String portada, String descripcion, Editorial editorialidEditorial) {
         this.isbn = isbn;
         this.titulo = titulo;
@@ -97,6 +94,26 @@ public class Libro implements Serializable {
         this.portada = portada;
         this.descripcion = descripcion;
         this.editorialidEditorial = editorialidEditorial;
+    }
+
+    public Libro(String isbn) {
+        this.isbn = isbn;
+    }
+
+    public Libro(String isbn, String titulo, Date fechaPublicacion, Short bestSeller, String portada, String descripcion) {
+        this.isbn = isbn;
+        this.titulo = titulo;
+        this.fechaPublicacion = fechaPublicacion;
+        this.bestSeller = bestSeller;
+        this.portada = portada;
+        this.descripcion = descripcion;
+    }
+    
+    
+
+    public Libro(String isbn, String titulo) {
+        this.isbn = isbn;
+        this.titulo = titulo;
     }
 
     public String getIsbn() {
@@ -207,9 +224,11 @@ public class Libro implements Serializable {
         return true;
     }
 
+
+
     @Override
     public String toString() {
         return "com.maximo.Dominio.Libro[ isbn=" + isbn + " ]";
     }
-    
+
 }

@@ -70,8 +70,6 @@ public class Editorial implements Serializable {
         this.nombre = nombre;
         this.direccion = direccion;
     }
-    
-    
 
     public Integer getIdEditorial() {
         return idEditorial;

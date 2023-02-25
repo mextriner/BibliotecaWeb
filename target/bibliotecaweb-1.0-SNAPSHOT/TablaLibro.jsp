@@ -1,5 +1,6 @@
+<%@page import="com.maximo.Dominio.Libro"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<%@page import="com.maximo.Service.Interfaz.iLibroService"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -112,8 +113,7 @@
                 <c:forEach items="${libros}" var="libro">
                     <div class="col-sm-12 col-md-3 text-light text-center bg-dark d-flex justify-content-center" style="border-radius:5%;border: solid 1px darkgray;">
                         <div style="padding:50px;">
-                            <p>UNIDADES: </p>
-                            <form action="editarLibro.php" method="POST">
+                            <form action="cargarModifica?clase=libro" method="POST">
                                 <img src='${libro.getPortada()}' style="height:300px;width:198px;border-radius:5%;">
                                 <div class="mb-3" style="height:120px;">
                                     <h1>${libro.getTitulo()}</h1>

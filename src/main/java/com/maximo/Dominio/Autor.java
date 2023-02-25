@@ -75,12 +75,6 @@ public class Autor implements Serializable {
         this.idAutor = idAutor;
     }
 
-    public Autor(Integer idAutor, String nombre, String apellido) {
-        this.idAutor = idAutor;
-        this.nombre = nombre;
-        this.apellido = apellido;
-    }
-
     public Autor(String nombre, String apellido, String nacionalidad, Date fechaNac) {
         this.nombre = nombre;
         this.apellido = apellido;
@@ -88,8 +82,19 @@ public class Autor implements Serializable {
         this.fechaNac = fechaNac;
     }
 
+    public Autor(Integer idAutor, List<Libro> libroList) {
+        this.idAutor = idAutor;
+        this.libroList = libroList;
+    }
     
     
+
+    public Autor(Integer idAutor, String nombre, String apellido) {
+        this.idAutor = idAutor;
+        this.nombre = nombre;
+        this.apellido = apellido;
+    }
+
     public Integer getIdAutor() {
         return idAutor;
     }

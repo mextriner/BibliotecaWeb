@@ -69,7 +69,7 @@ public class LibroServlet extends HttpServlet {
                     this.insertarLibro(request, response);
                     break;
                 case "editar":
-                    //this.editarCliente(request, response);
+                    this.editarLibro(request, response);
                     break;
                 case "eliminar":
                     //this.eliminarCliente(request, response);
@@ -113,7 +113,7 @@ public class LibroServlet extends HttpServlet {
 
     private void listarLibro(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        
         List<Libro> libros = libroService.findAllLibro();
         System.out.println("libros: " + libros);
         request.setAttribute("libros", libros);
@@ -126,26 +126,19 @@ public class LibroServlet extends HttpServlet {
 
         List<Categoria> c = new ArrayList<>();
         List<Autor> a = new ArrayList<>();
+        List<Unidad> unidad = new ArrayList<>();
 
-        String[] categorias = request.getParameterValues("categoria");
-        for (String i : categorias) {
-            c.add(new Categoria(Integer.valueOf(i)));
-        }
-
-        String[] autores = request.getParameterValues("autor");
-        for (String i : autores) {
-            a.add(new Autor(Integer.valueOf(i)));
-        }
+        
 
         String isbn = request.getParameter("ISBN");
         String titulo = request.getParameter("Titulo");
 
         Part origen = (request.getPart("foto"));
-        /*String or = getFilename(origen);
+        String or = getFilename(origen);
         File ar = new File(or);
-        ar.renameTo(new File("/BibliotecaWeb/img/"+ar));
-        String foto = ar.toPath().toString();*/
-        String foto = cargarImagen(request, response, origen);
+        ar.renameTo(new File("/BibliotecaWeb/img/" + ar));
+        String foto = ar.toPath().toString();
+        //String foto = cargarImagen(request, response, origen);
 
         String f = request.getParameter("Fecha");
         String fe[] = f.split("-");
@@ -153,7 +146,6 @@ public class LibroServlet extends HttpServlet {
         ZoneId defaultZoneId = ZoneId.systemDefault();
         Date fecha = Date.from(fec.atStartOfDay(defaultZoneId).toInstant());
 
-        int unidades = Integer.valueOf(request.getParameter("Unidades"));
         String descripcion = request.getParameter("descripcion");
         String editorial = request.getParameter("editorial");
 
@@ -161,19 +153,38 @@ public class LibroServlet extends HttpServlet {
 
         Editorial ed = new Editorial(Integer.valueOf(editorial));
         Libro libro = new Libro(isbn, titulo, fecha, bestseller, foto, descripcion, ed);
+        
+        List<Libro> l = new ArrayList<>();
+        l.add(libro);
+        
+        int unidades = Integer.valueOf(request.getParameter("Unidades"));
+        for (int i = 0; i < Integer.valueOf(unidades); i++) {
+            unidad.add(new Unidad((short)1, "administración", libro));
+        }
+        
+        String[] categorias = request.getParameterValues("categoria");
+        for (String i : categorias) {
+            c.add(new Categoria(Integer.valueOf(i),l));
+        }
 
+        String[] autores = request.getParameterValues("autor");
+        for (String i : autores) {
+            a.add(new Autor(Integer.valueOf(i),l));
+        }
+        
+        libro.setUnidadList(unidad);
         libro.setAutorList(a);
         libro.setCategoriaList(c);
 
-        /*for(int i = 0 ; i < unidades ; i++){
-            unidadService.insertarUnidad(new Unidad("disponible","administración",libro));
+        /*for (int i = 0; i < unidades; i++) {
+            unidadService.insertarUnidad(new Unidad("disponible", "administración", libro));
         }*/
         libroService.insertarLibro(libro);
         this.listarLibro(request, response);
 
     }
 
-    /*private static String getFilename(Part part) {
+    private static String getFilename(Part part) {
         String r = null;
         for (String cd : part.getHeader("content-disposition").split(";")) {
             if (cd.trim().startsWith("filename")) {
@@ -181,9 +192,10 @@ public class LibroServlet extends HttpServlet {
                 r = filename.substring(filename.lastIndexOf('/') + 1).substring(filename.lastIndexOf('\\') + 1); // MSIE fix.
             }
         }
-    return r;
-    }*/
-    private String cargarImagen(HttpServletRequest request, HttpServletResponse response, Part origen)
+        return r;
+    }
+
+    /*private String cargarImagen(HttpServletRequest request, HttpServletResponse response, Part origen)
             throws ServletException, IOException {
         String UPLOAD_DIR = "../../../img";
         String applicationPath = new File("").getAbsolutePath() + UPLOAD_DIR;
@@ -210,8 +222,8 @@ public class LibroServlet extends HttpServlet {
         
         return targetFile.toPath().toString();
     }
-
-    private String getFileName(Part part) {
+     */
+ /*private String getFileName(Part part) {
         String contentDisp = part.getHeader("content-disposition");
         String[] tokens = contentDisp.split(";");
         for (String token : tokens) {
@@ -220,8 +232,7 @@ public class LibroServlet extends HttpServlet {
             }
         }
         return "";
-    }
-
+    }*/
     @Override
     public String getServletInfo() {
         return "Short description";
@@ -233,6 +244,33 @@ public class LibroServlet extends HttpServlet {
         System.out.println("libros: " + libros);
         request.setAttribute("libros", libros);
         request.getRequestDispatcher("/index.jsp").forward(request, response);
+    }
+
+    private void editarLibro(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String isbn = request.getParameter("ISBN");
+        String titulo = request.getParameter("Titulo");
+
+        Part origen = (request.getPart("foto"));
+        String or = getFilename(origen);
+        File ar = new File(or);
+        ar.renameTo(new File("/BibliotecaWeb/img/" + ar));
+        String foto = ar.toPath().toString();
+        //String foto = cargarImagen(request, response, origen);
+
+        String f = request.getParameter("Fecha");
+        String fe[] = f.split("-");
+        LocalDate fec = LocalDate.of(Integer.valueOf(fe[0]), Integer.valueOf(fe[1]), Integer.valueOf(fe[2]));
+        ZoneId defaultZoneId = ZoneId.systemDefault();
+        Date fecha = Date.from(fec.atStartOfDay(defaultZoneId).toInstant());
+
+        String descripcion = request.getParameter("descripcion");
+        String editorial = request.getParameter("editorial");
+
+        short bestseller = Short.valueOf(request.getParameter("bestseller"));
+        
+        Libro libro = new Libro(isbn, titulo, fecha, bestseller, foto, descripcion);
+        libroService.updateLibro(libro);
+        request.getRequestDispatcher("/TablaLibro.jsp").forward(request, response);
     }
 
 }

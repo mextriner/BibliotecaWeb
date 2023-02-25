@@ -65,6 +65,11 @@ public class Categoria implements Serializable {
         this.idCategoria = idCategoria;
     }
 
+    public Categoria(Integer idCategoria, List<Libro> libroList) {
+        this.idCategoria = idCategoria;
+        this.libroList = libroList;
+    }
+
     public Categoria(Integer idCategoria, String nombre, String descripcion) {
         this.idCategoria = idCategoria;
         this.nombre = nombre;

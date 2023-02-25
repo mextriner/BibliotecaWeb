@@ -5,7 +5,9 @@
  */
 package com.maximo.Web;
 
+import com.maximo.Dominio.Libro;
 import com.maximo.Dominio.Usuario;
+import com.maximo.Service.Interfaz.iLibroService;
 import com.maximo.Service.Interfaz.iUsuarioService;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -26,6 +28,8 @@ public class cargarModifica extends HttpServlet {
 
     @Inject
     iUsuarioService usuarioService;
+    @Inject
+    iLibroService libroService;
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -77,7 +81,7 @@ public class cargarModifica extends HttpServlet {
                     this.modificarUsuario(request, response);
                     break;
                 case "libro":
-                    //this.iniciarSesion(request, response);
+                    this.modificarLibro(request, response);
                     break;
                 case "autor":
                     //this.editarCliente(request, response);
@@ -103,6 +107,17 @@ public class cargarModifica extends HttpServlet {
         usuario = usuarioService.findByIdUsuario(usuario);
         request.setAttribute("usuario", usuario);
         request.getRequestDispatcher("gestionPerfil.jsp").forward(request, response);
+
+    }
+
+    private void modificarLibro(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
+        String isbn = (String) request.getParameter("idLibro");
+        Libro libro = new Libro(isbn);
+        libroService.findByIsbn(libro);
+        request.setAttribute("libro", libro);
+        request.getRequestDispatcher("editarLibro.jsp").forward(request, response);
 
     }
 

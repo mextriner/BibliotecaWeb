@@ -1,10 +1,11 @@
 
+<%@page import="com.maximo.Dominio.Libro"%>
 <%@page import="com.maximo.Dominio.Usuario"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <%
-    Usuario usuario = (Usuario)request.getAttribute("usuario");
+    Libro libro = (Libro)request.getAttribute("libro");
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -110,41 +111,58 @@
     <div class="container-fluid align-item-center">
         <!--en esta linea se reparten los elementos-->
         <div class="row d-flex justify-content-center text-center" style="font-family:monospace; color: aliceblue;">
-            <h5 style="font-family:monospace; font-size : 46px; color: #ffffff;"><strong>CUENTA: <%= usuario.getIdUsuario() %><i class="fa-solid fa-user"></i></strong></h5>
+            <h5 style="font-family:monospace; font-size : 46px; color: #ffffff;"><strong>LIBRO: <%= libro.getIsbn() %><i class="fa-solid fa-user"></i></strong></h5>
             <div class="col-sm-12 col-md-4 mt-3 mb-3 text-light bg-dark p-5" style="border-radius: 5%;">
-                <form class="mb-5" method="post" action="Usuario?accion=editar">
-                    <div class="mb-3">
-                        <label for="exampleFormControlInput1" class="form-label">Contraseña</label>
-                        <input type="password" class="form-control" name="clave" placeholder="Contraseña" required>
-                    </div>
-                    <div>
-                        <input type="hidden" class="form-control" name="usuario" value="<%= usuario.getIdUsuario() %>">
-                    </div>
-                    <div class="mb-3">
-                        <label for="exampleFormControlInput1" class="form-label">Nombre</label>
-                        <input type="text" class="form-control" name="nombre" value="<%= usuario.getNombre() %>">
-                    </div>
+                <form method="POST" action="Libro?accion=insertar" enctype="multipart/form-data">
 
-                    <div class="mb-3">
-                        <label for="exampleFormControlInput1" class="form-label">Apellidos</label>
-                        <input type="text" class="form-control" name="apellido" value="<%= usuario.getApellido() %>">
-                    </div>
+                    <div class="row d-flex justify-content-center">
 
-                    <div class="mb-3">
-                        <label for="exampleFormControlInput1" class="form-label">Direccion</label>
-                        <input type="text" class="form-control" name="direccion" value="<%= usuario.getDireccion() %>" required>
-                    </div>
-                    <div class="mt-5 mb-5 pb-3">
-                        <label for="exampleFormControlInput1" class="form-label">Fecha de Nacimiento</label>
-                        <input type="date" class="form-control" name="fechaNac" value="<%= usuario.getFechaNac() %>" required>
-                    </div>
+                        <div class="col-md-4 col-sm-12 mb-3 mt-4">
+                            <h1 style="font-size: 30px; ;"><strong>REGISTRO</strong></h1>
 
-                    <div class="mt-5 col-12 d-flex justify-content-center align-item-center">
-                        <button class="btn btn-outline-info Hadow rounded border" name="actualizar" type="submit">ACTUALIZAR
-                            CUENTA</button>
+                            <label for="exampleFormControlInput1" class="form-label">Libro</label>
+                            <input type="text" class="form-control" name="Titulo" value="<%= libro.getTitulo() %>">
+                        </div>
+                    </div>
+                    <div class="row d-flex justify-content-center">
+
+
+                        <div class="col-sm-12 col-md-4 mt-3 mb-3 text-light">
+
+                            <div class="mb-3">
+                                <label for="exampleFormControlInput1" class="form-label">Fecha Publicación: <%= libro.getFechaPublicacion() %></label>
+                                <input type="date" class="form-control" name="Fecha" placeholder="Fecha" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="formFile" class="form-label">Portada</label>
+                                <input type="file" class="form-control" name="foto" placeholder="Ruta de imagen" id="formFile"> required
+                            </div>
+                            <div class="mb-5">
+                                <label for="exampleFormControlInput1" class="form-label">Número de Unidades</label>
+                                <input type="number" class="form-control" name="Unidades" placeholder="Unidades" required>
+                            </div>                            
+                        </div>
+                        <div class="col-sm-12 col-md-4 mt-3 mb-3 text-light">
+                            <label for="inputState" class="form-label">Bestseller</label>
+                            <div class="form-floating mb-4">
+                                <select name="bestseller" class="form-select" required>
+                                    <option value=0>NO</option>
+                                    <option value=1>SÍ</option>
+                                </select>
+                            </div>
+                            <div class="mb-4">
+                                <label for="exampleFormControlInput1" class="form-label">Descripción</label>
+                                <textarea class="form-control" name="descripcion" id="exampleFormControlTextarea1" rows="3" required><%= libro.getDescripcion() %></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row d-flex justify-content-center">
+                        <div class="mb-3 col-sm-12 col-md-1">
+                            <button class="btn btn-outline-success Hadow rounded border" type="submit">REGISTRARSE</button>
+                        </div>
                     </div>
                 </form>
-                <a class="mt-2 text-danger" href="eliminarUsuario.php?idUsuario=<?php echo $_SESSION['id'] ?>">ELIMINAR CUENTA</a>
+                <a class="mt-2 text-danger" href="">ELIMINAR CUENTA</a>
             </div>
         </div>
 

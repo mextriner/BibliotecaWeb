@@ -10,6 +10,7 @@ import com.maximo.Dominio.Categoria;
 import com.maximo.Dominio.Libro;
 import com.maximo.Dominio.Unidad;
 import com.maximo.Service.Interfaz.iLibroService;
+import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
 
@@ -61,7 +62,7 @@ public class LibroServiceImpl implements iLibroService {
     public List<Unidad> findUnidadByLibro(Libro libro){
         return libroDao.findUnidadByLibro(libro);
     }
-
+    
     @Override
     public void insertarLibro(Libro libro){
         libroDao.insertarLibro(libro);

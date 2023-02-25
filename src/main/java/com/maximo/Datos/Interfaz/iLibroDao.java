@@ -32,7 +32,7 @@ public interface iLibroDao {
     public List<Categoria> findCategoriaByLibro(Libro libro);
     
     public List<Unidad> findUnidadByLibro(Libro libro);
-
+    
     public void insertarLibro(Libro libro);
 
     public void updateLibro(Libro libro);
