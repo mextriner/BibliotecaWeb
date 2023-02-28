@@ -115,7 +115,7 @@ public class cargarModifica extends HttpServlet {
 
         String isbn = (String) request.getParameter("idLibro");
         Libro libro = new Libro(isbn);
-        libroService.findByIsbn(libro);
+        libro = libroService.findByIsbn(libro);
         request.setAttribute("libro", libro);
         request.getRequestDispatcher("editarLibro.jsp").forward(request, response);
 

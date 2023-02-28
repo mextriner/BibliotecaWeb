@@ -95,7 +95,7 @@ public class LibroServlet extends HttpServlet {
                     this.insertarLibro(request, response);
                     break;
                 case "editar":
-                    //this.editarCliente(request, response);
+                    this.editarLibro(request, response);
                     break;
                 case "eliminar":
                     //this.eliminarCliente(request, response);
@@ -113,7 +113,7 @@ public class LibroServlet extends HttpServlet {
 
     private void listarLibro(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
         List<Libro> libros = libroService.findAllLibro();
         System.out.println("libros: " + libros);
         request.setAttribute("libros", libros);
@@ -127,8 +127,6 @@ public class LibroServlet extends HttpServlet {
         List<Categoria> c = new ArrayList<>();
         List<Autor> a = new ArrayList<>();
         List<Unidad> unidad = new ArrayList<>();
-
-        
 
         String isbn = request.getParameter("ISBN");
         String titulo = request.getParameter("Titulo");
@@ -153,25 +151,25 @@ public class LibroServlet extends HttpServlet {
 
         Editorial ed = new Editorial(Integer.valueOf(editorial));
         Libro libro = new Libro(isbn, titulo, fecha, bestseller, foto, descripcion, ed);
-        
+
         List<Libro> l = new ArrayList<>();
         l.add(libro);
-        
+
         int unidades = Integer.valueOf(request.getParameter("Unidades"));
         for (int i = 0; i < Integer.valueOf(unidades); i++) {
-            unidad.add(new Unidad((short)1, "administración", libro));
+            unidad.add(new Unidad((short) 1, "administración", libro));
         }
-        
+
         String[] categorias = request.getParameterValues("categoria");
         for (String i : categorias) {
-            c.add(new Categoria(Integer.valueOf(i),l));
+            c.add(new Categoria(Integer.valueOf(i), l));
         }
 
         String[] autores = request.getParameterValues("autor");
         for (String i : autores) {
-            a.add(new Autor(Integer.valueOf(i),l));
+            a.add(new Autor(Integer.valueOf(i), l));
         }
-        
+
         libro.setUnidadList(unidad);
         libro.setAutorList(a);
         libro.setCategoriaList(c);
@@ -247,8 +245,8 @@ public class LibroServlet extends HttpServlet {
     }
 
     private void editarLibro(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String isbn = request.getParameter("ISBN");
-        String titulo = request.getParameter("Titulo");
+        String isbn = request.getParameter("isbn");
+        String titulo = request.getParameter("titulo");
 
         Part origen = (request.getPart("foto"));
         String or = getFilename(origen);
@@ -257,18 +255,28 @@ public class LibroServlet extends HttpServlet {
         String foto = ar.toPath().toString();
         //String foto = cargarImagen(request, response, origen);
 
-        String f = request.getParameter("Fecha");
+        String f = request.getParameter("fecha");
         String fe[] = f.split("-");
         LocalDate fec = LocalDate.of(Integer.valueOf(fe[0]), Integer.valueOf(fe[1]), Integer.valueOf(fe[2]));
         ZoneId defaultZoneId = ZoneId.systemDefault();
         Date fecha = Date.from(fec.atStartOfDay(defaultZoneId).toInstant());
 
         String descripcion = request.getParameter("descripcion");
-        String editorial = request.getParameter("editorial");
-
         short bestseller = Short.valueOf(request.getParameter("bestseller"));
-        
+        int u = Integer.valueOf(request.getParameter("Unidades"));
+        List<Categoria> c = new ArrayList<>();
+        List<Autor> a = new ArrayList<>();
+        List<Unidad> unidad = new ArrayList<>();
+        List<Libro> l = new ArrayList<>();
         Libro libro = new Libro(isbn, titulo, fecha, bestseller, foto, descripcion);
+        l.add(libro);
+
+        for (int i = 0; i < u; i++) {
+            unidad.add(new Unidad((short) 1, "administración", libro));
+        }
+        libro.setUnidadList(unidad);
+        libro.setAutorList(a);
+        libro.setCategoriaList(c);
         libroService.updateLibro(libro);
         request.getRequestDispatcher("/TablaLibro.jsp").forward(request, response);
     }
