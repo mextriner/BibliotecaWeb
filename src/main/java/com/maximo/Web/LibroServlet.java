@@ -14,27 +14,11 @@ import com.maximo.Service.Interfaz.iLibroService;
 import com.maximo.Service.Interfaz.iUnidadService;
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.PrintWriter;
-import java.nio.file.FileSystems;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
 import java.util.Date;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.Month;
 import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Collection;
-import java.util.Formatter;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -95,7 +79,7 @@ public class LibroServlet extends HttpServlet {
                     this.insertarLibro(request, response);
                     break;
                 case "editar":
-                    //this.editarCliente(request, response);
+                    this.editarLibro(request, response);
                     break;
                 case "eliminar":
                     //this.eliminarCliente(request, response);
@@ -140,16 +124,6 @@ public class LibroServlet extends HttpServlet {
         List<Categoria> c = new ArrayList<>();
         List<Autor> a = new ArrayList<>();
         List<Unidad> unidad = new ArrayList<>();
-<<<<<<< HEAD
-
-<<<<<<< HEAD
-=======
-        
->>>>>>> 598233af741d19e43aef5762d485f60ec0bc4798
-=======
-        
-
->>>>>>> parent of daa09f7 (cambios)
         String isbn = request.getParameter("ISBN");
         String titulo = request.getParameter("Titulo");
         
@@ -267,22 +241,12 @@ public class LibroServlet extends HttpServlet {
     }
     
     private void editarLibro(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-<<<<<<< HEAD
-<<<<<<< HEAD
+
         String isbn = request.getParameter("isbn");
         String titulo = request.getParameter("titulo");
-=======
-        String isbn = request.getParameter("ISBN");
-        String titulo = request.getParameter("Titulo");
->>>>>>> parent of daa09f7 (cambios)
-
-=======
-        String isbn = request.getParameter("ISBN");
         
         Libro libroAnterior = libroService.findByIsbn(new Libro(isbn));
-        String titulo = request.getParameter("Titulo");
         
->>>>>>> 598233af741d19e43aef5762d485f60ec0bc4798
         Part origen = (request.getPart("foto"));
         String or = getFilename(origen);
         File ar = new File(or);
@@ -290,49 +254,32 @@ public class LibroServlet extends HttpServlet {
         String foto = ar.toPath().toString();
         //String foto = cargarImagen(request, response, origen);
 
-        String f = request.getParameter("Fecha");
+        String f = request.getParameter("fecha");
         String fe[] = f.split("-");
         LocalDate fec = LocalDate.of(Integer.valueOf(fe[0]), Integer.valueOf(fe[1]), Integer.valueOf(fe[2]));
         ZoneId defaultZoneId = ZoneId.systemDefault();
         Date fecha = Date.from(fec.atStartOfDay(defaultZoneId).toInstant());
         
         String descripcion = request.getParameter("descripcion");
-<<<<<<< HEAD
-<<<<<<< HEAD
+        
         short bestseller = Short.valueOf(request.getParameter("bestseller"));
-        int u = Integer.valueOf(request.getParameter("Unidades"));
-        List<Categoria> c = new ArrayList<>();
-        List<Autor> a = new ArrayList<>();
-        List<Unidad> unidad = new ArrayList<>();
-        List<Libro> l = new ArrayList<>();
-        Libro libro = new Libro(isbn, titulo, fecha, bestseller, foto, descripcion);
-        l.add(libro);
-
-        for (int i = 0; i < u; i++) {
-            unidad.add(new Unidad((short) 1, "administración", libro));
-        }
-        libro.setUnidadList(unidad);
-        libro.setAutorList(a);
-        libro.setCategoriaList(c);
-=======
+        int u = Integer.valueOf(request.getParameter("unidades"));
         String e = request.getParameter("editorial");
         Editorial editorial = new Editorial(Integer.valueOf(e));
+        Libro libro = new Libro(isbn, titulo, fecha, bestseller, foto, descripcion, editorial);
+        List<Unidad> unidad = new ArrayList<>();
+        for (int i = 0; i < u; i++) {
+            unidad.add(new Unidad((short) 1, "administración", libro));
+        }       
+        
         List<Autor> autores = libroAnterior.getAutorList();
         List<Categoria> categorias = libroAnterior.getCategoriaList();
-        List<Unidad> unidades = libroAnterior.getUnidadList();
-        short bestseller = Short.valueOf(request.getParameter("bestseller"));
         
-        Libro libro = new Libro(isbn, titulo, fecha, bestseller, foto, descripcion, editorial);
->>>>>>> 598233af741d19e43aef5762d485f60ec0bc4798
-=======
-        String editorial = request.getParameter("editorial");
-
-        short bestseller = Short.valueOf(request.getParameter("bestseller"));
-        
-        Libro libro = new Libro(isbn, titulo, fecha, bestseller, foto, descripcion);
->>>>>>> parent of daa09f7 (cambios)
+         libro.setUnidadList(unidad);
+        libro.setAutorList(autores);
+        libro.setCategoriaList(categorias);
         libroService.updateLibro(libro);
-        request.getRequestDispatcher("/TablaLibro.jsp").forward(request, response);
+        this.listarLibro(request, response);
     }
     
 }

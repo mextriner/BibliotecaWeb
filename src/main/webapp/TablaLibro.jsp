@@ -76,7 +76,7 @@
                                     INSERTAR <i class="fa-solid fa-circle-plus"></i>
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <li><a class="dropdown-item" href="registroLibro.php">Registrar Libro</a></li>
+                                    <li><a class="dropdown-item" href="NuevoLibro?accion=insertar">Registrar Libro</a></li>
                                     <li>
                                         <hr class="dropdown-divider">
                                     </li>
@@ -113,7 +113,8 @@
                 <c:forEach items="${libros}" var="libro">
                     <div class="col-sm-12 col-md-3 text-light text-center bg-dark d-flex justify-content-center" style="border-radius:5%;border: solid 1px darkgray;">
                         <div style="padding:50px;">
-                            <form action="cargarModifica?clase=libro" method="POST">
+                            <form action="NuevoLibro?accion=editar" method="POST">
+                                <p>UNIDADES: ${libro.getUnidadList().size()}</p>
                                 <img src='${libro.getPortada()}' style="height:300px;width:198px;border-radius:5%;">
                                 <div class="mb-3" style="height:120px;">
                                     <h1>${libro.getTitulo()}</h1>

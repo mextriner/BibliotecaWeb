@@ -5,12 +5,14 @@
  */
 package com.maximo.Web;
 
+import com.maximo.Dominio.Editorial;
 import com.maximo.Dominio.Libro;
 import com.maximo.Dominio.Usuario;
 import com.maximo.Service.Interfaz.iLibroService;
 import com.maximo.Service.Interfaz.iUsuarioService;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -113,9 +115,11 @@ public class cargarModifica extends HttpServlet {
     private void modificarLibro(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+        List<Editorial> editoriales = (List)request.getAttribute("editoriales");
+        request.setAttribute("editoriales", editoriales);
         String isbn = (String) request.getParameter("idLibro");
         Libro libro = new Libro(isbn);
-        libroService.findByIsbn(libro);
+        libro = libroService.findByIsbn(libro);
         request.setAttribute("libro", libro);
         request.getRequestDispatcher("editarLibro.jsp").forward(request, response);
 

@@ -27,16 +27,15 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "FkLibroServlet", urlPatterns = {"/NuevoLibro"})
 public class FkLibroServlet extends HttpServlet {
-    
+
     @Inject
     iEditorialService editorialService;
-    
+
     @Inject
     iCategoriaService categoriaService;
-    
+
     @Inject
     iAutorService autorService;
-    
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -51,30 +50,54 @@ public class FkLibroServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
-    
+
     }
-    
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
-}
-    
-    
+        String accion = request.getParameter("accion");
+        if (accion != null) {
+            switch (accion) {
+                case "insertar":
+                    this.processRequest(request, response);
+                    request.getRequestDispatcher("/registroLibro.jsp").forward(request, response);
+
+                    break;
+                case "editar":
+                    this.processRequest(request, response);
+                    request.getRequestDispatcher("cargarModifica?clase=libro").forward(request, response);
+
+                    break;
+                case "eliminar":
+                    //this.eliminarCliente(request, response);
+                    break;
+                case "listar":
+                    //this.listarLibro(request, response);
+                    break;
+                case "buscar":
+                    //this.buscarLibro(request, response);
+                    break;
+                default:
+                //this.accionDefault(request, response);
+            }
+        } else {
+            //this.accionDefault(request, response);
+        }
+    }
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         List<Editorial> editoriales = editorialService.findAllEditorial();
-        System.out.println("Editorial: "+ editoriales);
+        System.out.println("Editorial: " + editoriales);
         request.setAttribute("editoriales", editoriales);
-        
-        
-        List <Categoria> categorias = categoriaService.findAllCategoria();
-        request.setAttribute("categorias",categorias);
-        
-        List <Autor> autores = autorService.findAllAutor();
+
+        List<Categoria> categorias = categoriaService.findAllCategoria();
+        request.setAttribute("categorias", categorias);
+
+        List<Autor> autores = autorService.findAllAutor();
         request.setAttribute("autores", autores);
-        
-        request.getRequestDispatcher("/registroLibro.jsp").forward(request, response);
+
     }
 
 }
