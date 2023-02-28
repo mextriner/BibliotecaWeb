@@ -9,7 +9,7 @@
     String user = "";
     HttpSession sesion = request.getSession();
     if (sesion.getAttribute("usuario") != null) {
-        user =(String) sesion.getAttribute("usuario");
+        user = (String) sesion.getAttribute("usuario");
     }
 %>
 
@@ -158,7 +158,7 @@
                                         <hr class="dropdown-divider">
                                     </li>
                                     <li><a class="dropdown-item" href="cargarModifica?clase=usuario&usr=<%=user%>">
-                                           Autores
+                                            Autores
                                         </a>
                                     </li>
                                 </ul>
@@ -178,6 +178,14 @@
                                         <hr class="dropdown-divider">
                                     </li>
                                     <li><a class="dropdown-item" href="registroEditorial.jsp">Registrar Editorial</a></li>
+                                    <li>
+                                        <hr class="dropdown-divider">
+                                    </li>
+                                    <li><a class="dropdown-item" href="registroCategoria.jsp">Registrar Categoria</a></li>
+                                    <li>
+                                        <hr class="dropdown-divider">
+                                    </li>
+                                    <li><a class="dropdown-item" href="registroAutor.jsp">Registrar Autor</a></li>
                                 </ul>
                             </li>
                             <li class="nav-item dropdown" style="margin-left:5px;">

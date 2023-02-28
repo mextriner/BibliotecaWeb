@@ -44,6 +44,11 @@ public class LibroServiceImpl implements iLibroService {
     }
 
     @Override
+    public List<Libro> buscadorLibro(String bus){
+        return libroDao.buscadorLibro(bus);
+    }
+    
+    @Override
     public List<Libro> findByBestSeller(Libro libro){
         return libroDao.findByBestSeller(libro);
     }

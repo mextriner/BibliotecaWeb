@@ -1,11 +1,4 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%
-    String user = "";
-    HttpSession sesion = request.getSession();
-    if (sesion.getAttribute("usuario") != null) {
-        user = (String) sesion.getAttribute("usuario");
-    }
-%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -22,6 +15,7 @@
     <body class="bg-secondary text-light" style="font-family:monospace;">
         <div>
 
+            <!--LA BARRA DE NAVEGACION-->
             <div class="container-fluid bg-secondary" style="padding:0;width:100%;">
                 <nav class="navbar navbar-expand-lg navbar-light ">
                     <div class="container-fluid">
@@ -44,37 +38,20 @@
                                         <li>
                                             <hr class="dropdown-divider">
                                         </li>
-                                        <li><a class="dropdown-item" href="inicioSesion.jsp">Iniciar Sesión</a></li>
+                                        <li><a class="dropdown-item" href="inicSesion.php">Iniciar Sesión</a></li>
                                         <li>
                                             <hr class="dropdown-divider">
                                         </li>
-                                        <li><a class="dropdown-item" href="cargarModifica?clase=usuario&usr=<%=user%>">
-                                                Mi cuenta: <%=user%>
-                                            </a>
-                                        </li>
+                                        <li><a class="dropdown-item" href="gestionPerfil.php">Mi cuenta</a></li>
                                     </ul>
                                 </li>
                                 <li class="nav-item dropdown" style="margin-left:5px;">
-                                    <a class="nav-link dropdown-toggle text-light" href="" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"">
+                                    <a class="nav-link text-light" href="tablas.php" id="navbarDropdown" role="button">
                                         Tablas <i class="fa-sharp fa-solid fa-chart-simple"></i>
                                     </a>
-                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                        <li><a class="dropdown-item" href="Usuario?accion=listar">Usuarios</a></li>
-                                        <li>
-                                            <hr class="dropdown-divider">
-                                        </li>
-                                        <li><a class="dropdown-item" href="Libro?accion=listar">Libros</a></li>
-                                        <li>
-                                            <hr class="dropdown-divider">
-                                        </li>
-                                        <li><a class="dropdown-item" href="cargarModifica?clase=usuario&usr=<%=user%>">
-                                                Autores
-                                            </a>
-                                        </li>
-                                    </ul>
                                 </li>
                                 <li class="nav-item dropdown" style="margin-left:5px;">
-                                    <a class="nav-link text-light" href="" id="navbarDropdown" role="button">
+                                    <a class="nav-link text-light" href="listarLibros.php" id="navbarDropdown" role="button">
                                         Libros <i class="fa-solid fa-book-bookmark"></i>
                                     </a>
                                 </li>
@@ -102,8 +79,11 @@
 
                                     </form>
                                 </li>
+
+
+
                             </ul>
-                            <form method="post" action="CerrarSesion">
+                            <form method="post" action="">
                                 <input type="hidden" value="1" name="cerrar">
                                 <button class="btn btn-danger" type="submit" value="1" id="button-addon2">CERAR SESION</button>
                             </form>
