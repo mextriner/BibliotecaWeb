@@ -28,6 +28,8 @@ public interface iLibroService {
     public List<Libro> findByFechaPublicacion(Libro libro);
 
     public List<Libro> findByBestSeller(Libro libro);
+    
+    public List<Libro> buscadorLibro(String bus);
 
     public List<Autor> findAutorByLibro(Libro libro);
 
