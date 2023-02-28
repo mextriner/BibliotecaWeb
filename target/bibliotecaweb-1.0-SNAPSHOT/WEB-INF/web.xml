@@ -10,7 +10,7 @@
     </session-config>
     <welcome-file-list>
         <welcome-file>
-               inicioSesion.jsp
+                registro.jsp
         </welcome-file>
     </welcome-file-list>
 </web-app>
