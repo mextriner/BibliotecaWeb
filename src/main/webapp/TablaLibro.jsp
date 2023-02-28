@@ -108,12 +108,12 @@
                                 </ul>
                             </li>
                             <li class="nav-item dropdown" style="margin-left:5px;">
-                                <form action="Libro?accion=buscar" method="post" class="d-flex text-light">
+                                <form method="GET" class="d-flex text-light">
 
                                     <div class="input-group mb-3">
                                         <input type="text" class="form-control" name="bus" placeholder="Término de búsqueda" aria-label="Recipient's username" aria-describedby="button-addon2">
 
-                                        <button class="btn btn-outline-info" type="submit" id="button-addon2">Buscar</button>
+                                        <button class="btn btn-outline-info" name="buscar" value="yes" type="submit" id="button-addon2">Buscar</button>
                                     </div>
 
 
