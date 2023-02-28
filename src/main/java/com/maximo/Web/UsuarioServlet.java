@@ -58,7 +58,7 @@ public class UsuarioServlet extends HttpServlet {
         } else {
             //this.accionDefault(request, response);
         }
-    
+
     }
 
     @Override
@@ -99,6 +99,7 @@ public class UsuarioServlet extends HttpServlet {
         String direccion = request.getParameter("direccion");
 
         String f = request.getParameter("fechaNac");
+
         String fe[] = f.split("-");
         LocalDate fec = LocalDate.of(Integer.valueOf(fe[0]), Integer.valueOf(fe[1]), Integer.valueOf(fe[2]));
         ZoneId defaultZoneId = ZoneId.systemDefault();
@@ -109,12 +110,11 @@ public class UsuarioServlet extends HttpServlet {
         request.getRequestDispatcher("Libro?accion=listar").forward(request, response);
     }
 
-    
     @Override
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-    
+
     private void editarUsuario(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String user = request.getParameter("usuario");
@@ -132,7 +132,7 @@ public class UsuarioServlet extends HttpServlet {
         Usuario usuario = new Usuario(user, clave, nombre, apellido, direccion, fecha);
         usuarioService.updateUsuario(usuario);
         request.getRequestDispatcher("Libro?accion=listar").forward(request, response);
-        
+
     }
 
     private void iniciarSesion(HttpServletRequest request, HttpServletResponse response)
@@ -149,38 +149,43 @@ public class UsuarioServlet extends HttpServlet {
                     usuario = usuarioService.findByIdUsuario(usuario);
                     if (usuario.getClave().equals(clave)) {
                         sesion.setAttribute("usuario", user);
-                        request.getRequestDispatcher("Libro?accion=listar").forward(request, response);          
-                    }else{
+                        if (user.equals("admin")) {
+                            request.getRequestDispatcher("Libro?accion=listar").forward(request, response);
+                        } else {
+                            request.getRequestDispatcher("Libro?accion=defaultaction").forward(request, response);
+
+                        }
+
+                    } else {
                         msj = "La contraseña no es correcta";
                         request.setAttribute("mensaje", msj);
                         request.getRequestDispatcher("inicioSesion.jsp").forward(request, response);
                     }
-                }else{
+                } else {
                     msj = "El usuario no existe";
                     request.setAttribute("mensaje", msj);
                     request.getRequestDispatcher("inicioSesion.jsp").forward(request, response);
                 }
-            }else{
+            } else {
                 msj = "Las credenciales no pueden estar vacías";
                 request.setAttribute("mensaje", msj);
                 request.getRequestDispatcher("inicioSesion.jsp").forward(request, response);
             }
-        }else{
+        } else {
             msj = "La sesión ya está iniciada";
             request.setAttribute("mensaje", msj);
             request.getRequestDispatcher("Libro?accion=listar").forward(request, response);
         }
-        
 
     }
 
-    private void listarUsuario(HttpServletRequest request, HttpServletResponse response) 
-        throws ServletException, IOException {
-        
+    private void listarUsuario(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
         List<Usuario> usuarios = usuarioService.findAllUsuario();
         request.setAttribute("usuarios", usuarios);
         request.getRequestDispatcher("TablaUsuario.jsp").forward(request, response);
-    
+
     }
 
 }

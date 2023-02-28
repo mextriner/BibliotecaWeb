@@ -102,12 +102,12 @@
 
                     <div class="mb-3">
                         <label for="exampleFormControlInput1" class="form-label">Nombre de Usuario</label>
-                        <input type="text" class="form-control" name="usuario" placeholder="Usuario">
+                        <input type="text" class="form-control" name="usuario" placeholder="Usuario" required>
                     </div>
 
                     <div class="mb-3">
                         <label for="exampleFormControlInput1" class="form-label">Clave</label>
-                        <input type="password" class="form-control" name="clave" placeholder="Contraseña">
+                        <input type="password" class="form-control" name="clave" placeholder="Contraseña" required>
                     </div>
 
                     <div class="mb-3">
@@ -125,7 +125,7 @@
 
                     <div class="mb-5 pb-3">
                         <label for="exampleFormControlInput1" class="form-label">Fecha de Nacimiento</label>
-                        <input type="date" class="form-control" name="fechaNac" placeholder="Fecha de Nacimiento">
+                        <input type="date" class="form-control" name="fechaNac" placeholder="Fecha de Nacimiento" required>
                     </div>
                     <input type="hidden" name="oculto" value="1">
                     <div class="mt-5 col-12 d-flex justify-content-center align-item-center">
