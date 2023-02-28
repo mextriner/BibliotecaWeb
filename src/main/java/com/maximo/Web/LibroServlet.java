@@ -65,8 +65,8 @@ public class LibroServlet extends HttpServlet {
         String accion = request.getParameter("accion");
         if (accion != null) {
             switch (accion) {
-                case "insertar":
-                    this.insertarLibro(request, response);
+                case "buscar":
+                    //this.buscarLibro(request, response);
                     break;
                 case "editar":
                     this.editarLibro(request, response);
@@ -103,6 +103,9 @@ public class LibroServlet extends HttpServlet {
                 case "listar":
                     this.listarLibro(request, response);
                     break;
+                case "buscar":
+                    this.buscarLibro(request, response);
+                    break;
                 default:
                     this.accionDefault(request, response);
             }
@@ -113,8 +116,18 @@ public class LibroServlet extends HttpServlet {
 
     private void listarLibro(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
         List<Libro> libros = libroService.findAllLibro();
+        System.out.println("libros: " + libros);
+        request.setAttribute("libros", libros);
+        request.getRequestDispatcher("/TablaLibro.jsp").forward(request, response);
+
+    }
+
+    private void buscarLibro(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        String bus = request.getParameter("bus");
+        List<Libro> libros = libroService.buscadorLibro(bus);
         System.out.println("libros: " + libros);
         request.setAttribute("libros", libros);
         request.getRequestDispatcher("/TablaLibro.jsp").forward(request, response);
@@ -127,8 +140,6 @@ public class LibroServlet extends HttpServlet {
         List<Categoria> c = new ArrayList<>();
         List<Autor> a = new ArrayList<>();
         List<Unidad> unidad = new ArrayList<>();
-
-        
 
         String isbn = request.getParameter("ISBN");
         String titulo = request.getParameter("Titulo");
@@ -153,25 +164,25 @@ public class LibroServlet extends HttpServlet {
 
         Editorial ed = new Editorial(Integer.valueOf(editorial));
         Libro libro = new Libro(isbn, titulo, fecha, bestseller, foto, descripcion, ed);
-        
+
         List<Libro> l = new ArrayList<>();
         l.add(libro);
-        
+
         int unidades = Integer.valueOf(request.getParameter("Unidades"));
         for (int i = 0; i < Integer.valueOf(unidades); i++) {
-            unidad.add(new Unidad((short)1, "administración", libro));
+            unidad.add(new Unidad((short) 1, "administración", libro));
         }
-        
+
         String[] categorias = request.getParameterValues("categoria");
         for (String i : categorias) {
-            c.add(new Categoria(Integer.valueOf(i),l));
+            c.add(new Categoria(Integer.valueOf(i), l));
         }
 
         String[] autores = request.getParameterValues("autor");
         for (String i : autores) {
-            a.add(new Autor(Integer.valueOf(i),l));
+            a.add(new Autor(Integer.valueOf(i), l));
         }
-        
+
         libro.setUnidadList(unidad);
         libro.setAutorList(a);
         libro.setCategoriaList(c);
@@ -267,7 +278,7 @@ public class LibroServlet extends HttpServlet {
         String editorial = request.getParameter("editorial");
 
         short bestseller = Short.valueOf(request.getParameter("bestseller"));
-        
+
         Libro libro = new Libro(isbn, titulo, fecha, bestseller, foto, descripcion);
         libroService.updateLibro(libro);
         request.getRequestDispatcher("/TablaLibro.jsp").forward(request, response);
