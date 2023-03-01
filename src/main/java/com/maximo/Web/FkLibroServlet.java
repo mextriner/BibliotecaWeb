@@ -49,8 +49,34 @@ public class FkLibroServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        String accion = request.getParameter("accion");
+        if (accion != null) {
+            switch (accion) {
+                case "insertar":
+                    this.processRequest(request, response);
+                    request.getRequestDispatcher("/registroLibro.jsp").forward(request, response);
 
+                    break;
+                case "editar":
+                    this.processRequest(request, response);
+                    request.getRequestDispatcher("cargarModifica?clase=libro").forward(request, response);
+
+                    break;
+                case "eliminar":
+                    //this.eliminarCliente(request, response);
+                    break;
+                case "listar":
+                    //this.listarLibro(request, response);
+                    break;
+                case "buscar":
+                    //this.buscarLibro(request, response);
+                    break;
+                default:
+                //this.accionDefault(request, response);
+            }
+        } else {
+            //this.accionDefault(request, response);
+        }
     }
 
     @Override

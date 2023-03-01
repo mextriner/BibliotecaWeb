@@ -10,6 +10,8 @@ import com.maximo.Dominio.Categoria;
 import com.maximo.Dominio.Editorial;
 import com.maximo.Dominio.Libro;
 import com.maximo.Dominio.Unidad;
+import com.maximo.Service.Interfaz.iAutorService;
+import com.maximo.Service.Interfaz.iCategoriaService;
 import com.maximo.Service.Interfaz.iLibroService;
 import com.maximo.Service.Interfaz.iUnidadService;
 import java.io.File;
@@ -40,6 +42,12 @@ public class LibroServlet extends HttpServlet {
     iLibroService libroService;
     
     @Inject
+    iAutorService autorService;
+    
+    @Inject
+    iCategoriaService categoriaService;
+    
+    @Inject
     iUnidadService unidadService;
     
     @Override
@@ -49,7 +57,7 @@ public class LibroServlet extends HttpServlet {
         String accion = request.getParameter("accion");
         if (accion != null) {
             switch (accion) {
-                case "buscar":
+                case "alquilar":
                     //this.buscarLibro(request, response);
                     break;
                 case "editar":
@@ -173,11 +181,17 @@ public class LibroServlet extends HttpServlet {
         String[] categorias = request.getParameterValues("categoria");
         for (String i : categorias) {
             c.add(new Categoria(Integer.valueOf(i),l));
+            Categoria cat = categoriaService.findByIdCategoria((new Categoria(Integer.valueOf(i))));
+            cat.setLibroList(l);
+            categoriaService.updateCategoria(cat);
         }
         
         String[] autores = request.getParameterValues("autor");
         for (String i : autores) {
             a.add(new Autor(Integer.valueOf(i),l));
+            Autor au = autorService.findByIdAutor(new Autor(Integer.valueOf(i)));
+            au.setLibroList(l);
+            autorService.updateAutor(au);
         }
         
         libro.setUnidadList(unidad);

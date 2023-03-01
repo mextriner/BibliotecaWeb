@@ -9,13 +9,13 @@
     String user = "";
     HttpSession sesion = request.getSession();
     String msj = "";
-    if(request.getAttribute("msj") != null){
-        msj = "Resultado de: "+((String)request.getAttribute("msj")).toUpperCase();
-        
+    if (request.getAttribute("msj") != null) {
+        msj = "Resultado de: " + ((String) request.getAttribute("msj")).toUpperCase();
+
     }
     if (sesion.getAttribute("usuario") != null) {
         user = (String) sesion.getAttribute("usuario");
-    }else{
+    } else {
         response.sendRedirect("inicioSesion.jsp");
     }
 %>
@@ -191,7 +191,7 @@
                                     INSERTAR <i class="fa-solid fa-circle-plus"></i>
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <li><a class="dropdown-item" href="NuevoLibro">Registrar Libro</a></li>
+                                    <li><a class="dropdown-item" href="NuevoLibro?accion=insertar">Registrar Libro</a></li>
                                     <li>
                                         <hr class="dropdown-divider">
                                     </li>
@@ -235,7 +235,7 @@
             <!--AQUÍ VAN LAS CARDS-->
             <center>
                 <div class="col-sm-12 col-md-12 bg-dark" style="width: 100%;">
-                    <h1 style="font-family:monospace; font-size : 46px; color: aliceblue;"><%= msj %>
+                    <h1 style="font-family:monospace; font-size : 46px; color: aliceblue;"><%= msj%>
                     </h1>
                     <div class="principal">
                         <!-- Swiper -->
@@ -253,6 +253,10 @@
                                                             <p class="card-text"><strong>${libro.titulo}</strong><br>
                                                                 ${libro.descripcion}</p>
                                                         </div>
+                                                        <form method="post" action="CerrarSesion">
+                                                            <input type="hidden" value="1" name="cerrar">
+                                                            <button class="btn btn-danger" type="submit" value="1" id="button-addon2">CERAR SESION</button>
+                                                        </form>
                                                     </div>
                                                 </div>
                                             </c:forEach>

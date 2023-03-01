@@ -5,12 +5,15 @@
  */
 package com.maximo.Web;
 
+import com.maximo.Dominio.Libro;
 import com.maximo.Dominio.Usuario;
+import com.maximo.Service.Interfaz.iLibroService;
 import com.maximo.Service.Interfaz.iUsuarioService;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.inject.Inject;
@@ -31,6 +34,8 @@ public class UsuarioServlet extends HttpServlet {
 
     @Inject
     iUsuarioService usuarioService;
+    @Inject
+    iLibroService libroService;
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -46,8 +51,8 @@ public class UsuarioServlet extends HttpServlet {
                 case "editar":
                     this.editarUsuario(request, response);
                     break;
-                case "eliminar":
-                    //this.eliminarCliente(request, response);
+                case "sumarLibro":
+                    this.sumarLibro(request, response);
                     break;
                 case "listar":
                     this.listarUsuario(request, response);
@@ -188,4 +193,22 @@ public class UsuarioServlet extends HttpServlet {
 
     }
 
+    private void sumarLibro(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        String msj = "";
+        HttpSession sesion = request.getSession();
+        Libro libro = libroService.findByIsbn(new Libro((String) request.getParameter("isbn")));
+        List<Libro> carrito = (List) sesion.getAttribute("carrito");
+        if (carrito == null) {
+            carrito = new ArrayList<>();
+            carrito.add(libro);
+        } else if (carrito.size() < 6) {
+            carrito.add(libro);
+        } else if (carrito.size() >= 5) {
+            msj = "No puedes alquilar más de 5 libros";
+            request.getRequestDispatcher("miCarrito.jsp").forward(request, response);
+        }
+        request.getRequestDispatcher("Libro?accion=default").forward(request, response);
+
+    }
 }
