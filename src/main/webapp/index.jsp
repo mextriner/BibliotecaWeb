@@ -8,8 +8,15 @@
 <%
     String user = "";
     HttpSession sesion = request.getSession();
+    String msj = "";
+    if(request.getAttribute("msj") != null){
+        msj = "Resultado de: "+((String)request.getAttribute("msj")).toUpperCase();
+        
+    }
     if (sesion.getAttribute("usuario") != null) {
         user = (String) sesion.getAttribute("usuario");
+    }else{
+        response.sendRedirect("inicioSesion.jsp");
     }
 %>
 
@@ -153,12 +160,23 @@
                                     <li>
                                         <hr class="dropdown-divider">
                                     </li>
+                                    <li><a class="dropdown-item" href="Editorial?accion=">Editoriales</a></li>
+                                    <li>
+                                        <hr class="dropdown-divider">
+                                    </li>
                                     <li><a class="dropdown-item" href="Libro?accion=listar">Libros</a></li>
                                     <li>
                                         <hr class="dropdown-divider">
                                     </li>
-                                    <li><a class="dropdown-item" href="cargarModifica?clase=usuario&usr=<%=user%>">
+                                    <li><a class="dropdown-item" href="Autor?accion=listar">
                                             Autores
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <hr class="dropdown-divider">
+                                    </li>
+                                    <li><a class="dropdown-item" href="Categoria?accion=listar">
+                                            Categorías
                                         </a>
                                     </li>
                                 </ul>
@@ -189,12 +207,12 @@
                                 </ul>
                             </li>
                             <li class="nav-item dropdown" style="margin-left:5px;">
-                                <form method="GET" class="d-flex text-light">
+                                <form action="Libro?accion=buscarU" method="post" class="d-flex text-light">
 
                                     <div class="input-group mb-3">
                                         <input type="text" class="form-control" name="bus" placeholder="Término de búsqueda" aria-label="Recipient's username" aria-describedby="button-addon2">
 
-                                        <button class="btn btn-outline-info" name="buscar" value="yes" type="submit" id="button-addon2">Buscar</button>
+                                        <button class="btn btn-outline-info" type="submit" id="button-addon2">Buscar</button>
                                     </div>
 
 
@@ -217,7 +235,7 @@
             <!--AQUÍ VAN LAS CARDS-->
             <center>
                 <div class="col-sm-12 col-md-12 bg-dark" style="width: 100%;">
-                    <h1 style="font-family:monospace; font-size : 46px; color: aliceblue;">LOS FAVORITOS DE LOS LECTORES
+                    <h1 style="font-family:monospace; font-size : 46px; color: aliceblue;"><%= msj %>
                     </h1>
                     <div class="principal">
                         <!-- Swiper -->

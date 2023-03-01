@@ -5,10 +5,12 @@
  */
 package com.maximo.Web;
 
+
 import com.maximo.Dominio.Categoria;
 import com.maximo.Service.Interfaz.iCategoriaService;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -41,7 +43,7 @@ public class CategoriaServlet extends HttpServlet {
                     //this.eliminarCliente(request, response);
                     break;
                 case "listar":
-                    //this.listarUsuario(request, response);
+                    this.litarCategorias(request, response);
                     break;
                 default:
                 //this.accionDefault(request, response);
@@ -76,7 +78,7 @@ public class CategoriaServlet extends HttpServlet {
                     //this.eliminarCliente(request, response);
                     break;
                 case "listar":
-                    //this.listarUsuario(request, response);
+                    this.litarCategorias(request, response);
                     break;
                 default:
                 //this.accionDefault(request, response);
@@ -85,20 +87,27 @@ public class CategoriaServlet extends HttpServlet {
             //this.accionDefault(request, response);
         }
     }
-    
+
     @Override
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
 
-    private void insertarCategoria(HttpServletRequest request, HttpServletResponse response)        
+    private void insertarCategoria(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String nombre = request.getParameter("nombre");
         String descripcion = request.getParameter("descripcion");
-        
-        Categoria categoria = new Categoria(nombre,descripcion);
+
+        Categoria categoria = new Categoria(nombre, descripcion);
         categoriaService.insertarCategoria(categoria);
         request.getRequestDispatcher("/index.jsp").forward(request, response);
     }
 
+    private void litarCategorias(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        List<Categoria> categorias = categoriaService.findAllCategoria();
+        System.out.println("categorias: " + categorias);
+        request.setAttribute("categorias", categorias);
+        request.getRequestDispatcher("/TablaCategoria.jsp").forward(request, response);
+    }
 }

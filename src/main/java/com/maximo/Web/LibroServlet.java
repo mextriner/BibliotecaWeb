@@ -90,6 +90,9 @@ public class LibroServlet extends HttpServlet {
                 case "buscar":
                     this.buscarLibro(request, response);
                     break;
+                case "buscarU":
+                    this.buscarLibroUsuario(request, response);
+                    break;
                 default:
                     this.accionDefault(request, response);
             }
@@ -115,6 +118,17 @@ public class LibroServlet extends HttpServlet {
         System.out.println("libros: " + libros);
         request.setAttribute("libros", libros);
         request.getRequestDispatcher("/TablaLibro.jsp").forward(request, response);
+        
+    }
+    
+    private void buscarLibroUsuario(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        String bus = request.getParameter("bus");
+        List<Libro> libros = libroService.buscadorLibro(bus);
+        System.out.println("libros: " + libros);
+        request.setAttribute("msj",bus);
+        request.setAttribute("libros", libros);
+        request.getRequestDispatcher("/index.jsp").forward(request, response);
         
     }
     

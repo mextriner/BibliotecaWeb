@@ -12,6 +12,7 @@ import java.io.PrintWriter;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
+import java.util.List;
 import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -46,7 +47,7 @@ public class AutorServlet extends HttpServlet {
                     //this.eliminarCliente(request, response);
                     break;
                 case "listar":
-                    //this.listarLibro(request, response);
+                    this.litarAutores(request, response);
                     break;
                 default:
                 //this.accionDefault(request, response);
@@ -79,7 +80,7 @@ public class AutorServlet extends HttpServlet {
                     //this.eliminarCliente(request, response);
                     break;
                 case "listar":
-                    //this.listarLibro(request, response);
+                    this.litarAutores(request, response);
                     break;
                 default:
                 //this.accionDefault(request, response);
@@ -106,7 +107,15 @@ public class AutorServlet extends HttpServlet {
         autorService.insertarAutor(autor);
         request.getRequestDispatcher("/index.jsp").forward(request, response);
     }
-
+    
+    private void litarAutores(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        List<Autor> autores = autorService.findAllAutor();
+        System.out.println("Autores: "+ autores);
+        request.setAttribute("autores", autores);
+        request.getRequestDispatcher("/TablaAutores.jsp").forward(request, response);
+    }
+    
     @Override
     public String getServletInfo() {
         return "Short description";

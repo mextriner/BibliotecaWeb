@@ -46,7 +46,7 @@ public class EditorialServlet extends HttpServlet {
                         //this.eliminarCliente(request, response);
                         break;
                     default:
-                        //this.accionDefault(request, response);
+                        this.accionDefault(request, response);
                 }
             } else {
                 //this.accionDefault(request, response);
@@ -71,7 +71,7 @@ public class EditorialServlet extends HttpServlet {
                         //this.eliminarCliente(request, response);
                         break;
                     default:
-                        //this.accionDefault(request, response);
+                        this.accionDefault(request, response);
                 }
             } else {
                 //this.accionDefault(request, response);
@@ -96,7 +96,7 @@ public class EditorialServlet extends HttpServlet {
         List<Editorial> editoriales = editorialService.findAllEditorial();
         System.out.println("Editorial: "+ editoriales);
         request.setAttribute("editoriales", editoriales);
-        request.getRequestDispatcher("/listarEditorial.jsp").forward(request, response);
+        request.getRequestDispatcher("/TablaEditorial.jsp").forward(request, response);
         
     }
     
