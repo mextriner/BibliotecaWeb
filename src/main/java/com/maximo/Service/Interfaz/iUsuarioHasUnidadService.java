@@ -14,6 +14,8 @@ import javax.ejb.Local;
  */
 @Local
 public interface iUsuarioHasUnidadService {
+    
+    public List<UsuarioHasUnidad> findAll();
 
     public List<UsuarioHasUnidad> findPrestamoByidUsuario(UsuarioHasUnidad usuariohasunidad);
 

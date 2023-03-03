@@ -179,6 +179,13 @@
                                             Categorías
                                         </a>
                                     </li>
+                                    <li>
+                                        <hr class="dropdown-divider">
+                                    </li>
+                                    <li><a class="dropdown-item" href="Prestamo?accion=listar">
+                                            Préstamos 
+                                        </a>
+                                    </li>
                                 </ul>
                             </li>
                             <li class="nav-item dropdown" style="margin-left:5px;">
@@ -223,6 +230,7 @@
                                     Mi carrito <i class="fa-solid fa-cart-shopping"></i>
                                 </a>
                             </li>
+
                         </ul>
                         <form method="post" action="CerrarSesion">
                             <input type="hidden" value="1" name="cerrar">

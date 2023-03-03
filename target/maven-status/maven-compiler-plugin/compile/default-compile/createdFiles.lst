@@ -37,6 +37,7 @@ com\maximo\Web\LibroServlet.class
 com\maximo\Dominio\Libro.class
 com\maximo\Web\AutorServlet.class
 com\maximo\Datos\Interfaz\iUnidadDao.class
+com\maximo\Web\PrestamoServlet.class
 com\maximo\Datos\Interfaz\iAutorDao.class
 com\maximo\Datos\Interfaz\iUsuarioDao.class
 com\maximo\Web\FkLibroServlet.class

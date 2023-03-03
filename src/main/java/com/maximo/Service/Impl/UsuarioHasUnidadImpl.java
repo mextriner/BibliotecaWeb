@@ -20,6 +20,11 @@ public class UsuarioHasUnidadImpl implements iUsuarioHasUnidadService{
     private iUsuarioHasUnidadDao usuarioHasUnidadDao ;
     
     @Override
+    public List<UsuarioHasUnidad> findAll(){
+        return usuarioHasUnidadDao.findAll();
+    }
+    
+    @Override
     public List<UsuarioHasUnidad> findPrestamoByidUsuario(UsuarioHasUnidad usuariohasunidad){
         return usuarioHasUnidadDao.findPrestamoByidUsuario(usuariohasunidad);
     }

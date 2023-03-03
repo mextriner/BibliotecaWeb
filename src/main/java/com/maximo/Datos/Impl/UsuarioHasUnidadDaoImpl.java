@@ -24,6 +24,12 @@ public class UsuarioHasUnidadDaoImpl implements iUsuarioHasUnidadDao{
     EntityManager em;
     
     @Override
+    public List<UsuarioHasUnidad> findAll(){
+        Query query = em.createNamedQuery("UsuarioHasUnidad.findAll");
+        return query.getResultList();
+    }
+    
+    @Override
     public List<UsuarioHasUnidad> findPrestamoByidUsuario(UsuarioHasUnidad usuariohasunidad){
         Query query = em.createQuery("UsuarioHasUnidad.findByUsuarioidUsuario");
         query.setParameter("usuariohasunidad", usuariohasunidad.getUsuarioidUsuario());

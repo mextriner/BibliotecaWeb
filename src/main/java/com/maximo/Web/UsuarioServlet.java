@@ -8,6 +8,7 @@ package com.maximo.Web;
 import com.maximo.Dominio.Libro;
 import com.maximo.Dominio.Usuario;
 import com.maximo.Service.Interfaz.iLibroService;
+import com.maximo.Service.Interfaz.iUsuarioHasUnidadService;
 import com.maximo.Service.Interfaz.iUsuarioService;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -36,6 +37,8 @@ public class UsuarioServlet extends HttpServlet {
     iUsuarioService usuarioService;
     @Inject
     iLibroService libroService;
+    @Inject
+    iUsuarioHasUnidadService usuarioHasUnidad;
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

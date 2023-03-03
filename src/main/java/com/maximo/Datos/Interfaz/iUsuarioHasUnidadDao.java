@@ -13,6 +13,8 @@ import java.util.List;
  * @author Alumno Mañana
  */
 public interface iUsuarioHasUnidadDao {
+    
+    public List<UsuarioHasUnidad> findAll();
 
     public List<UsuarioHasUnidad> findPrestamoByidUsuario(UsuarioHasUnidad usuariohasunidad);
 

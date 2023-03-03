@@ -96,25 +96,21 @@
                 <div class="col-md-4 col-sm-12" style="width:66%;">
 
                     <!--Comenzamos a mostrar los datos-->
-                    <h2>Listado de EDITORIALES <a class="text-dark" href="usuarioPdf.php"><i class="fa-solid fa-file-circle-plus"></i></a></h2>
+                    <h2>Listado de CATEGORÍAS <a class="text-dark" href="usuarioPdf.php"><i class="fa-solid fa-file-circle-plus"></i></a></h2>
                     <table class="table" style="border: solid darkgray 1px;">
 
                         <tr>
-                            <td>ID AUTOR</td>
+                            <td>ID CATEGORIA</td>
                             <td>Nombre</td>
-                            <td>Apellido</td>
-                            <td>Fecha Nacimiento</td>
-                            <td>Nacionalidad</td>
+                            <td>Descripción</td>
                             <td>Eliminar</td>
                             <td>Editar</td>
                         </tr>
-                        <c:forEach items="${autores}" var="autor">
+                        <c:forEach items="${categorias}" var="categoria">
                             <tr style="border: solid black 2px;">
-                                <td style="border: solid black 2px;">${autor.getIdAutor()}</td>
-                                <td style="border: solid black 2px;">${autor.getNombre()}</td>
-                                <td style="border: solid black 2px;">${autor.getApellido()}</td>
-                                <td style="border: solid black 2px;">${autor.getFechaNac()}</td>
-                                <td style="border: solid black 2px;">${autor.getNacionalidad()}</td>
+                                <td style="border: solid black 2px;">${categoria.getIdCategoria()}</td>
+                                <td style="border: solid black 2px;">${categoria.getNombre()}</td>
+                                <td style="border: solid black 2px;">${categoria.getDescripcion()}</td>
                                 <td style="border: solid black 2px;"><a class="text-danger" href=""><i class="fa-solid fa-trash"></i></a></td>
                                 <td style="border: solid black 2px;"><a class="text-primary" href=""><i class="fa-solid fa-pen"></i></a></td>
 
