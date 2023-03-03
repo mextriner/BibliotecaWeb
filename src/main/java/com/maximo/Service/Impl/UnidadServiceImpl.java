@@ -5,6 +5,7 @@
 package com.maximo.Service.Impl;
 
 import com.maximo.Datos.Interfaz.iUnidadDao;
+import com.maximo.Dominio.Libro;
 import com.maximo.Dominio.Unidad;
 import com.maximo.Service.Interfaz.iUnidadService;
 import java.util.List;
@@ -44,6 +45,10 @@ public class UnidadServiceImpl implements iUnidadService{
         return unidadDao.findByLibroISBN(unidad);
     }
 
+    public Unidad findByLibroISBNLimit1(Libro libro){
+        return unidadDao.findByLibroISBNLimit1(libro);
+    }
+    
     @Override
     public void insertarUnidad(Unidad unidad){
         unidadDao.insertarUnidad(unidad);

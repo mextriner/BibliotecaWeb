@@ -5,6 +5,7 @@
  */
 package com.maximo.Service.Interfaz;
 
+import com.maximo.Dominio.Libro;
 import com.maximo.Dominio.Unidad;
 import java.util.List;
 import javax.ejb.Local;
@@ -25,6 +26,8 @@ public interface iUnidadService {
     public List<Unidad> findProveedorByUnidad(Unidad unidad);
 
     public List<Unidad> findByLibroISBN(Unidad unidad);
+    
+    public Unidad findByLibroISBNLimit1(Libro libro);
 
     public void insertarUnidad(Unidad unidad);
 

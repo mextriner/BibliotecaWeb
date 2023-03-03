@@ -21,6 +21,7 @@ com\maximo\Service\Interfaz\iUnidadService.class
 com\maximo\Service\Interfaz\iLibroService.class
 com\maximo\Datos\Interfaz\iEditorialDao.class
 com\maximo\Web\EditorialServlet.class
+com\maximo\Web\UnidadServlet.class
 com\maximo\Web\CerrarSesion.class
 com\maximo\Service\Impl\LibroServiceImpl.class
 com\maximo\Dominio\Usuario.class

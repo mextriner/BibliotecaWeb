@@ -51,9 +51,7 @@ public class UsuarioServlet extends HttpServlet {
                 case "editar":
                     this.editarUsuario(request, response);
                     break;
-                case "sumarLibro":
-                    this.sumarLibro(request, response);
-                    break;
+
                 case "listar":
                     this.listarUsuario(request, response);
                     break;
@@ -87,6 +85,9 @@ public class UsuarioServlet extends HttpServlet {
                 case "listar":
                     this.listarUsuario(request, response);
                     break;
+                case "sumar":
+                    this.sumarLibro(request, response);
+                    break;
                 default:
                 //this.accionDefault(request, response);
                 }
@@ -97,7 +98,17 @@ public class UsuarioServlet extends HttpServlet {
 
     private void insertarUsuario(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        HttpSession sesion = request.getSession(false);
+        if (sesion != null) {
+            sesion.invalidate();
+        }
+
         String user = request.getParameter("usuario");
+        if (usuarioService.existUsuario(new Usuario(user))) {
+            String msj = "Este nombre de usuario ya existe";
+            request.setAttribute("msj", msj);
+            request.getRequestDispatcher("registro.jsp").forward(request, response);
+        }
         String clave = request.getParameter("clave");
         String nombre = request.getParameter("nombre");
         String apellido = request.getParameter("apellido");
@@ -202,6 +213,7 @@ public class UsuarioServlet extends HttpServlet {
         if (carrito == null) {
             carrito = new ArrayList<>();
             carrito.add(libro);
+            sesion.setAttribute("carrito",carrito);
         } else if (carrito.size() < 6) {
             carrito.add(libro);
         } else if (carrito.size() >= 5) {

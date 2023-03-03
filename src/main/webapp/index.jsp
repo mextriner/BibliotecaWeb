@@ -218,6 +218,11 @@
 
                                 </form>
                             </li>
+                            <li class="nav-item dropdown" style="margin-left:5px;">
+                                <a class="nav-link text-light" href="Libro?accion=carrito" id="navbarDropdown" role="button">
+                                    Mi carrito <i class="fa-solid fa-cart-shopping"></i>
+                                </a>
+                            </li>
                         </ul>
                         <form method="post" action="CerrarSesion">
                             <input type="hidden" value="1" name="cerrar">
@@ -253,9 +258,9 @@
                                                             <p class="card-text"><strong>${libro.titulo}</strong><br>
                                                                 ${libro.descripcion}</p>
                                                         </div>
-                                                        <form method="post" action="CerrarSesion">
-                                                            <input type="hidden" value="1" name="cerrar">
-                                                            <button class="btn btn-danger" type="submit" value="1" id="button-addon2">CERAR SESION</button>
+                                                        <form method="post" action="Usuario?accion=sumar">
+                                                            <input type="hidden" value="${libro.getIsbn()}" name="isbn">
+                                                            <button class="btn btn-info" type="submit">AÑADIR AL CARRO</button>
                                                         </form>
                                                     </div>
                                                 </div>

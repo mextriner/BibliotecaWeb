@@ -5,6 +5,7 @@
  */
 package com.maximo.Datos.Interfaz;
 
+import com.maximo.Dominio.Libro;
 import com.maximo.Dominio.Unidad;
 import java.util.List;
 
@@ -23,6 +24,8 @@ public interface iUnidadDao {
     public List<Unidad> findProveedorByUnidad(Unidad unidad);
 
     public List<Unidad> findByLibroISBN(Unidad unidad);
+    
+    public Unidad findByLibroISBNLimit1(Libro libro);
 
     public void insertarUnidad(Unidad unidad);
 
