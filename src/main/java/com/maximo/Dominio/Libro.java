@@ -26,6 +26,7 @@ import javax.persistence.Query;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -63,9 +64,9 @@ public class Libro implements Serializable {
     private Date fechaPublicacion;
     @Column(name = "bestSeller")
     private Short bestSeller;
-    @Size(max = 140)
+    @Lob
     @Column(name = "portada")
-    private String portada;
+    private byte[] portada;
     @Lob
     @Size(max = 65535)
     @Column(name = "descripcion")
@@ -81,13 +82,15 @@ public class Libro implements Serializable {
     private Editorial editorialidEditorial;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "libroISBN")
     private List<Unidad> unidadList;
-
+    @Transient
+    private String portadabase64;
+    
     public Libro() {
     }
 
     
     
-    public Libro(String isbn, String titulo, Date fechaPublicacion, Short bestSeller, String portada, String descripcion, Editorial editorialidEditorial) {
+    public Libro(String isbn, String titulo, Date fechaPublicacion, Short bestSeller, byte[] portada, String descripcion, Editorial editorialidEditorial) {
         this.isbn = isbn;
         this.titulo = titulo;
         this.fechaPublicacion = fechaPublicacion;
@@ -101,13 +104,21 @@ public class Libro implements Serializable {
         this.isbn = isbn;
     }
 
-    public Libro(String isbn, String titulo, Date fechaPublicacion, Short bestSeller, String portada, String descripcion) {
+    public Libro(String isbn, String titulo, Date fechaPublicacion, Short bestSeller, byte[] portada, String descripcion) {
         this.isbn = isbn;
         this.titulo = titulo;
         this.fechaPublicacion = fechaPublicacion;
         this.bestSeller = bestSeller;
         this.portada = portada;
         this.descripcion = descripcion;
+    }
+
+    public String getPortadabase64() {
+        return portadabase64;
+    }
+
+    public void setPortadabase64(String portadabase64) {
+        this.portadabase64 = portadabase64;
     }
     
     
@@ -149,11 +160,11 @@ public class Libro implements Serializable {
         this.bestSeller = bestSeller;
     }
 
-    public String getPortada() {
+    public byte[] getPortada() {
         return portada;
     }
 
-    public void setPortada(String portada) {
+    public void setPortada(byte[] portada) {
         this.portada = portada;
     }
 

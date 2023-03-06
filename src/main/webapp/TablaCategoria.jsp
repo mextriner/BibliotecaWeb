@@ -7,7 +7,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Document</title>
-       <link rel="stylesheet" href="lb/css/bootstrap.min.css">
+        <link rel="stylesheet" href="lb/css/bootstrap.min.css">
         <link rel="stylesheet" href="swiper/swiper-bundle.min.css" />
         <link rel="stylesheet" href="lb/fontawesome-free-6.3.0-web/css/all.min.css">
     </head>

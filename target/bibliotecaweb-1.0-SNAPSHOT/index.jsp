@@ -258,10 +258,10 @@
                                     <div class="swiper mySwiper">
                                         <div class="swiper-wrapper">
                                             <c:forEach items="${libros}" var="libro">
-
                                                 <div class="swiper-slide">
                                                     <div class="card" style="width: 25em;">
-                                                        <img src="${libro.portada}" class="card-img-top" alt="...">
+
+                                                        <img src="data:image/jpg;base64,${libro.portadabase64}" class="card-img-top" alt="..." style="padding:5%">
                                                         <div class="card-body">
                                                             <p class="card-text"><strong>${libro.titulo}</strong><br>
                                                                 ${libro.descripcion}</p>

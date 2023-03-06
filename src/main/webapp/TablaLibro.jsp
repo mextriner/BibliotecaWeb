@@ -115,7 +115,7 @@
                         <div style="padding:50px;">
                             <form action="NuevoLibro?accion=editar" method="POST">
                                 <p>UNIDADES: ${libro.getUnidadList().size()}</p>
-                                <img src='${libro.getPortada()}' style="height:300px;width:198px;border-radius:5%;">
+                                <img src="data:image/jpg;base64,${libro.portadabase64}" class="card-img-top" alt="..." style="padding:5%">
                                 <div class="mb-3" style="height:120px;">
                                     <h1>${libro.getTitulo()}</h1>
                                     <p>ISBN:${libro.getIsbn()}</p>
