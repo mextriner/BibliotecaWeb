@@ -5,7 +5,6 @@
  */
 package com.maximo.Web;
 
-
 import com.maximo.Dominio.Categoria;
 import com.maximo.Service.Interfaz.iCategoriaService;
 import java.io.IOException;
@@ -36,9 +35,7 @@ public class CategoriaServlet extends HttpServlet {
                 case "insertar":
                     this.insertarCategoria(request, response);
                     break;
-                case "editar":
-                    //this.editarCliente(request, response);
-                    break;
+                
                 case "eliminar":
                     //this.eliminarCliente(request, response);
                     break;
@@ -72,7 +69,7 @@ public class CategoriaServlet extends HttpServlet {
                     this.insertarCategoria(request, response);
                     break;
                 case "editar":
-                    //this.editarCliente(request, response);
+                    this.editarCategoria(request, response);
                     break;
                 case "eliminar":
                     //this.eliminarCliente(request, response);
@@ -100,7 +97,7 @@ public class CategoriaServlet extends HttpServlet {
 
         Categoria categoria = new Categoria(nombre, descripcion);
         categoriaService.insertarCategoria(categoria);
-        request.getRequestDispatcher("/index.jsp").forward(request, response);
+        this.litarCategorias(request, response);
     }
 
     private void litarCategorias(HttpServletRequest request, HttpServletResponse response)
@@ -109,5 +106,16 @@ public class CategoriaServlet extends HttpServlet {
         System.out.println("categorias: " + categorias);
         request.setAttribute("categorias", categorias);
         request.getRequestDispatcher("/TablaCategoria.jsp").forward(request, response);
+    }
+
+    private void editarCategoria(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        int id = Integer.valueOf(request.getParameter("id"));
+        String nombre = request.getParameter("nombre");
+        String descripcion = request.getParameter("descripcion");
+
+        Categoria categoria = new Categoria(id,nombre, descripcion);
+        categoriaService.updateCategoria(categoria);
+        this.litarCategorias(request, response);
     }
 }

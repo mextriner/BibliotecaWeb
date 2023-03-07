@@ -65,7 +65,7 @@ public class EditorialServlet extends HttpServlet {
                         this.insertarEditorial(request, response);
                         break;
                     case "editar":
-                        //this.editarCliente(request, response);
+                        this.editarEditorial(request, response);
                         break;
                     case "eliminar":
                         //this.eliminarCliente(request, response);
@@ -110,6 +110,18 @@ public class EditorialServlet extends HttpServlet {
         Editorial ed = new Editorial(nombre,direccion);
         
         editorialService.insertarEditorial(ed);
+        this.accionDefault(request, response);
+        
+    }
+    private void editarEditorial(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        
+        String nombre = request.getParameter("nombre");
+        String direccion = request.getParameter("direccion");
+        int id = Integer.valueOf(request.getParameter("id"));
+        Editorial ed = new Editorial(id,nombre,direccion);
+        
+        editorialService.updateEditorial(ed);
         this.accionDefault(request, response);
         
     }

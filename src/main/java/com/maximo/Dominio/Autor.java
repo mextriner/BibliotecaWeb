@@ -86,6 +86,14 @@ public class Autor implements Serializable {
         this.idAutor = idAutor;
         this.libroList = libroList;
     }
+
+    public Autor(Integer idAutor, String nombre, String apellido, String nacionalidad, Date fechaNac) {
+        this.idAutor = idAutor;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.nacionalidad = nacionalidad;
+        this.fechaNac = fechaNac;
+    }
     
     
 

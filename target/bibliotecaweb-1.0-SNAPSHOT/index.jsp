@@ -27,7 +27,7 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Index
+        <title>Página Principal
         </title>
         <link rel="stylesheet" href="lb/css/bootstrap.min.css">
         <link rel="stylesheet" href="swiper/swiper-bundle.min.css" />
@@ -133,86 +133,18 @@
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
                             <li class="nav-item dropdown" style="margin-left:5px;">
-                                <a class="nav-link dropdown-toggle text-light" href="" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    ¿Tienes cuenta? <i class="fa-solid fa-user"></i>
+                                <a class="nav-link text-light" href="cargarModifica?clase=usuario&usr=<%=user%>">
+                                    Mi cuenta: <%=user%>
                                 </a>
-                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <li><a class="dropdown-item" href="registro.jsp">Registrarse</a></li>
-                                    <li>
-                                        <hr class="dropdown-divider">
-                                    </li>
-                                    <li><a class="dropdown-item" href="inicioSesion.jsp">Iniciar Sesión</a></li>
-                                    <li>
-                                        <hr class="dropdown-divider">
-                                    </li>
-                                    <li><a class="dropdown-item" href="cargarModifica?clase=usuario&usr=<%=user%>">
-                                            Mi cuenta: <%=user%>
-                                        </a>
-                                    </li>
-                                </ul>
+
                             </li>
+
                             <li class="nav-item dropdown" style="margin-left:5px;">
-                                <a class="nav-link dropdown-toggle text-light" href="" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"">
-                                    Tablas <i class="fa-sharp fa-solid fa-chart-simple"></i>
-                                </a>
-                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <li><a class="dropdown-item" href="Usuario?accion=listar">Usuarios</a></li>
-                                    <li>
-                                        <hr class="dropdown-divider">
-                                    </li>
-                                    <li><a class="dropdown-item" href="Editorial?accion=">Editoriales</a></li>
-                                    <li>
-                                        <hr class="dropdown-divider">
-                                    </li>
-                                    <li><a class="dropdown-item" href="Libro?accion=listar">Libros</a></li>
-                                    <li>
-                                        <hr class="dropdown-divider">
-                                    </li>
-                                    <li><a class="dropdown-item" href="Autor?accion=listar">
-                                            Autores
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <hr class="dropdown-divider">
-                                    </li>
-                                    <li><a class="dropdown-item" href="Categoria?accion=listar">
-                                            Categorías
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <hr class="dropdown-divider">
-                                    </li>
-                                    <li><a class="dropdown-item" href="Prestamo?accion=listar">
-                                            Préstamos 
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li class="nav-item dropdown" style="margin-left:5px;">
-                                <a class="nav-link text-light" href="" id="navbarDropdown" role="button">
+                                <a class="nav-link text-light" href="accion?libros=deafult" id="navbarDropdown" role="button">
                                     Libros <i class="fa-solid fa-book-bookmark"></i>
                                 </a>
                             </li>
-                            <li class="nav-item dropdown" style="margin-left:5px;">
-                                <a class="nav-link dropdown-toggle text-light" href="" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    INSERTAR <i class="fa-solid fa-circle-plus"></i>
-                                </a>
-                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <li><a class="dropdown-item" href="NuevoLibro?accion=insertar">Registrar Libro</a></li>
-                                    <li>
-                                        <hr class="dropdown-divider">
-                                    </li>
-                                    <li><a class="dropdown-item" href="registroEditorial.jsp">Registrar Editorial</a></li>
-                                    <li>
-                                        <hr class="dropdown-divider">
-                                    </li>
-                                    <li><a class="dropdown-item" href="registroCategoria.jsp">Registrar Categoria</a></li>
-                                    <li>
-                                        <hr class="dropdown-divider">
-                                    </li>
-                                    <li><a class="dropdown-item" href="registroAutor.jsp">Registrar Autor</a></li>
-                                </ul>
-                            </li>
+
 
                             <li class="nav-item dropdown" style="margin-left:5px;">
                                 <a class="nav-link text-light" href="Libro?accion=carrito" id="navbarDropdown" role="button">
@@ -238,7 +170,7 @@
                         </ul>
                         <form method="post" action="CerrarSesion">
                             <input type="hidden" value="1" name="cerrar">
-                            <button class="btn btn-danger" type="submit" value="1" id="button-addon2">CERAR SESION</button>
+                            <button class="btn btn-danger" type="submit" value="1" id="button-addon2">CERRAR SESION</button>
                         </form>
                     </div>
                 </div>

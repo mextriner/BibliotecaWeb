@@ -41,7 +41,7 @@ public class AutorServlet extends HttpServlet {
                     //this.insertarAutor(request, response);
                     break;
                 case "editar":
-                    //this.editarCliente(request, response);
+                    this.editarAutor(request, response);
                     break;
                 case "eliminar":
                     //this.eliminarCliente(request, response);
@@ -74,7 +74,7 @@ public class AutorServlet extends HttpServlet {
                     this.insertarAutor(request, response);
                     break;
                 case "editar":
-                    //this.editarCliente(request, response);
+                    this.editarAutor(request, response);
                     break;
                 case "eliminar":
                     //this.eliminarCliente(request, response);
@@ -105,7 +105,7 @@ public class AutorServlet extends HttpServlet {
         
         Autor autor = new Autor(nombre,apellido,nacionalidad,fecha);
         autorService.insertarAutor(autor);
-        request.getRequestDispatcher("/index.jsp").forward(request, response);
+        this.litarAutores(request, response);
     }
     
     private void litarAutores(HttpServletRequest request, HttpServletResponse response)
@@ -120,4 +120,23 @@ public class AutorServlet extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
+    private void editarAutor(HttpServletRequest request, HttpServletResponse response)
+        throws ServletException, IOException {
+        String nombre = request.getParameter("nombre");
+        String apellido = request.getParameter("apellido");
+        String nacionalidad = request.getParameter("nacionalidad");
+        int id = Integer.valueOf(request.getParameter("id"));
+        String f = request.getParameter("fecha");
+        String fe[] = f.split("-");
+        LocalDate fec = LocalDate.of(Integer.valueOf(fe[0]), Integer.valueOf(fe[1]), Integer.valueOf(fe[2]));
+        ZoneId defaultZoneId = ZoneId.systemDefault();
+        Date fecha = Date.from(fec.atStartOfDay(defaultZoneId).toInstant());
+        
+        Autor autor = new Autor(id,nombre,apellido,nacionalidad,fecha);
+        autorService.updateAutor(autor);
+        
+        this.litarAutores(request, response);
+    
+    }
 }

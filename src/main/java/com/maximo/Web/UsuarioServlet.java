@@ -150,7 +150,7 @@ public class UsuarioServlet extends HttpServlet {
 
         Usuario usuario = new Usuario(user, clave, nombre, apellido, direccion, fecha);
         usuarioService.updateUsuario(usuario);
-        request.getRequestDispatcher("Libro?accion=listar").forward(request, response);
+        request.getRequestDispatcher("Libro?accion=default").forward(request, response);
 
     }
 

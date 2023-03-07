@@ -52,7 +52,7 @@ public class LibroDaoImpl implements iLibroDao {
 
     @Override
     public List<Libro> findByBestSeller(Libro libro) {
-        Query query = em.createQuery("Libro.findByFechaNac");
+        Query query = em.createNamedQuery("Libro.findByBestSeller");
         query.setParameter("bestSeller", libro.getBestSeller());
         return query.getResultList();
     }
@@ -70,7 +70,7 @@ public class LibroDaoImpl implements iLibroDao {
     
     @Override
     public List<Libro> buscadorLibro(String bus){
-        Query query = em.createNamedQuery("Libro.buscadorBestseller");
+        Query query = em.createNamedQuery("Libro.buscador");
         query.setParameter("isbn", bus);
         query.setParameter("titulo", bus);
         query.setParameter("fechaPublicacion",bus);

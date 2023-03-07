@@ -1,18 +1,28 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
-<html lang="en">
+<%-- 
+    Document   : registroEditorial
+    Created on : 06-feb-2023, 10:51:40
+    Author     : Alumno Mañana
+--%>
 
+<%@page import="com.maximo.Dominio.Editorial"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!DOCTYPE html>
+
+<% Editorial ed = (Editorial) request.getAttribute("editorial");%>
+
+<html lang="en">
     <head>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Listado de Autores</title>
+        <title>Actualizar Editorial</title>
         <link rel="stylesheet" href="lb/css/bootstrap.min.css">
         <link rel="stylesheet" href="swiper/swiper-bundle.min.css" />
         <link rel="stylesheet" href="lb/fontawesome-free-6.3.0-web/css/all.min.css">
     </head>
+    <body class="bg-secondary" style="font-family:monospace;">
 
-    <body>
+
         <!--LA BARRA DE NAVEGACION-->
         <div class="container-fluid bg-secondary" style="padding:0;width:100%;">
             <nav class="navbar navbar-expand-lg navbar-light ">
@@ -94,7 +104,6 @@
                                     <li><a class="dropdown-item" href="registroAutor.jsp">Registrar Autor</a></li>
                                 </ul>
                             </li>
-                            
                             <li class="nav-item dropdown" style="margin-left:5px;width:500px;">
                                 <form action="Libro?accion=buscar" method="post" class="d-flex text-light">
 
@@ -123,39 +132,33 @@
 
 
         <!---->
-        <section>
-            <h1>BIENVENIDO: </h1>
+        <div class="container-fluid bg-dark align-item-center">
+            <!--en esta linea se reparten los elementos-->
+            <div class="row d-flex justify-content-center">
+                <div class="col-sm-12 col-md-4 mt-3 mb-3 text-light">
+                    <form method="POST" action="Editorial?accion=editar">
+                        <h1 style="font-size: 30px; ;"><strong>REGISTRO EDITORIAL</strong></h1>
+                        <div class="mb-3">
+                            <label for="exampleFormControlInput1" class="form-label">Editorial</label>
+                            <input type="text" class="form-control" name="nombre" value="<%= ed.getNombre()%>">
+                        </div>
 
-            <div class="row d-flex justify-content-center px-5">
-                <div class="col-md-4 col-sm-12" style="width:66%;">
+                        <div class="mb-3">
+                            <label for="exampleFormControlInput1" class="form-label">Dirección</label>
+                            <input type="text" class="form-control" name="direccion" value="<%= ed.getDireccion()%>">
+                        </div>
+                        <input type="hidden" name="id" value="<%= request.getAttribute("id")%>">
+                        <div class="mt-5 col-12 d-flex justify-content-center align-item-center">
+                            <button class="btn btn-outline-success Hadow rounded border" type="submit">REGISTRARSE</button>
 
-                    <!--Comenzamos a mostrar los datos-->
-                    <h2>Listado de CATEGORÍAS <a class="text-dark" href="usuarioPdf.php"><i class="fa-solid fa-file-circle-plus"></i></a></h2>
-                    <table class="table" style="border: solid darkgray 1px;">
+                        </div>
 
-                        <tr>
-                            <td>ID CATEGORIA</td>
-                            <td>Nombre</td>
-                            <td>Descripción</td>
-                            <td>Eliminar</td>
-                            <td>Editar</td>
-                        </tr>
-                        <c:forEach items="${categorias}" var="categoria">
-                            <tr style="border: solid black 2px;">
-                                <td style="border: solid black 2px;">${categoria.getIdCategoria()}</td>
-                                <td style="border: solid black 2px;">${categoria.getNombre()}</td>
-                                <td style="border: solid black 2px;">${categoria.getDescripcion()}</td>
-                                <td style="border: solid black 2px;"><a class="text-danger" href=""><i class="fa-solid fa-trash"></i></a></td>
-                                <td style="border: solid black 2px;"><a class="text-primary" href="cargarModifica?clase=categoria&categoriaId=${categoria.getIdCategoria()}"><i class="fa-solid fa-pen"></i></a></td>
-
-                            </tr>
-                        </c:forEach>
-
-                    </table>
+                    </form>
                 </div>
 
-        </section>
+
+            </div>
+        </div>
         <script src="lb/js/bootstrap.min.js"></script>
     </body>
-
 </html>
