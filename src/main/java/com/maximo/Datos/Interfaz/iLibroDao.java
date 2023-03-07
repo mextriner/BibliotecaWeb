@@ -27,6 +27,8 @@ public interface iLibroDao {
 
     public List<Libro> findByBestSeller(Libro libro);
 
+    public List<Libro> buscadorLibroBestseller(String bus, short bestseller);
+    
     public List<Libro> buscadorLibro(String bus);
     
     public List<Autor> findAutorByLibro(Libro libro);

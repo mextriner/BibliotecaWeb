@@ -58,8 +58,19 @@ public class LibroDaoImpl implements iLibroDao {
     }
     
     @Override
+    public List<Libro> buscadorLibroBestseller(String bus, short bestseller){
+        Query query = em.createNamedQuery("Libro.buscadorBestseller");
+        query.setParameter("isbn", bus);
+        query.setParameter("titulo", bus);
+        query.setParameter("fechaPublicacion",bus);
+        query.setParameter("descripcion",bus);
+        query.setParameter("bestSeller",bestseller);
+        return query.getResultList();
+    }
+    
+    @Override
     public List<Libro> buscadorLibro(String bus){
-        Query query = em.createNamedQuery("Libro.buscador");
+        Query query = em.createNamedQuery("Libro.buscadorBestseller");
         query.setParameter("isbn", bus);
         query.setParameter("titulo", bus);
         query.setParameter("fechaPublicacion",bus);

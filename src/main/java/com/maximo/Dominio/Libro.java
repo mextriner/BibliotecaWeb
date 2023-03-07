@@ -39,6 +39,7 @@ import javax.validation.constraints.Size;
 @Table(name = "libro")
 @NamedQueries({
     @NamedQuery(name = "Libro.findAll", query = "SELECT l FROM Libro l"),
+    @NamedQuery(name = "Libro.buscadorBestseller", query = "SELECT l FROM Libro l WHERE l.isbn LIKE CONCAT('%' , :isbn , '%') OR l.titulo LIKE CONCAT('%' , :titulo , '%') OR l.fechaPublicacion LIKE CONCAT('%' , :fechaPublicacion , '%') OR l.descripcion LIKE CONCAT('%' , :descripcion , '%')AND l.bestSeller = :bestSeller "),
     @NamedQuery(name = "Libro.buscador", query = "SELECT l FROM Libro l WHERE l.isbn LIKE CONCAT('%' , :isbn , '%') OR l.titulo LIKE CONCAT('%' , :titulo , '%') OR l.fechaPublicacion LIKE CONCAT('%' , :fechaPublicacion , '%') OR l.descripcion LIKE CONCAT('%' , :descripcion , '%')"),
     @NamedQuery(name = "Libro.findByIsbn", query = "SELECT l FROM Libro l WHERE l.isbn = :isbn"),
     @NamedQuery(name = "Libro.findByTitulo", query = "SELECT l FROM Libro l WHERE l.titulo = :titulo"),
@@ -86,6 +87,10 @@ public class Libro implements Serializable {
     private String portadabase64;
     
     public Libro() {
+    }
+
+    public Libro(Short bestSeller) {
+        this.bestSeller = bestSeller;
     }
 
     

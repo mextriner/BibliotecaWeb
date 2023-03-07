@@ -213,24 +213,28 @@
                                     <li><a class="dropdown-item" href="registroAutor.jsp">Registrar Autor</a></li>
                                 </ul>
                             </li>
-                            <li class="nav-item dropdown" style="margin-left:5px;">
-                                <form action="Libro?accion=buscarU" method="post" class="d-flex text-light">
 
-                                    <div class="input-group mb-3">
-                                        <input type="text" class="form-control" name="bus" placeholder="Término de búsqueda" aria-label="Recipient's username" aria-describedby="button-addon2">
-
-                                        <button class="btn btn-outline-info" type="submit" id="button-addon2">Buscar</button>
-                                    </div>
-
-
-                                </form>
-                            </li>
                             <li class="nav-item dropdown" style="margin-left:5px;">
                                 <a class="nav-link text-light" href="Libro?accion=carrito" id="navbarDropdown" role="button">
                                     Mi carrito <i class="fa-solid fa-cart-shopping"></i>
                                 </a>
                             </li>
+                            <li class="nav-item dropdown" style="margin-left:5px;width:500px;">
+                                <form action="Libro?accion=buscarU" method="post" class="d-flex text-light">
 
+                                    <div class="input-group mb-3">
+                                        <input type="text" style="width:50%;" class="form-control" name="bus" placeholder="Término de búsqueda" aria-label="Recipient's username" aria-describedby="button-addon2">
+
+                                        <select name="bestseller" class="form-select" style="width:30%;">
+                                            <option selected>BESTSELLER</option>
+                                            <option value=0>NO</option>
+                                            <option value=1>SÍ</option>
+                                        </select>
+
+                                        <button class="btn btn-outline-info" style="width:20%;" type="submit" id="button-addon2">Buscar</button>
+                                    </div>                                  
+                                </form>
+                            </li>
                         </ul>
                         <form method="post" action="CerrarSesion">
                             <input type="hidden" value="1" name="cerrar">

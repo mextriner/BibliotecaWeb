@@ -40,7 +40,7 @@ import javax.servlet.http.Part;
  * @author Alumno Mañana
  */
 @MultipartConfig(fileSizeThreshold = 1024 * 1024 * 2, // 2MB
-        maxFileSize = 1024 * 1024 * 10,      // 10MB
+        maxFileSize = 1024 * 1024 * 10, // 10MB
         maxRequestSize = 1024 * 1024 * 50)   // 50MB
 @WebServlet("/Libro")
 public class LibroServlet extends HttpServlet {
@@ -126,11 +126,11 @@ public class LibroServlet extends HttpServlet {
             throws ServletException, IOException {
 
         List<Libro> libros = libroService.findAllLibro();
-        for (Libro i: libros) {         
-            byte[] imagen = i.getPortada();         
-            if (imagen != null) {             
-                String portadaBase64 = Base64.getEncoder().encodeToString(imagen);             
-                i.setPortadabase64(portadaBase64);             
+        for (Libro i : libros) {
+            byte[] imagen = i.getPortada();
+            if (imagen != null) {
+                String portadaBase64 = Base64.getEncoder().encodeToString(imagen);
+                i.setPortadabase64(portadaBase64);
                 System.out.println(i.getPortadabase64());
             }
         }
@@ -161,37 +161,109 @@ public class LibroServlet extends HttpServlet {
     private void buscarLibro(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String bus = request.getParameter("bus");
-        List<Libro> libros = libroService.buscadorLibro(bus);
-        for (Libro i: libros) {         
-            byte[] imagen = i.getPortada();         
-            if (imagen != null) {             
-                String portadaBase64 = Base64.getEncoder().encodeToString(imagen);             
-                i.setPortadabase64(portadaBase64);             
-                System.out.println(i.getPortadabase64());
+        short bestseller = Short.valueOf(request.getParameter("bestseller"));
+        List<Libro> libros = new ArrayList<>();
+        if (request.getParameter("bestseller") != null) {
+            libros = libroService.buscadorLibroBestseller(bus, bestseller);
+            for (Libro i : libros) {
+                byte[] imagen = i.getPortada();
+                if (imagen != null) {
+
+                    String portadaBase64 = Base64.getEncoder().encodeToString(imagen);
+                    i.setPortadabase64(portadaBase64);
+                    System.out.println(i.getPortadabase64());
+                }
             }
+            System.out.println("libros: " + libros);
+            request.setAttribute("libros", libros);
+            request.getRequestDispatcher("/TablaLibro.jsp").forward(request, response);
+        } else if (request.getParameter("bus") != null && request.getParameter("bestseller") == null) {
+            libros = libroService.buscadorLibro(bus);
+            for (Libro i : libros) {
+                byte[] imagen = i.getPortada();
+                if (imagen != null) {
+                    String portadaBase64 = Base64.getEncoder().encodeToString(imagen);
+                    i.setPortadabase64(portadaBase64);
+                    System.out.println(i.getPortadabase64());
+                }
+            }
+            System.out.println("libros: " + libros);
+            request.setAttribute("libros", libros);
+            request.getRequestDispatcher("/TablaLibro.jsp").forward(request, response);
+        } else if (request.getParameter("bus") == null && request.getParameter("bestseller") != null) {
+            Libro l = new Libro(bestseller);
+            libros = libroService.findByBestSeller(l);
+            for (Libro i : libros) {
+                byte[] imagen = i.getPortada();
+                if (imagen != null) {
+                    String portadaBase64 = Base64.getEncoder().encodeToString(imagen);
+                    i.setPortadabase64(portadaBase64);
+                    System.out.println(i.getPortadabase64());
+                }
+            }
+            System.out.println("libros: " + libros);
+            request.setAttribute("libros", libros);
+            request.getRequestDispatcher("/TablaLibro.jsp").forward(request, response);
+        } else if (request.getParameter("bus") == null && request.getParameter("bestseller") == null) {
+            this.listarLibro(request, response);
         }
-        System.out.println("libros: " + libros);
-        request.setAttribute("libros", libros);
-        request.getRequestDispatcher("/TablaLibro.jsp").forward(request, response);
 
     }
 
     private void buscarLibroUsuario(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String bus = request.getParameter("bus");
-        List<Libro> libros = libroService.buscadorLibro(bus);
-        for (Libro i: libros) {         
-            byte[] imagen = i.getPortada();         
-            if (imagen != null) {             
-                String portadaBase64 = Base64.getEncoder().encodeToString(imagen);             
-                i.setPortadabase64(portadaBase64);             
-                System.out.println(i.getPortadabase64());
+        String p = request.getParameter("bestseller");
+        List<Libro> libros = new ArrayList<>();
+        if (!p.equals("BESTSELLER")) {
+            short bestseller = Short.valueOf(p);
+            libros = libroService.buscadorLibroBestseller(bus, bestseller);
+            for (Libro i : libros) {
+                byte[] imagen = i.getPortada();
+                if (imagen != null) {
+
+                    String portadaBase64 = Base64.getEncoder().encodeToString(imagen);
+                    i.setPortadabase64(portadaBase64);
+                    System.out.println(i.getPortadabase64());
+                }
             }
+            System.out.println("libros: " + libros);
+            request.setAttribute("msj", bus);
+            request.setAttribute("libros", libros);
+            request.getRequestDispatcher("/index.jsp").forward(request, response);
+        } else if (request.getParameter("bus") != null && p.equals("BESTSELLER")) {
+            libros = libroService.buscadorLibro(bus);
+            for (Libro i : libros) {
+                byte[] imagen = i.getPortada();
+                if (imagen != null) {
+                    String portadaBase64 = Base64.getEncoder().encodeToString(imagen);
+                    i.setPortadabase64(portadaBase64);
+                    System.out.println(i.getPortadabase64());
+                }
+            }
+            System.out.println("libros: " + libros);
+            request.setAttribute("msj", bus);
+            request.setAttribute("libros", libros);
+            request.getRequestDispatcher("/index.jsp").forward(request, response);
+        } else if (request.getParameter("bus") == null && !p.equals("BESTSELLER")) {
+            short bestseller = Short.valueOf(request.getParameter("bestseller"));
+            Libro l = new Libro(bestseller);
+            libros = libroService.findByBestSeller(l);
+            for (Libro i : libros) {
+                byte[] imagen = i.getPortada();
+                if (imagen != null) {
+                    String portadaBase64 = Base64.getEncoder().encodeToString(imagen);
+                    i.setPortadabase64(portadaBase64);
+                    System.out.println(i.getPortadabase64());
+                }
+            }
+            System.out.println("libros: " + libros);
+            request.setAttribute("msj", bus);
+            request.setAttribute("libros", libros);
+            request.getRequestDispatcher("/index.jsp").forward(request, response);
+        } else if (request.getParameter("bus") == null && p.equals("BESTSELLER")) {
+            this.accionDefault(request, response);
         }
-        System.out.println("libros: " + libros);
-        request.setAttribute("msj", bus);
-        request.setAttribute("libros", libros);
-        request.getRequestDispatcher("/index.jsp").forward(request, response);
 
     }
 
@@ -206,9 +278,9 @@ public class LibroServlet extends HttpServlet {
 
         Part filePart = request.getPart("portada");
         byte[] portada = null;
-        if (filePart !=null){
+        if (filePart != null) {
             InputStream fileContent = filePart.getInputStream();
-            portada=leerBytesDeInputStream(fileContent);
+            portada = leerBytesDeInputStream(fileContent);
         }
         /*String or = getFilename(origen);
         File ar = new File(or);
@@ -234,7 +306,7 @@ public class LibroServlet extends HttpServlet {
         for (int i = 0; i < unidades; i++) {
             unidad.add(new Unidad((short) 1, "administración", libro));
         }
-        
+
         String[] categorias = request.getParameterValues("categoria");
         for (String i : categorias) {
             c.add(new Categoria(Integer.valueOf(i)));
@@ -277,9 +349,7 @@ public class LibroServlet extends HttpServlet {
 
         return buffer.toByteArray();
     }
-    
-    
-    
+
     private static String getFilename(Part part) {
         String r = null;
         for (String cd : part.getHeader("content-disposition").split(";")) {
@@ -291,44 +361,6 @@ public class LibroServlet extends HttpServlet {
         return r;
     }
 
-    /*private String cargarImagen(HttpServletRequest request, HttpServletResponse response, Part origen)
-            throws ServletException, IOException {
-        String UPLOAD_DIR = "../../../img";
-        String applicationPath = new File("").getAbsolutePath() + UPLOAD_DIR;
-        String uploadFilePath = applicationPath + File.separator + UPLOAD_DIR;
-
-        File fileSaveDir = new File(uploadFilePath);
-        if (!fileSaveDir.exists()) {
-            fileSaveDir.mkdirs();
-        }
-
-        // Obtener información sobre el archivo cargado
-        String fileName = getFileName(origen);
-        String contentType = origen.getContentType();
-        long fileSize = origen.getSize();
-
-        // Escribir el archivo en el directorio de destino
-        InputStream fileContent = origen.getInputStream();
-        File targetFile = new File(uploadFilePath + File.separator + fileName);
-        // Para copiar los datos del archivo cargado al archivo en el servidor
-        Files.copy(fileContent, targetFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
-
-        PrintWriter out = response.getWriter();
-        out.println("Archivo " + fileName + " subido correctamente al directorio " + uploadFilePath);
-        
-        return targetFile.toPath().toString();
-    }
-     */
- /*private String getFileName(Part part) {
-        String contentDisp = part.getHeader("content-disposition");
-        String[] tokens = contentDisp.split(";");
-        for (String token : tokens) {
-            if (token.trim().startsWith("filename")) {
-                return token.substring(token.indexOf("=") + 2, token.length() - 1);
-            }
-        }
-        return "";
-    }*/
     @Override
     public String getServletInfo() {
         return "Short description";
@@ -337,11 +369,11 @@ public class LibroServlet extends HttpServlet {
     private void accionDefault(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         List<Libro> libros = libroService.findAllLibro();
-        for (Libro i: libros) {         
-            byte[] imagen = i.getPortada();         
-            if (imagen != null) {             
-                String portadaBase64 = Base64.getEncoder().encodeToString(imagen);             
-                i.setPortadabase64(portadaBase64);             
+        for (Libro i : libros) {
+            byte[] imagen = i.getPortada();
+            if (imagen != null) {
+                String portadaBase64 = Base64.getEncoder().encodeToString(imagen);
+                i.setPortadabase64(portadaBase64);
                 System.out.println(i.getPortadabase64());
             }
         }
@@ -359,9 +391,9 @@ public class LibroServlet extends HttpServlet {
 
         Part filePart = request.getPart("portada");
         byte[] portada = null;
-        if (filePart !=null){
+        if (filePart != null) {
             InputStream fileContent = filePart.getInputStream();
-            portada=leerBytesDeInputStream(fileContent);
+            portada = leerBytesDeInputStream(fileContent);
         }
         //String foto = cargarImagen(request, response, origen);
 
