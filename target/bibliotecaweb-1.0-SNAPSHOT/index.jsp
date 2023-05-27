@@ -23,15 +23,8 @@
 <!DOCTYPE html>
 <html lang="en">
 
+    <jsp:include page="includes/head.jsp"/>
     <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Página Principal
-        </title>
-        <link rel="stylesheet" href="lb/css/bootstrap.min.css">
-        <link rel="stylesheet" href="swiper/swiper-bundle.min.css" />
-        <link rel="stylesheet" href="lb/fontawesome-free-6.3.0-web/css/all.min.css">
         <style>
             html,
             body {
@@ -119,64 +112,13 @@
 
 
         <!--LA BARRA DE NAVEGACION-->
-        <div class="container-fluid bg-secondary" style="padding:0;width:100%;">
-            <nav class="navbar navbar-expand-lg navbar-light ">
-                <div class="container-fluid">
-                    <a class="navbar-brand" href="Libro?accion=listar"><img src="foto/bibliLogoRec.png" alt="" style="width:35% ;"></a>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                        <div class="bg-ligth">
-                            <span class="navbar-toggler-icon"></span>
-                        </div>
 
-                    </button>
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <div class="row">
+            <div class="col-sm-12 com-md-12" >
 
-                            <li class="nav-item dropdown" style="margin-left:5px;">
-                                <a class="nav-link text-light" href="cargarModifica?clase=usuario&usr=<%=user%>">
-                                    Mi cuenta: <%=user%>
-                                </a>
-
-                            </li>
-
-                            <li class="nav-item dropdown" style="margin-left:5px;">
-                                <a class="nav-link text-light" href="accion?libros=deafult" id="navbarDropdown" role="button">
-                                    Libros <i class="fa-solid fa-book-bookmark"></i>
-                                </a>
-                            </li>
-
-
-                            <li class="nav-item dropdown" style="margin-left:5px;">
-                                <a class="nav-link text-light" href="Libro?accion=carrito" id="navbarDropdown" role="button">
-                                    Mi carrito <i class="fa-solid fa-cart-shopping"></i>
-                                </a>
-                            </li>
-                            <li class="nav-item dropdown" style="margin-left:5px;width:500px;">
-                                <form action="Libro?accion=buscarU" method="post" class="d-flex text-light">
-
-                                    <div class="input-group mb-3">
-                                        <input type="text" style="width:50%;" class="form-control" name="bus" placeholder="Término de búsqueda" aria-label="Recipient's username" aria-describedby="button-addon2">
-
-                                        <select name="bestseller" class="form-select" style="width:30%;">
-                                            <option selected>BESTSELLER</option>
-                                            <option value=0>NO</option>
-                                            <option value=1>SÍ</option>
-                                        </select>
-
-                                        <button class="btn btn-outline-info" style="width:20%;" type="submit" id="button-addon2">Buscar</button>
-                                    </div>                                  
-                                </form>
-                            </li>
-                        </ul>
-                        <form method="post" action="CerrarSesion">
-                            <input type="hidden" value="1" name="cerrar">
-                            <button class="btn btn-danger" type="submit" value="1" id="button-addon2">CERRAR SESION</button>
-                        </form>
-                    </div>
-                </div>
-            </nav>
+                <jsp:include page="includes/navbar.jsp" />
+            </div>
         </div>
-
 
         <!---->
         <!--SLIDER-->
@@ -261,6 +203,7 @@
                         <a class="nav-link text-light" href="#">AYÚDANOS A MEJORAR</a>
                         <a class="nav-link disabled text-light" href="#" tabindex="-1" aria-disabled="true">ASISTENCIA</a>
                         <a class="nav-link disabled text-light" href="#" tabindex="-1" aria-disabled="true">ESTADO DEL SERVIDOR</a>
+
                     </div>
                     <div class="col-sm-12 col-md-6 text-center" style="font-size: 25px;">
                         <div class=""><i class="fa-brands fa-facebook"></i></div>
