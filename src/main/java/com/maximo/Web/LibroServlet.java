@@ -114,6 +114,9 @@ public class LibroServlet extends HttpServlet {
                 case "carrito":
                     this.carrito(request, response);
                     break;
+                case "detalleLibro":
+                    this.verDetalleLibro(request, response);
+                    break;
                 default:
                     this.accionDefault(request, response);
             }
@@ -170,10 +173,10 @@ public class LibroServlet extends HttpServlet {
         String bus = request.getParameter("bus");
         String p = request.getParameter("bestseller");
         List<Libro> libros = new ArrayList<>();
-        
+
         if (!bus.equals("") && p.equals("BESTSELLER")) {
             libros = libroService.buscadorLibro(bus);
-            if(libros.isEmpty()){
+            if (libros.isEmpty()) {
                 request.setAttribute("msj", "NO HAY RESULTADOS");
                 request.getRequestDispatcher("/TablaLibro.jsp").forward(request, response);
             }
@@ -192,7 +195,7 @@ public class LibroServlet extends HttpServlet {
             short bestseller = Short.valueOf(request.getParameter("bestseller"));
             Libro l = new Libro(bestseller);
             libros = libroService.findByBestSeller(l);
-            if(libros.isEmpty()){
+            if (libros.isEmpty()) {
                 request.setAttribute("msj", "NO HAY RESULTADOS");
                 request.getRequestDispatcher("/TablaLibro.jsp").forward(request, response);
             }
@@ -210,7 +213,7 @@ public class LibroServlet extends HttpServlet {
         } else if (!bus.equals("") && !p.equals("BESTSELLER")) {
             short bestseller = Short.valueOf(request.getParameter("bestseller"));
             libros = libroService.buscadorLibroBestseller(bus, bestseller);
-            if(libros.isEmpty()){
+            if (libros.isEmpty()) {
                 request.setAttribute("msj", "NO HAY RESULTADOS");
                 request.getRequestDispatcher("/TablaLibro.jsp").forward(request, response);
             }
@@ -238,7 +241,7 @@ public class LibroServlet extends HttpServlet {
         List<Libro> libros = new ArrayList<>();
         if (!bus.equals("") && p.equals("BESTSELLER")) {
             libros = libroService.buscadorLibro(bus);
-            if(libros.isEmpty()){
+            if (libros.isEmpty()) {
                 request.setAttribute("msj", "NO HAY RESULTADOS");
                 request.getRequestDispatcher("/index.jsp").forward(request, response);
             }
@@ -257,7 +260,7 @@ public class LibroServlet extends HttpServlet {
             short bestseller = Short.valueOf(request.getParameter("bestseller"));
             Libro l = new Libro(bestseller);
             libros = libroService.findByBestSeller(l);
-            if(libros.isEmpty()){
+            if (libros.isEmpty()) {
                 request.setAttribute("msj", "NO HAY RESULTADOS");
                 request.getRequestDispatcher("/index.jsp").forward(request, response);
             }
@@ -275,7 +278,7 @@ public class LibroServlet extends HttpServlet {
         } else if (!bus.equals("") && !p.equals("BESTSELLER")) {
             short bestseller = Short.valueOf(request.getParameter("bestseller"));
             libros = libroService.buscadorLibroBestseller(bus, bestseller);
-            if(libros.isEmpty()){
+            if (libros.isEmpty()) {
                 request.setAttribute("msj", "NO HAY RESULTADOS");
                 request.getRequestDispatcher("/index.jsp").forward(request, response);
             }
@@ -378,6 +381,15 @@ public class LibroServlet extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+    
+    private void portadaToBase64(Libro libro){
+        byte[] imagen = libro.getPortada();
+            if (imagen != null) {
+                String portadaBase64 = Base64.getEncoder().encodeToString(imagen);
+                libro.setPortadabase64(portadaBase64);
+                System.out.println(libro.getPortadabase64());
+            }
+    }
 
     private void accionDefault(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -385,9 +397,7 @@ public class LibroServlet extends HttpServlet {
         for (Libro i : libros) {
             byte[] imagen = i.getPortada();
             if (imagen != null) {
-                String portadaBase64 = Base64.getEncoder().encodeToString(imagen);
-                i.setPortadabase64(portadaBase64);
-                System.out.println(i.getPortadabase64());
+                portadaToBase64(i);
             }
         }
         System.out.println("libros: " + libros);
@@ -436,6 +446,15 @@ public class LibroServlet extends HttpServlet {
         libro.setCategoriaList(categorias);
         libroService.updateLibro(libro);
         this.listarLibro(request, response);
+    }
+
+    private void verDetalleLibro(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        Libro isbn = new Libro(request.getParameter("ISBN"));
+        Libro libro = libroService.findByIsbn(isbn);
+        portadaToBase64(libro);
+        System.out.println("libro: " + libro);
+        request.setAttribute("libro", libro);
+        request.getRequestDispatcher("/detalleLibro.jsp").forward(request, response);
     }
 
 }

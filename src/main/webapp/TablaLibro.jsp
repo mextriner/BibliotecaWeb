@@ -163,6 +163,10 @@
                                 <input type="hidden" name="idLibro" value='${libro.getIsbn()}'>
                                 <button class="btn btn-outline-danger mt-3" type="submit" name="eliminar" id="button-addon2">ELIMINAR</button>
                             </form>
+                            <form action="Libro?accion=detalleLibro" method="POST">
+                                <input type="hidden" name="ISBN" value='${libro.getIsbn()}'>
+                                <button class="btn btn-outline-info mt-3" type="submit" name="verDetalle" id="button-addon2">VER MÁS</button>
+                            </form>
 
                         </div>
                     </div>
