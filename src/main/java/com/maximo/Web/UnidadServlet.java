@@ -29,7 +29,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author Maximo
  */
-@WebServlet(name = "UnidadServlet", urlPatterns = {"/Unidad"})
+@WebServlet("/Unidad")
 public class UnidadServlet extends HttpServlet {
 
     @Inject
@@ -50,7 +50,7 @@ public class UnidadServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -65,6 +65,16 @@ public class UnidadServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        String accion = request.getParameter("accion");
+        if (accion != null) {
+            switch (accion) {
+                case "unidadesPorIsbn":
+                    this.unidadesPorIsbn(request, response);
+                    break;
+                default:
+                //this.accionDefault(request, response);
+            }
+        }
     }
 
     /**
@@ -83,6 +93,9 @@ public class UnidadServlet extends HttpServlet {
             switch (accion) {
                 case "procesar":
                     this.procesarPrestamo(request, response);
+                    break;
+                case "unidadesPorIsbn":
+                    this.unidadesPorIsbn(request, response);
                     break;
                 default:
                 //this.accionDefault(request, response);
@@ -122,4 +135,20 @@ public class UnidadServlet extends HttpServlet {
         }
 
     }
+
+    protected void unidadesPorIsbn(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
+        Object libro = (Libro) request.getAttribute("libro");
+        
+        Libro isbn = (Libro) libro;
+
+        List<Unidad> unidades = unidadService.findByLibroISBN(isbn);
+
+        request.setAttribute("unidades", unidades);
+
+        request.getRequestDispatcher("/detalleLibro.jsp").forward(request, response);
+
+    }
+
 }

@@ -452,9 +452,8 @@ public class LibroServlet extends HttpServlet {
         Libro isbn = new Libro(request.getParameter("ISBN"));
         Libro libro = libroService.findByIsbn(isbn);
         portadaToBase64(libro);
-        System.out.println("libro: " + libro);
         request.setAttribute("libro", libro);
-        request.getRequestDispatcher("/detalleLibro.jsp").forward(request, response);
+        request.getRequestDispatcher("Unidad?accion=unidadesPorIsbn").forward(request, response);
     }
 
 }

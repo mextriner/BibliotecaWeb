@@ -25,7 +25,7 @@ public interface iUnidadService {
 
     public List<Unidad> findProveedorByUnidad(Unidad unidad);
 
-    public List<Unidad> findByLibroISBN(Unidad unidad);
+    public List<Unidad> findByLibroISBN(Libro libro);
     
     public Unidad findByLibroISBNLimit1(Libro libro);
 

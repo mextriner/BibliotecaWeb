@@ -51,15 +51,15 @@ public class UnidadDaoImpl implements iUnidadDao {
     }
 
     @Override
-    public List<Unidad> findByLibroISBN(Unidad unidad) {
-        Query query = em.createQuery("Unidad.findByLibroISBN");
-        query.setParameter("unidad", unidad.getProveedor());
+    public List<Unidad> findByLibroISBN(Libro libro) {
+        Query query = em.createNamedQuery("Unidad.findByIsbn");
+        query.setParameter("libro_ISBN", libro);
         return query.getResultList();
     }
 
     @Override
     public Unidad findByLibroISBNLimit1(Libro libro) {
-        Query query = em.createNamedQuery("Unidad.findByIsbn");
+        Query query = em.createNamedQuery("Unidad.findByIsbnEstado");
         query.setParameter("libro_ISBN", libro);
         query.setParameter("estado", 1);
         Unidad unidad;

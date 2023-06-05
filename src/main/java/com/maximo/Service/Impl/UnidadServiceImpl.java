@@ -41,8 +41,8 @@ public class UnidadServiceImpl implements iUnidadService{
     }
 
     @Override
-    public List<Unidad> findByLibroISBN(Unidad unidad){
-        return unidadDao.findByLibroISBN(unidad);
+    public List<Unidad> findByLibroISBN(Libro libro){
+        return unidadDao.findByLibroISBN(libro);
     }
 
     public Unidad findByLibroISBNLimit1(Libro libro){
