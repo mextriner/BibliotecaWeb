@@ -9,20 +9,17 @@
 <!DOCTYPE html>
 <html lang="en">
 
+    <jsp:include page="includes/head.jsp"/>
     <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Inicio Sesión</title>
-        <link rel="stylesheet" href="lb/css/bootstrap.min.css">
-        <link rel="stylesheet" href="swiper/swiper-bundle.min.css" />
-        <link rel="stylesheet" href="lb/fontawesome-free-6.3.0-web/css/all.min.css">
+        <title> Iniciar Sesión
+        </title>
+
     </head>
 
-    <body class="bg-secondary" style="font-family:monospace;">
+    <body class="container-fluid d-flex justify-content-center">
 
 
-        <div class="container-fluid bg-dark align-item-center">
+        <div style="margin: 10rem" class="container-fluid bg-dark align-item-center">
             <!--en esta linea se reparten los elementos-->
             <div class="row d-flex justify-content-center">
                 <div class="col-sm-12 col-md-4 mt-3 mb-3 text-light">
@@ -44,12 +41,17 @@
                             <button class="btn btn-outline-success Hadow rounded border" type="submit">INICIAR SESIÓN</button>
                         </div>
                     </form>
+
                 </div>
             </div>
         </div>
 
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
 
-        <script src="lb/js/bootstrap.min.js"></script>
+
+
     </body>
+
+
 
 </html>

@@ -28,7 +28,8 @@ import javax.validation.constraints.NotNull;
 @Table(name = "usuario_has_unidad")
 @NamedQueries({
     @NamedQuery(name = "UsuarioHasUnidad.findAll", query = "SELECT u FROM UsuarioHasUnidad u"),
-    @NamedQuery(name = "UsuarioHasUnidad.findByFecha", query = "SELECT u FROM UsuarioHasUnidad u WHERE u.fecha = :fecha")})
+    @NamedQuery(name = "UsuarioHasUnidad.findByFecha", query = "SELECT u FROM UsuarioHasUnidad u WHERE u.fecha = :fecha"),
+    @NamedQuery(name = "UsuarioHasUnidad.findByFechaEntrega", query = "SELECT u FROM UsuarioHasUnidad u WHERE u.fechaEntrega = :fechaEntrega")})
 public class UsuarioHasUnidad implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -44,6 +45,9 @@ public class UsuarioHasUnidad implements Serializable {
     @JoinColumn(name = "usuario_idUsuario", referencedColumnName = "idUsuario")
     @ManyToOne(optional = false)
     private Usuario usuarioidUsuario;
+    @Column(name = "fechaEntrega")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date fechaEntrega;
 
     public UsuarioHasUnidad() {
     }
@@ -59,7 +63,7 @@ public class UsuarioHasUnidad implements Serializable {
     public void setFecha(Date fecha) {
         this.fecha = fecha;
     }
-
+    
     public Unidad getUnidadidUnidad() {
         return unidadidUnidad;
     }
@@ -76,6 +80,15 @@ public class UsuarioHasUnidad implements Serializable {
         this.usuarioidUsuario = usuarioidUsuario;
     }
 
+    public Date getFechaEntrega() {
+        return fechaEntrega;
+    }
+
+    public void setFechaEntrega(Date fechaEntrega) {
+        this.fechaEntrega = fechaEntrega;
+    }
+
+    
     @Override
     public int hashCode() {
         int hash = 0;

@@ -11,15 +11,13 @@
 <html lang="en">
 
     <jsp:include page="includes/head.jsp" />
-
+    <head>
+        <title> Libro: <%= libro.getTitulo()%>
+        </title>
+    </head>
     <body class="bg-secondary">
         <!--LA BARRA DE NAVEGACION-->
         <jsp:include page="includes/navbar.jsp" />
-
-        <!---->
-
-        <!-- INFO DE MI CUENTA -->
-        <!-- NOMBRE, APELLIDOS, CORREO, ETC. -->
 
         <div class="container-fluid align-item-center">
             <!--en esta linea se reparten los elementos-->
@@ -113,12 +111,6 @@
 
         </div>
     </div>
-
-
-
-
-
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
 </body>
 

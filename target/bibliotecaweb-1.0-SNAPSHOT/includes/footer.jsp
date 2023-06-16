@@ -17,10 +17,10 @@
 
         </div>
         <div class="col-sm-12 col-md-6 text-center" style="font-size: 25px;">
-            <div class=""><i class="fa-brands fa-facebook"></i></div>
-            <div class=""> <i class="fa-brands fa-instagram"></i></div>
-            <div class=""><i class="fa-brands fa-twitter"></i></div>
-            <div class=""> <i class="fa-brands fa-youtube"></i></div>
+            <div><i class="fa-brands fa-facebook"></i></div>
+            <div> <i class="fa-brands fa-instagram"></i></div>
+            <div><i class="fa-brands fa-twitter"></i></div>
+            <div> <i class="fa-brands fa-youtube"></i></div>
         </div>
     </div>
 </div>

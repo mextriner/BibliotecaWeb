@@ -6,8 +6,10 @@
 package com.maximo.Web;
 
 import com.maximo.Dominio.Libro;
+import com.maximo.Dominio.Unidad;
 import com.maximo.Dominio.Usuario;
 import com.maximo.Service.Interfaz.iLibroService;
+import com.maximo.Service.Interfaz.iUnidadService;
 import com.maximo.Service.Interfaz.iUsuarioHasUnidadService;
 import com.maximo.Service.Interfaz.iUsuarioService;
 import java.io.IOException;
@@ -39,6 +41,8 @@ public class UsuarioServlet extends HttpServlet {
     iLibroService libroService;
     @Inject
     iUsuarioHasUnidadService usuarioHasUnidad;
+    @Inject
+    iUnidadService unidadService;
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -54,9 +58,11 @@ public class UsuarioServlet extends HttpServlet {
                 case "editar":
                     this.editarUsuario(request, response);
                     break;
-
                 case "listar":
                     this.listarUsuario(request, response);
+                    break;
+                case "carrito":
+                    this.verCarrito(request, response);
                     break;
                 default:
                 //this.accionDefault(request, response);
@@ -88,8 +94,11 @@ public class UsuarioServlet extends HttpServlet {
                 case "listar":
                     this.listarUsuario(request, response);
                     break;
-                case "sumar":
+                case "sumarLibro":
                     this.sumarLibro(request, response);
+                    break;
+                case "carrito":
+                    this.verCarrito(request, response);
                     break;
                 default:
                 //this.accionDefault(request, response);
@@ -193,7 +202,7 @@ public class UsuarioServlet extends HttpServlet {
         } else {
             msj = "La sesión ya está iniciada";
             request.setAttribute("mensaje", msj);
-            request.getRequestDispatcher("Libro?accion=listar").forward(request, response);
+            request.getRequestDispatcher("Libro?accion=defaultaction").forward(request, response);
         }
 
     }
@@ -211,19 +220,29 @@ public class UsuarioServlet extends HttpServlet {
             throws ServletException, IOException {
         String msj = "";
         HttpSession sesion = request.getSession();
-        Libro libro = libroService.findByIsbn(new Libro((String) request.getParameter("isbn")));
-        List<Libro> carrito = (List) sesion.getAttribute("carrito");
+        final int id = Integer.valueOf(request.getParameter("idUnidad"));
+
+        final Unidad idUnidad = new Unidad(id);
+
+        Unidad unidad = (unidadService.findByIdUnidad(idUnidad));
+        List<Unidad> carrito = (List) sesion.getAttribute("carrito");
         if (carrito == null) {
             carrito = new ArrayList<>();
-            carrito.add(libro);
-            sesion.setAttribute("carrito",carrito);
+            carrito.add(unidad);
+            sesion.setAttribute("carrito", carrito);
         } else if (carrito.size() < 6) {
-            carrito.add(libro);
-        } else if (carrito.size() >= 5) {
+            carrito.add(unidad);
+        } else if (carrito.size() > 5) {
             msj = "No puedes alquilar más de 5 libros";
             request.getRequestDispatcher("miCarrito.jsp").forward(request, response);
         }
         request.getRequestDispatcher("Libro?accion=default").forward(request, response);
 
     }
+
+    private void verCarrito(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        request.getRequestDispatcher("miCarrito.jsp").forward(request, response);
+    }
+
 }

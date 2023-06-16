@@ -13,18 +13,14 @@
 <!DOCTYPE html>
 <html lang="en">
 
+    <jsp:include page="includes/head.jsp"/>
     <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Registro</title>
-        <link rel="stylesheet" href="lb/css/bootstrap.min.css">
-        <link rel="stylesheet" href="swiper/swiper-bundle.min.css" />
-        <link rel="stylesheet" href="lb/fontawesome-free-6.3.0-web/css/all.min.css">
+        <title> Nueva Cuenta
+        </title>
     </head>
 
     <body class="bg-secondary" style="font-family:monospace;">
-        <!---->
+        <jsp:include page="includes/navbar.jsp"/>
         <div class="container-fluid bg-dark align-item-center">
             <!--en esta linea se reparten los elementos-->
             <div class="row d-flex justify-content-center">
@@ -72,9 +68,8 @@
 
             </div>
         </div>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
 
-
-        <script src="lb/js/bootstrap.min.js"></script>
     </body>
 
 </html>

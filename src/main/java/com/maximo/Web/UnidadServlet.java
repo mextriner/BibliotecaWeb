@@ -71,6 +71,9 @@ public class UnidadServlet extends HttpServlet {
                 case "unidadesPorIsbn":
                     this.unidadesPorIsbn(request, response);
                     break;
+                case "procesar":
+                    this.procesarPrestamo(request, response);
+                    break;
                 default:
                 //this.accionDefault(request, response);
             }
@@ -117,8 +120,12 @@ public class UnidadServlet extends HttpServlet {
 
     protected void procesarPrestamo(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        final int id = Integer.valueOf(request.getParameter("idUnidad"));
+        
+        final Unidad idUnidad = new Unidad(id);
 
-        Unidad unidad = (unidadService.findByLibroISBNLimit1(new Libro((String) request.getParameter("isbn"))));
+        Unidad unidad = (unidadService.findByIdUnidad(idUnidad));
 
         if (unidad == null) {
             String msj = "No hay unidades disponibles";

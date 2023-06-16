@@ -19,12 +19,13 @@
         response.sendRedirect("inicioSesion.jsp");
     }
 %>
-
 <!DOCTYPE html>
 <html lang="en">
-
-    <jsp:include page="includes/head.jsp"/>
+<jsp:include page="includes/head.jsp"/>
     <head>
+        <title>Nueva Categoría
+        </title>
+        <link rel="stylesheet" href="swiper/swiper-bundle.min.css" />
         <style>
             html,
             body {
@@ -107,6 +108,8 @@
             }
         </style>
     </head>
+    
+
 
     <body class="bg-secondary" style="font-family:monospace;">
 
@@ -115,7 +118,6 @@
 
         <div class="row">
             <div class="col-sm-12 com-md-12" >
-
                 <jsp:include page="includes/navbar.jsp" />
             </div>
         </div>
@@ -144,9 +146,9 @@
                                                             <p class="card-text"><strong>${libro.titulo}</strong><br>
                                                                 ${libro.descripcion}</p>
                                                         </div>
-                                                        <form method="post" action="Usuario?accion=sumar">
-                                                            <input type="hidden" value="${libro.getIsbn()}" name="isbn">
-                                                            <button class="btn btn-info" type="submit">AÑADIR AL CARRO</button>
+                                                        <form action="Libro?accion=detalleLibro" method="POST">
+                                                            <input type="hidden" name="ISBN" value='${libro.getIsbn()}'>
+                                                            <button class="btn btn-outline-info mt-3" type="submit" name="verDetalle" id="button-addon2">VER MÁS</button>
                                                         </form>
                                                     </div>
                                                 </div>
@@ -200,7 +202,7 @@
 
 
         </main>
-        <script src="lb/js/bootstrap.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
     </body>
 
 </html>

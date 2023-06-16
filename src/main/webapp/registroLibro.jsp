@@ -1,8 +1,13 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 
-    <jsp:include page="includes/head.jsp" />
+    <jsp:include page="includes/head.jsp"/>
+    <head>
+        <title> Nuevo libro
+        </title>
+    </head>
     <body class="bg-secondary text-light" style="font-family:monospace;">
         <!--LA BARRA DE NAVEGACION-->
         <jsp:include page="includes/navbar.jsp" />
@@ -20,7 +25,7 @@
                         <h1 style="font-size: 30px; ;"><strong>REGISTRO</strong></h1>
 
                         <label for="exampleFormControlInput1" class="form-label">Libro</label>
-                        <input type="text" class="form-control" name="Titulo" placeholder="TÌtulo">
+                        <input type="text" class="form-control" name="Titulo" placeholder="T√≠tulo">
                     </div>
                 </div>
                 <div class="row d-flex justify-content-center">
@@ -35,7 +40,7 @@
                         </div>
 
                         <div class="mb-3">
-                            <label for="exampleFormControlInput1" class="form-label">Fecha PublicaciÛn</label>
+                            <label for="exampleFormControlInput1" class="form-label">Fecha Publicaci√≥n</label>
                             <input type="date" class="form-control" name="Fecha" placeholder="Fecha" required>
                         </div>
                         <div class="mb-3">
@@ -43,14 +48,14 @@
                             <input type="file" class="form-control" name="portada" placeholder="Ruta de imagen" id="formFile">
                         </div>
                         <div class="mb-5">
-                            <label for="exampleFormControlInput1" class="form-label">N˙mero de Unidades</label>
+                            <label for="exampleFormControlInput1" class="form-label">N√∫mero de Unidades</label>
                             <input type="number" class="form-control" name="Unidades" placeholder="Unidades" required>
                         </div>
 
                         <div class="mb-3">
                             <a style="font-size:20px;" class="text-light" href="#" onclick="duplicarDiv2()"><i class="fa-solid fa-circle-plus"></i></a>
 
-                            <label for="inputState" class="form-label">CategorÌas</label>
+                            <label for="inputState" class="form-label">Categor√≠as</label>
                             <div id="categoriaDuplica" class="form-floating">
 
                                 <select name="categoria" class="form-select" required>
@@ -68,7 +73,7 @@
 
                             function duplicarDiv2() {
                                 var divCopia = originalDiv.cloneNode(true);
-                                // Agrega cualquier modificaciÛn adicional que desees hacer a la copia del div
+                                // Agrega cualquier modificaci√≥n adicional que desees hacer a la copia del div
                                 var contenedor = document.getElementById("conten");
                                 contenedor.appendChild(divCopia); // Agrega la copia del div al contenedor
                                 var nuevoBoton = document.createElement("a");
@@ -92,11 +97,11 @@
                         <div class="form-floating mb-4">
                             <select name="bestseller" class="form-select" required>
                                 <option value=0>NO</option>
-                                <option value=1>SÕ</option>
+                                <option value=1>S√ç</option>
                             </select>
                         </div>
                         <div class="mb-4">
-                            <label for="exampleFormControlInput1" class="form-label">DescripciÛn</label>
+                            <label for="exampleFormControlInput1" class="form-label">Descripci√≥n</label>
                             <textarea class="form-control" name="descripcion" id="exampleFormControlTextarea1" rows="3" required></textarea>
                         </div>
                         <div class="mb-3">
@@ -132,7 +137,7 @@
 
                             function duplicarDiv() {
                                 var divCopiado = divOrigina.cloneNode(true);
-                                // Agrega cualquier modificaciÛn adicional que desees hacer a la copia del div
+                                // Agrega cualquier modificaci√≥n adicional que desees hacer a la copia del div
                                 var contenedor = document.getElementById("contenedor");
                                 contenedor.appendChild(divCopiado); // Agrega la copia del div al contenedor
                                 //var contenedor2 = document.createElement("div");
@@ -157,14 +162,14 @@
                 </div>
                 <div class="row d-flex justify-content-center">
                     <div class="mb-3 col-sm-12 col-md-1">
-                        <button class="btn btn-outline-success Hadow rounded border" type="submit">REGISTRARSE</button>
+                        <button class="btn btn-outline-success Hadow rounded border" type="submit">REGISTRAR</button>
                     </div>
                 </div>
             </form>
 
 
         </div>
-        <script src="lb/js/bootstrap.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
     </body>
 
 </html>
