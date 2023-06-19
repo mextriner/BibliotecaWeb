@@ -10,10 +10,12 @@ import com.maximo.Dominio.Categoria;
 import com.maximo.Dominio.Editorial;
 import com.maximo.Dominio.Libro;
 import com.maximo.Dominio.Usuario;
+import com.maximo.Dominio.UsuarioHasUnidad;
 import com.maximo.Service.Interfaz.iAutorService;
 import com.maximo.Service.Interfaz.iCategoriaService;
 import com.maximo.Service.Interfaz.iEditorialService;
 import com.maximo.Service.Interfaz.iLibroService;
+import com.maximo.Service.Interfaz.iUsuarioHasUnidadService;
 import com.maximo.Service.Interfaz.iUsuarioService;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -35,6 +37,8 @@ public class cargarModifica extends HttpServlet {
 
     @Inject
     iUsuarioService usuarioService;
+    @Inject
+    iUsuarioHasUnidadService usuarioHasUnidad;
     @Inject
     iLibroService libroService;
     @Inject
@@ -124,14 +128,15 @@ public class cargarModifica extends HttpServlet {
         String u = (String) sesion.getAttribute("usuario");
         Usuario usuario = new Usuario(u);
         usuario = usuarioService.findByIdUsuario(usuario);
+        List<UsuarioHasUnidad> prestamos = usuarioHasUnidad.findByIdusuario(usuario);
         request.setAttribute("usuario", usuario);
+        request.setAttribute("prestamos", prestamos);
         request.getRequestDispatcher("gestionPerfil.jsp").forward(request, response);
 
     }
 
     private void modificarLibro(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
         List<Editorial> editoriales = (List)request.getAttribute("editoriales");
         request.setAttribute("editoriales", editoriales);
         String isbn = (String) request.getParameter("idLibro");

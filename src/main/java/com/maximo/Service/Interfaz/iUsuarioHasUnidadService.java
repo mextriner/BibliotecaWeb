@@ -4,6 +4,7 @@
  */
 package com.maximo.Service.Interfaz;
 
+import com.maximo.Dominio.Usuario;
 import com.maximo.Dominio.UsuarioHasUnidad;
 import java.util.List;
 import javax.ejb.Local;
@@ -14,7 +15,7 @@ import javax.ejb.Local;
  */
 @Local
 public interface iUsuarioHasUnidadService {
-    
+
     public List<UsuarioHasUnidad> findAll();
 
     public List<UsuarioHasUnidad> findPrestamoByidUsuario(UsuarioHasUnidad usuariohasunidad);
@@ -22,6 +23,12 @@ public interface iUsuarioHasUnidadService {
     public List<UsuarioHasUnidad> findPrestamoByidUnidad(UsuarioHasUnidad usuariohasunidad);
 
     public List<UsuarioHasUnidad> findByFecha(UsuarioHasUnidad usuariohasunidad);
+
+    public List<UsuarioHasUnidad> findByFechaEntrega(UsuarioHasUnidad usuariohasunidad);
+
+    public List<UsuarioHasUnidad> findByIdusuario(Usuario usuario);
+
+    public UsuarioHasUnidad findByIdPrestamo(UsuarioHasUnidad usuariohasunidad);
 
     public void insertarUsuarioHasUnidad(UsuarioHasUnidad usuariohasunidad);
 

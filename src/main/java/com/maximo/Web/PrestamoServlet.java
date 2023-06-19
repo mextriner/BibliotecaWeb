@@ -9,6 +9,7 @@ import com.maximo.Dominio.UsuarioHasUnidad;
 import com.maximo.Service.Interfaz.iUsuarioHasUnidadService;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Date;
 import java.util.List;
 import javax.inject.Inject;
 import javax.servlet.ServletException;
@@ -26,6 +27,7 @@ public class PrestamoServlet extends HttpServlet {
 
     @Inject
     iUsuarioHasUnidadService usuarioHasUnidad;
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -99,6 +101,9 @@ public class PrestamoServlet extends HttpServlet {
                 case "listar":
                     this.listarPrestamo(request, response);
                     break;
+                case "entregar":
+                    this.finalizarPrestamo(request, response);
+                    break;
                 case "listarU":
                     //this.procesarPrestamo(request, response);
                     break;
@@ -127,4 +132,11 @@ public class PrestamoServlet extends HttpServlet {
         request.getRequestDispatcher("/TablaPrestamo.jsp").forward(request, response);
     }
 
+    private void finalizarPrestamo(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {        
+        UsuarioHasUnidad uhu = new UsuarioHasUnidad(Integer.valueOf(request.getParameter("prestamo")));
+        UsuarioHasUnidad prestamo = usuarioHasUnidad.findByIdPrestamo(uhu);
+        prestamo.setFechaEntrega(new Date());
+        usuarioHasUnidad.updateUsuarioHasUnidad(prestamo);
+        request.getRequestDispatcher("cargarModifica?clase=usuario").forward(request, response);
+    }
 }

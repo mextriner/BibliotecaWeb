@@ -1,6 +1,8 @@
 
+<%@page import="java.text.SimpleDateFormat"%>
 <%@page import="com.maximo.Dominio.Usuario"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
     String user = "";
@@ -12,6 +14,7 @@
         response.sendRedirect("inicioSesion.jsp");
     }
     Usuario usuario = (Usuario) request.getAttribute("usuario");
+    SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -57,7 +60,7 @@
                             <input type="text" class="form-control" name="direccion" value="<%= usuario.getDireccion()%>" required>
                         </div>
                         <div class="mt-5 mb-5 pb-3">
-                            <label for="exampleFormControlInput1" class="form-label">Fecha de Nacimiento</label>
+                            <label for="exampleFormControlInput1" class="form-label">Fecha de Nacimiento: <fmt:formatDate value="${prestamo.getFecha()}" pattern="yyyy-MM-dd HH:mm:ss" /></label>
                             <input type="date" class="form-control" name="fechaNac" value="<%= usuario.getFechaNac()%>" required>
                         </div>
 
@@ -71,46 +74,45 @@
             </div>
 
         </div>
-        <div>
-            <h2>Mis libros</h2>
+        <h2>Mis libros</h2>
+        <div class="d-flex justify-content-center">
+            <table class="table table-hover">
+                <tr class="text-center">
+                    <th>ISBN</th>
+                    <th>TÍTULO</th>
+                    <th>FECHA INICIO</th>
+                    <th>FECHA FINALIZACIÓN</th>
+                    <th></th>
+                </tr>
+                <c:forEach items="${prestamos}" var="prestamo" >
+                    <tr class="text-center">
+                        <th>${prestamo.getUnidadidUnidad().getLibroISBN().getIsbn()}</th>
+                        <th>${prestamo.getUnidadidUnidad().getLibroISBN().getTitulo()}</th>
+                        <th><fmt:formatDate value="${prestamo.getFecha()}" pattern="yyyy-MM-dd HH:mm:ss" /></th>
+                            <c:choose>
+                                <c:when test="${prestamo.getFechaEntrega() != null}">
+
+                                <th><fmt:formatDate value="${prestamo.getFechaEntrega()}" pattern="yyyy-MM-dd HH:mm:ss" /></th>
+                                <th></th>
+                                </c:when>
+                                <c:otherwise>
+                                <th>SIN ENTREGAR</th>
+                                <th>
+                                    <form action="Prestamo?accion=entregar" method="post">
+                                        <input type="hidden" name="prestamo" value="${prestamo.getIdPrestamo()}">
+                                        <button>ENTREGAR</button>
+                                    </form>
+                                </th>
+                            </c:otherwise>
+
+                        </c:choose>
+                    </tr>
+                </c:forEach>
+            </table>
         </div>
+        <jsp:include page="includes/footer.jsp"/>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
 
-        <!-- HISTORIAL DE LIBROS/ LIBROSD EN ALQUILER... -->
-
-
-
-        <div class="container-fluid bg-secondary">
-            <div class="row d-flex justify-content-center mb-3">
-
-                <div class="col-sm-12 col-md-6 mb-5 text-light text-center">
-                    <a class="nav-link active text-light" aria-current="page" href="#">ACERCA DE NOSOTROS</a>
-                    <a class="nav-link text-light" href="#">AYÚDANOS A MEJORAR</a>
-                    <a class="nav-link disabled text-light" href="#" tabindex="-1" aria-disabled="true">ASISTENCIA</a>
-                    <a class="nav-link disabled text-light" href="#" tabindex="-1" aria-disabled="true">ESTADO DEL SERVIDOR</a>
-                </div>
-                <div class="col-sm-12 col-md-6 text-center" style="font-size: 25px;">
-                    <div class=""><i class="fa-brands fa-facebook"></i></div>
-                    <div class=""> <i class="fa-brands fa-instagram"></i></div>
-                    <div class=""><i class="fa-brands fa-twitter"></i></div>
-                    <div class=""> <i class="fa-brands fa-youtube"></i></div>
-                </div>
-            </div>
-        </div>
-
-
-
-
-
-
-    </div>
-
-
-
-
-
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
-
-</body>
+    </body>
 
 </html>

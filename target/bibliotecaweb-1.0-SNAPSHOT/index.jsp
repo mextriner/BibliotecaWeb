@@ -30,7 +30,6 @@
             html,
             body {
                 background: rgb(52, 52, 52);
-                border-radius: 5%;
             }
 
             .principal {
@@ -100,11 +99,6 @@
             main {
                 /* margin-top: 160px; */
                 width: 100%;
-            }
-
-            .navbar {
-                border: solid white 1px;
-                border-radius: 5%;
             }
         </style>
     </head>
