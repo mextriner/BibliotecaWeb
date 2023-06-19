@@ -11,7 +11,7 @@
 <html lang="en">
     <jsp:include page="includes/head.jsp"/>
     <head>
-        <title> Categoría: <%= c.getNombre() %>
+        <title> Categoría: <%= c.getNombre()%>
         </title>
     </head>
     <body class="bg-secondary" style="font-family:monospace;">
@@ -42,7 +42,8 @@
                 </div>
             </div>
         </div>
-                <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+        <jsp:include page="includes/footer.jsp"/>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
 
     </body>
 </html>

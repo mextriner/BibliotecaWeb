@@ -7,7 +7,7 @@
         <title> Nuevo Autor
         </title>
     </head>
-    <body class="bg-secondary text-light" style="font-family:monospace;">
+    <body style = "margin-top:8rem">
         <jsp:include page="includes/navbar.jsp"/>
 
         <div class="container-fluid bg-dark">
@@ -53,8 +53,8 @@
                 </div>
             </div>
         </div>
+        <jsp:include page="includes/footer.jsp"/>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
-
     </body>
 
 </html>

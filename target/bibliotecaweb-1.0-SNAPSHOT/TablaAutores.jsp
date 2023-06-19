@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -10,8 +11,8 @@
         <title>Autores
         </title>
     </head>
-        <jsp:include page="includes/navbar.jsp"/>
-    <body>
+    <jsp:include page="includes/navbar.jsp"/>
+    <body style = "margin-top:8rem">
         <!--LA BARRA DE NAVEGACION-->
 
 
@@ -40,7 +41,7 @@
                                 <td style="border: solid black 2px;">${autor.getIdAutor()}</td>
                                 <td style="border: solid black 2px;">${autor.getNombre()}</td>
                                 <td style="border: solid black 2px;">${autor.getApellido()}</td>
-                                <td style="border: solid black 2px;">${autor.getFechaNac()}</td>
+                                <td style="border: solid black 2px;"><fmt:formatDate value="${autor.getFechaNac()}" pattern="yyyy-MM-dd"/></td>
                                 <td style="border: solid black 2px;">${autor.getNacionalidad()}</td>
                                 <td style="border: solid black 2px;"><a class="text-danger" href=""><i class="fa-solid fa-trash"></i></a></td>
                                 <td style="border: solid black 2px;"><a class="text-primary" href="cargarModifica?clase=autor&autorId=${autor.getIdAutor()}"><i class="fa-solid fa-pen"></i></a></td>
@@ -52,6 +53,7 @@
                 </div>
 
         </section>
+        <jsp:include page="includes/footer.jsp"/>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
     </body>
 

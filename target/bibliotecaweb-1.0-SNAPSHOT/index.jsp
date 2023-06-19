@@ -21,16 +21,13 @@
 %>
 <!DOCTYPE html>
 <html lang="en">
-<jsp:include page="includes/head.jsp"/>
+    <jsp:include page="includes/head.jsp"/>
     <head>
         <title>Nueva Categoría
         </title>
         <link rel="stylesheet" href="swiper/swiper-bundle.min.css" />
         <style>
             html,
-            body {
-                background: rgb(52, 52, 52);
-            }
 
             .principal {
                 height: 100%;
@@ -102,26 +99,19 @@
             }
         </style>
     </head>
-    
 
 
-    <body class="bg-secondary" style="font-family:monospace;">
 
+    <body style = "margin-top:8rem">
 
-        <!--LA BARRA DE NAVEGACION-->
-
-        <div class="row">
-            <div class="col-sm-12 com-md-12" >
-                <jsp:include page="includes/navbar.jsp" />
-            </div>
-        </div>
+        <jsp:include page="includes/navbar.jsp" />
 
         <!---->
         <!--SLIDER-->
         <main>
             <!--AQUÍ VAN LAS CARDS-->
             <center>
-                <div class="col-sm-12 col-md-12 bg-dark" style="width: 100%;">
+                <div class="col-sm-12 col-md-12" style="width: 100%;">
                     <h1 style="font-family:monospace; font-size : 46px; color: aliceblue;"><%= msj%>
                     </h1>
                     <div class="principal">
@@ -133,23 +123,33 @@
                                         <div class="swiper-wrapper">
                                             <c:forEach items="${libros}" var="libro">
                                                 <div class="swiper-slide">
-                                                    <div class="card" style="width: 25em;">
-
+                                                    <div class="card" style="width: 25em; padding: 1rem">
+                                                        <h5 class="card-title">${libro.titulo}</h5>
                                                         <img src="data:image/jpg;base64,${libro.portadabase64}" class="card-img-top" alt="..." style="padding:5%">
                                                         <div class="card-body">
-                                                            <p class="card-text"><strong>${libro.titulo}</strong><br>
-                                                                ${libro.descripcion}</p>
+                                                            <p>ISBN: ${libro.isbn} </p>
+                                                            <form action="Libro?accion=detalleLibro" method="POST">
+                                                                <input type="hidden" name="ISBN" value='${libro.getIsbn()}'>
+                                                                <button class="btn btn-outline-info mt-3" type="submit" name="verDetalle" id="button-addon2">VER MÁS</button>
+                                                            </form>
                                                         </div>
-                                                        <form action="Libro?accion=detalleLibro" method="POST">
-                                                            <input type="hidden" name="ISBN" value='${libro.getIsbn()}'>
-                                                            <button class="btn btn-outline-info mt-3" type="submit" name="verDetalle" id="button-addon2">VER MÁS</button>
-                                                        </form>
                                                     </div>
                                                 </div>
                                             </c:forEach>
+
                                         </div>
                                     </div>
                                 </div>
+                            </div>
+                        </div>
+                        <div class="row d-flex align-items-center" style="background-color: whitesmoke; margin: 3rem">
+                            <div class="col-md-2 col-sm-12 d-flex justify-content-left mt-2 mb-3">
+                                <img width="50%" src="foto/book-default.jpg" alt="alt" style="margin:0; padding: 0"/>
+                            </div>
+                            <div class="col-md-8 col-sm-12">
+                                <article>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed luctus leo non sem eleifend ornare. Donec in tellus in dui pretium vehicula. Vivamus eleifend risus finibus convallis tincidunt. Quisque vitae viverra nibh, ut mollis lacus. Aenean ac arcu non magna rhoncus accumsan vitae id lorem. Interdum et malesuada fames ac ante ipsum primis in faucibus. Aenean gravida justo sit amet tempor gravida. In eu massa diam.</p>
+                                </article>
                             </div>
                         </div>
 
@@ -189,13 +189,11 @@
 
             </center>
 
-            <!--FOOTER-->
-
-            <jsp:include page="includes/footer.jsp" />
 
 
 
         </main>
+        <jsp:include page="includes/footer.jsp"/>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
     </body>
 

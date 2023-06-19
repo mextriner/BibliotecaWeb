@@ -15,7 +15,7 @@
         <title> Libro: <%= libro.getTitulo()%>
         </title>
     </head>
-    <body class="bg-secondary">
+    <body class="text-light" style = "margin-top:8rem">
         <!--LA BARRA DE NAVEGACION-->
         <jsp:include page="includes/navbar.jsp" />
 
@@ -86,31 +86,9 @@
         </div>
     </div>
     <!--AQUÍ VAN LAS CARDS-->
+    <!--FOOTER-->
+    <jsp:include page="includes/footer.jsp" />
 
-    <div class="container-fluid">
-        <div class="row justify-content-center mt-3 pt-2 pb-2 bg-secondary">
-            <h4 style="font-family:monospace; font-size : 46px; color: aliceblue;">MIS ÚLTIMOS LIBROS
-            </h4>
-            <div class="col-sm-12 col-md-2">
-
-                <div class="card bg-dark text-light" style="width: 18rem;">
-                    <img src="<?php echo $lib['portada']; ?>" alt="..." style="border-radius:5%;">
-                    <div class="card-body">
-                        <p class="card-text"><strong><?php echo $lib['titulo']; ?></strong>
-                            <?php echo $lib['descripcion']; ?></p>
-                    </div>
-                </div>
-                <button class="btn-info" name="devolver">DEVOLVER</button>
-                <?php
-                }
-                ?>
-            </div>
-
-            <!--FOOTER-->
-            <jsp:include page="includes/footer.jsp" />
-
-        </div>
-    </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
 </body>
 

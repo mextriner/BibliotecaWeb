@@ -21,9 +21,9 @@
 %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<div class="container-fluid bg-secondary" style="padding:0;width:100%;">
+<div class="container-fluid bg-dark fixed-top" style="padding:0;width:100%;">
     <nav class="navbar navbar-expand-lg navbar-light ">
-        <div class="container-fluid">
+        <div class="container-fluid" style="margin-left:5rem; margin-right:5rem">
             <a class="navbar-brand" href="Libro?accion=listar"><img src="foto/bibliLogoRec.png" alt="" style="width:35% ;"></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <div class="bg-ligth">
@@ -130,7 +130,7 @@
                                     <option value=1>SÍ</option>
                                 </select>
 
-                                <button class="btn btn-outline-info" style="width:20%;" type="submit" id="button-addon2">Buscar</button>
+                                <button class="btn btn-outline-info" style="width:20%;" type="submit" id="button-addon2"><i class="fa-solid fa-magnifying-glass"></i>Buscar</button>
                             </div>                                  
                         </form>
                     </li>
@@ -138,11 +138,12 @@
                 </ul>
                 <form method="post" action="CerrarSesion">
                     <input type="hidden" value="1" name="cerrar">
-                    <button class="btn btn-danger" type="submit" value="1" id="button-addon2">CERRAR SESION</button>
+                    <button class="btn btn-danger" type="submit" value="1" id="button-addon2"><i class="fa-solid fa-right-from-bracket"></i> CERRAR SESION</button>
                 </form>
             </div>
         </div>
     </nav>
 </div>
+<hr style="border-top: 1px ivory">
 
 

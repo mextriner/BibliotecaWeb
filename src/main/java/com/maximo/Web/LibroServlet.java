@@ -137,7 +137,6 @@ public class LibroServlet extends HttpServlet {
                 System.out.println(i.getPortadabase64());
             }
         }
-        System.out.println("libros: " + libros);
         request.setAttribute("libros", libros);
         request.getRequestDispatcher("/TablaLibro.jsp").forward(request, response);
 
@@ -381,14 +380,14 @@ public class LibroServlet extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-    
-    private void portadaToBase64(Libro libro){
+
+    private void portadaToBase64(Libro libro) {
         byte[] imagen = libro.getPortada();
-            if (imagen != null) {
-                String portadaBase64 = Base64.getEncoder().encodeToString(imagen);
-                libro.setPortadabase64(portadaBase64);
-                System.out.println(libro.getPortadabase64());
-            }
+        if (imagen != null) {
+            String portadaBase64 = Base64.getEncoder().encodeToString(imagen);
+            libro.setPortadabase64(portadaBase64);
+            System.out.println(libro.getPortadabase64());
+        }
     }
 
     private void accionDefault(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

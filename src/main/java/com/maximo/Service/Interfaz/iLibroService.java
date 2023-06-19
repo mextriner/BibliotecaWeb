@@ -18,7 +18,7 @@ import javax.ejb.Local;
  */
 @Local
 public interface iLibroService {
-    
+
     public List<Libro> findAllLibro();
 
     public Libro findByIsbn(Libro libro);
@@ -28,17 +28,17 @@ public interface iLibroService {
     public List<Libro> findByFechaPublicacion(Libro libro);
 
     public List<Libro> findByBestSeller(Libro libro);
-    
+
     public List<Libro> buscadorLibroBestseller(String bus, short bestseller);
-    
+
     public List<Libro> buscadorLibro(String bus);
 
     public List<Autor> findAutorByLibro(Libro libro);
 
     public List<Categoria> findCategoriaByLibro(Libro libro);
-    
+
     public List<Unidad> findUnidadByLibro(Libro libro);
-    
+
     public void insertarLibro(Libro libro);
 
     public void updateLibro(Libro libro);

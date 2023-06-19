@@ -4,6 +4,7 @@
     Author     : Maximo
 --%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@page import="com.maximo.Dominio.Libro"%>
 <%
     Libro libro = (Libro) request.getAttribute("libro");
@@ -16,13 +17,13 @@
         <title><%= libro.getTitulo()%>
         </title>
     </head>    
-    <body>
+    <body style = "margin-top:8rem">
 
         <jsp:include page="includes/navbar.jsp"/>
-        <div class="row align-items-center mt-3 mb-3">
+        <div class="row align-items-center mt-3 mb-3" style="margin: 5rem">
             <div class="col-md-6 col-sm-12 text-center">
 
-                <h1><%=libro.getTitulo()%></h1>
+                <strong><h1><%=libro.getTitulo()%></h1></strong>
 
                 <c:choose>
                     <c:when test="${empty libro.getPortadabase64()}">
@@ -38,12 +39,32 @@
             </div>
             <div class="col-sm-12 col-md-6 text-center">
                 <p>UNIDADES:        <%=libro.getUnidadList().size()%></p>
-                <div class="mb-3" style="height:120px;">
-                    <p>ISBN:        <%= libro.getIsbn()%></p>
-                    <p>DESCRIPCIÓN: <%= libro.getDescripcion()%></p>
+                <div class="mb-5">
+                    <h1><strong>ISBN:        <%= libro.getIsbn()%></strong></h1>
+                    <div class="mb-5"><strong>SINOPSIS</strong>: </br><%= libro.getDescripcion()%></div>
                 </div>
+                <div>
+                    <h3>FECHA DE PUBLICACIÓN:</h3>
+                    <p><fmt:formatDate value="<%= libro.getFechaPublicacion()%>" pattern="yyyy-MM-dd"/></p>
+                </div>
+                <div class="mt-5 mb-2">
+                    <h3>CATEGORÍAS</h3>
+                    <div class="row d-flex justify-content-center" >
+                        <c:forEach items="<%= libro.getCategoriaList()%>" var="categoria">
+                            <div class="col-md-2 col-sm-12 text-center" >
+                                <span class="badge bg-primary">${categoria.nombre}</span>
 
+                            </div>
+                        </c:forEach>
+                    </div>
+                </div>
+                <div class="mt-3 mb-2">
+                    <h3>AUTORES</h3>
+                    <c:forEach items="<%= libro.getAutorList()%>" var="autor">
+                        <div><p>${autor.nombre} ${autor.apellido}</p></div>
+                    </c:forEach>
 
+                </div>
             </div>
             <div class="row d-flex p-5">
                 <div class="col-sm-12 col-md-12 p-5">
@@ -75,8 +96,16 @@
                                     </c:if>
                                 </td>
                                 <th scope="row">${unidad.libroISBN.getIsbn()}</th>
-                                <th scope="row">${unidad.idUnidad}</th>
-                                <td> ${unidad.estado}</td>
+
+                                <td> ${unidad.idUnidad}</td>
+                                <c:choose>
+                                    <c:when test="${unidad.estado == 1}">
+                                        <th scope="row">Disponible</th>
+                                        </c:when>
+                                        <c:otherwise>
+                                        <th scope="row">No disponible</th>
+                                        </c:otherwise>
+                                    </c:choose>
 
                             </tr>
 

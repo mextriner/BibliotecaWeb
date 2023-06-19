@@ -7,7 +7,7 @@
         <title>Editoriales
         </title>
     </head>
-    <body>
+    <body style = "margin-top:8rem">
         <jsp:include page="includes/navbar.jsp"/>
 
         <section>
@@ -42,6 +42,7 @@
                 </div>
 
         </section>
+        <jsp:include page="includes/footer.jsp"/>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
     </body>
 

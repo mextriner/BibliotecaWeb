@@ -8,13 +8,13 @@
         <title> Nuevo libro
         </title>
     </head>
-    <body class="bg-secondary text-light" style="font-family:monospace;">
+    <body style = "margin-top:8rem">
         <!--LA BARRA DE NAVEGACION-->
         <jsp:include page="includes/navbar.jsp" />
 
 
         <!---->
-        <div class="container-fluid bg-dark">
+        <div class="container-fluid bg-dark text-light">
             <!--en esta linea se reparten los elementos-->
 
             <form method="POST" action="Libro?accion=insertar" enctype="multipart/form-data">
@@ -22,7 +22,7 @@
                 <div class="row d-flex justify-content-center">
 
                     <div class="col-md-4 col-sm-12 mb-3 mt-4">
-                        <h1 style="font-size: 30px; ;"><strong>REGISTRO</strong></h1>
+                        <h1 style="font-size: 30px; ;"><strong>REGISTRO LIBRO <i class="fa-solid fa-book"></i></strong></h1>
 
                         <label for="exampleFormControlInput1" class="form-label">Libro</label>
                         <input type="text" class="form-control" name="Titulo" placeholder="Título">
@@ -169,6 +169,7 @@
 
 
         </div>
+        <jsp:include page="includes/footer.jsp"/>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
     </body>
 

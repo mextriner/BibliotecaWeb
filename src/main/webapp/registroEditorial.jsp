@@ -12,14 +12,14 @@
 <!DOCTYPE html>
 <html lang="en">
     <jsp:include page="includes/head.jsp"/>
-    <body class="bg-secondary" style="font-family:monospace;">
+    <body style = "margin-top:8rem">
         <jsp:include page="includes/navbar.jsp"/>
-        <div class="container-fluid bg-dark align-item-center">
+        <div class="container-fluid bg-dark text-light align-item-center">
             <!--en esta linea se reparten los elementos-->
             <div class="row d-flex justify-content-center">
-                <div class="col-sm-12 col-md-4 mt-3 mb-3 text-light">
+                <div class="col-sm-12 col-md-4 mt-3 mb-3">
                     <form method="POST" action="Editorial?accion=insertar">
-                        <h1 style="font-size: 30px; ;"><strong>REGISTRO EDITORIAL</strong></h1>
+                        <h1 style="font-size: 30px; ;"><strong>REGISTRO EDITORIAL </strong> <i class="fa-solid fa-typewriter"></i></h1>
                         <div class="mb-3">
                             <label for="exampleFormControlInput1" class="form-label">Editorial</label>
                             <input type="text" class="form-control" name="nombre" placeholder="Nombre">
@@ -34,14 +34,11 @@
                             <button class="btn btn-outline-success Hadow rounded border" type="submit">REGISTRARSE</button>
 
                         </div>
-
                     </form>
                 </div>
-
-
             </div>
         </div>
+        <jsp:include page="includes/footer.jsp"/>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
-
     </body>
 </html>

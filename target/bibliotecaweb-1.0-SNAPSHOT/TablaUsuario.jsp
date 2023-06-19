@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -8,7 +9,7 @@
         </title>
     </head>
     <jsp:include page="includes/navbar.jsp"/>
-    <body>
+    <body style = "margin-top:8rem">
         <h1>BIENVENIDO: </h1>
 
         <div class="row d-flex justify-content-center px-5">
@@ -31,12 +32,13 @@
                             <td style="border: solid black 2px;">${usuario.getNombre()}</td>
                             <td style="border: solid black 2px;">${usuario.getApellido()}</td>
                             <td style="border: solid black 2px;">${usuario.getDireccion()}</td>
-                            <td style="border: solid black 2px;">${usuario.getFechaNac().getYear()}</td>
+                            <td style="border: solid black 2px;"><fmt:formatDate value="${usuario.getFechaNac()}" pattern="yyyy-MM-dd"/></td>
                         </tr>
                     </c:forEach>
 
                 </table>
-            </div>        
+            </div>    
+            <jsp:include page="includes/footer.jsp"/>
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
 
         </div>

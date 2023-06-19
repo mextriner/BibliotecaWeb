@@ -28,15 +28,15 @@ public interface iLibroDao {
     public List<Libro> findByBestSeller(Libro libro);
 
     public List<Libro> buscadorLibroBestseller(String bus, short bestseller);
-    
+
     public List<Libro> buscadorLibro(String bus);
-    
+
     public List<Autor> findAutorByLibro(Libro libro);
 
     public List<Categoria> findCategoriaByLibro(Libro libro);
-    
+
     public List<Unidad> findUnidadByLibro(Libro libro);
-    
+
     public void insertarLibro(Libro libro);
 
     public void updateLibro(Libro libro);

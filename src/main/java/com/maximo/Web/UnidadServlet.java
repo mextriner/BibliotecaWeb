@@ -121,9 +121,9 @@ public class UnidadServlet extends HttpServlet {
 
     protected void procesarPrestamo(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
         final int id = Integer.valueOf(request.getParameter("idUnidad"));
-        
+
         final Unidad idUnidad = new Unidad(id);
 
         Unidad unidad = (unidadService.findByIdUnidad(idUnidad));
@@ -139,16 +139,21 @@ public class UnidadServlet extends HttpServlet {
             prestamo.setUnidadidUnidad(unidad);
             prestamo.setUsuarioidUsuario(usuario);
             usuarioHasUnidadService.insertarUsuarioHasUnidad(prestamo);
+            unidad.setEstado((short) 0);
+            unidadService.updateUnidad(unidad);
+            List <Unidad> carrito = (List <Unidad>)sesion.getAttribute("carrito");
+            carrito.remove(unidad);
             request.getRequestDispatcher("Libro?accion=default").forward(request, response);
         }
 
     }
+    
 
     protected void unidadesPorIsbn(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
         Object libro = (Libro) request.getAttribute("libro");
-        
+
         Libro isbn = (Libro) libro;
 
         List<Unidad> unidades = unidadService.findByLibroISBN(isbn);

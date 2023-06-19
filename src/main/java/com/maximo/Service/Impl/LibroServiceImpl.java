@@ -34,57 +34,57 @@ public class LibroServiceImpl implements iLibroService {
     }
 
     @Override
-    public List<Libro> findByTitulo(Libro libro){
+    public List<Libro> findByTitulo(Libro libro) {
         return libroDao.findByTitulo(libro);
     }
 
     @Override
-    public List<Libro> findByFechaPublicacion(Libro libro){
+    public List<Libro> findByFechaPublicacion(Libro libro) {
         return libroDao.findByFechaPublicacion(libro);
     }
 
     @Override
-    public List<Libro> buscadorLibroBestseller(String bus, short bestseller){
-        return libroDao.buscadorLibroBestseller(bus,bestseller);
+    public List<Libro> buscadorLibroBestseller(String bus, short bestseller) {
+        return libroDao.buscadorLibroBestseller(bus, bestseller);
     }
-    
+
     @Override
-    public List<Libro> buscadorLibro(String bus){
+    public List<Libro> buscadorLibro(String bus) {
         return libroDao.buscadorLibro(bus);
     }
-    
+
     @Override
-    public List<Libro> findByBestSeller(Libro libro){
+    public List<Libro> findByBestSeller(Libro libro) {
         return libroDao.findByBestSeller(libro);
     }
 
     @Override
-    public List<Autor> findAutorByLibro(Libro libro){
+    public List<Autor> findAutorByLibro(Libro libro) {
         return libroDao.findAutorByLibro(libro);
     }
 
     @Override
-    public List<Categoria> findCategoriaByLibro(Libro libro){
+    public List<Categoria> findCategoriaByLibro(Libro libro) {
         return libroDao.findCategoriaByLibro(libro);
     }
 
     @Override
-    public List<Unidad> findUnidadByLibro(Libro libro){
+    public List<Unidad> findUnidadByLibro(Libro libro) {
         return libroDao.findUnidadByLibro(libro);
     }
-    
+
     @Override
-    public void insertarLibro(Libro libro){
+    public void insertarLibro(Libro libro) {
         libroDao.insertarLibro(libro);
     }
 
     @Override
-    public void updateLibro(Libro libro){
+    public void updateLibro(Libro libro) {
         libroDao.updateLibro(libro);
     }
 
     @Override
-    public void deleteLibro(Libro libro){
+    public void deleteLibro(Libro libro) {
         libroDao.deleteLibro(libro);
     }
 }

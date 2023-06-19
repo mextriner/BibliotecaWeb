@@ -24,14 +24,17 @@
     <jsp:include page="includes/navbar.jsp"/>
 
 
-    <body style="font-family:monospace;">
+    <body style = "margin-top:8rem">
         <div class="container-fluid">
             <div class="row" style="padding:100px;">
                 <h1>MI CARRITO <i class="fa-solid fa-cart-shopping"></i></h1>
                 <p class="text-danger bg-light" style="font-size:50px"><strong><%= msj%></strong></p>
                         <c:if test="${carrito != null}">
-                    <table>
+                    <table class="table">
                         <tr>
+                            <th scope="col">
+
+                            </th>
                             <th scope="col">
 
                             </th>
@@ -50,9 +53,14 @@
                                 <td>
                                     <form action="Unidad?accion=procesar" method="POST">
                                         <input type="hidden" value="${unidad.idUnidad}" name="idUnidad">
-                                        <button class="btn btn-info">ALQUILAR</button>
+                                        <button class="btn btn-info">SOLICITAR PRÉSTAMO</button>
                                     </form>
+                                </td>
+                                <td>
+                                    <form action="Unidad?accion=procesar" method="POST">
+                                        <button class="btn btn-danger"><i class="fa-solid fa-square-minus"></i> QUITAR</button>
 
+                                    </form>
                                 </td>
                                 <th scope="row">${unidad.libroISBN.getIsbn()}</th>
                                 <th scope="row">${unidad.idUnidad}</th>
@@ -71,6 +79,7 @@
 
 
 
+        <jsp:include page="includes/footer.jsp"/>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
     </body>
 </html>
