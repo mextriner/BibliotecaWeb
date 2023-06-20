@@ -6,21 +6,14 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<div class="container-fluid mt-3  mb-3">
-    <div class="d-flex justify-content-center">
-        <table class="table table-dark table-striped">
-            <tr class="text-center">
-                <th><a class="nav-link active text-light" aria-current="page" href="#">ACERCA DE NOSOTROS</a></th>
-                <th><a class="nav-link text-light" href="#">AYÚDANOS A MEJORAR</a></th>
-                <th><a class="nav-link disabled text-light" href="#" tabindex="-1" aria-disabled="true">ASISTENCIA</a></th>
-                <th><a class="nav-link disabled text-light" href="#" tabindex="-1" aria-disabled="true">ESTADO DEL SERVIDOR</a></th>
-            </tr>
-            <tr class="text-center">
-                <th><i class="fa-brands fa-facebook"></i></th>
-                <th><i class="fa-brands fa-instagram"></i></th>
-                <th><i class="fa-brands fa-twitter"></i></th>
-                <th><i class="fa-brands fa-youtube"></i></th>
-            </tr>
-        </table>
-    </div>
-</div>
+<div class="b-example-divider" style="background-color: lightgray ; height: 3rem;border-bottom: black 1px;border-top: black 1px;"></div>
+<footer class="py-3 fixed-bot my-4">
+    <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+        <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Home</a></li>
+        <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Features</a></li>
+        <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Pricing</a></li>
+        <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">FAQs</a></li>
+        <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">About</a></li>
+    </ul>
+    <p class="text-center text-muted">© 2021 Company, Inc</p>
+</footer>

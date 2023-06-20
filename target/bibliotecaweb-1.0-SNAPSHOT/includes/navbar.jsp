@@ -106,12 +106,12 @@
                             </ul>
                         </li>
                     </c:if>
-                    <li class="nav-item dropdown" style="margin-left:5px;">
-                        <a class="nav-link text-light" href="Libro?accion=listar" id="navbarDropdown" role="button">
-                            Libros <i class="fa-solid fa-book-bookmark"></i>
-                        </a>
-                    </li>
                     <c:if test="<%=!isAdmin%>">
+                        <li class="nav-item dropdown" style="margin-left:5px;">
+                            <a class="nav-link text-light" href="Libro?accion=listar" id="navbarDropdown" role="button">
+                                Libros <i class="fa-solid fa-book-bookmark"></i>
+                            </a>
+                        </li>
                         <li class="nav-item dropdown" style="margin-left:5px;">
                             <a class="nav-link text-light" href="Usuario?accion=carrito" id="navbarDropdown" role="button">
                                 Mi carrito <i class="fa-solid fa-cart-shopping"></i>

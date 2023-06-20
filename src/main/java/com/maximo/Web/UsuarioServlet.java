@@ -176,8 +176,8 @@ public class UsuarioServlet extends HttpServlet {
                 if (usuarioService.findByIdUsuario(usuario) != null) {
                     usuario = usuarioService.findByIdUsuario(usuario);
                     if (usuario.getClave().equals(clave)) {
-                        sesion.setAttribute("usuario", user);
-                        if (user.equals("admin")) {
+                        sesion.setAttribute("usuario", usuario.getIdUsuario());
+                        if (usuario.getIdUsuario().equals("admin")) {
                             request.getRequestDispatcher("Libro?accion=listar").forward(request, response);
                         } else {
                             request.getRequestDispatcher("Libro?accion=defaultaction").forward(request, response);
@@ -230,6 +230,8 @@ public class UsuarioServlet extends HttpServlet {
             carrito = new ArrayList<>();
             carrito.add(unidad);
             sesion.setAttribute("carrito", carrito);
+        } else if (carrito.contains(unidad)) {
+            request.getRequestDispatcher("Libro?accion=default").forward(request, response);
         } else if (carrito.size() < 6) {
             carrito.add(unidad);
         } else if (carrito.size() > 5) {

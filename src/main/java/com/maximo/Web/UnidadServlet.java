@@ -98,6 +98,9 @@ public class UnidadServlet extends HttpServlet {
                 case "procesar":
                     this.procesarPrestamo(request, response);
                     break;
+                case "quitar":
+                    this.quitarUnidad(request, response);
+                    break;
                 case "unidadesPorIsbn":
                     this.unidadesPorIsbn(request, response);
                     break;
@@ -141,13 +144,26 @@ public class UnidadServlet extends HttpServlet {
             usuarioHasUnidadService.insertarUsuarioHasUnidad(prestamo);
             unidad.setEstado((short) 0);
             unidadService.updateUnidad(unidad);
-            List <Unidad> carrito = (List <Unidad>)sesion.getAttribute("carrito");
+            List<Unidad> carrito = (List<Unidad>) sesion.getAttribute("carrito");
             carrito.remove(unidad);
             request.getRequestDispatcher("Libro?accion=default").forward(request, response);
         }
 
     }
-    
+
+    protected void quitarUnidad(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
+        final int id = Integer.valueOf(request.getParameter("idUnidad"));
+
+        final Unidad idUnidad = new Unidad(id);
+
+        Unidad unidad = (unidadService.findByIdUnidad(idUnidad));
+        HttpSession sesion = request.getSession();
+        List<Unidad> carrito = (List<Unidad>) sesion.getAttribute("carrito");
+        carrito.remove(unidad);
+        request.getRequestDispatcher("/miCarrito.jsp").forward(request, response);
+    }
 
     protected void unidadesPorIsbn(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

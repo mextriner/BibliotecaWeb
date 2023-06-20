@@ -34,7 +34,6 @@ import javax.validation.constraints.Size;
  *
  * @author Maximo
  */
-
 @Entity
 @Table(name = "libro")
 @NamedQueries({
@@ -47,7 +46,7 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "Libro.findByBestSeller", query = "SELECT l FROM Libro l WHERE l.bestSeller = :bestSeller"),
     @NamedQuery(name = "Libro.findByPortada", query = "SELECT l FROM Libro l WHERE l.portada = :portada")})
 public class Libro implements Serializable {
-    
+
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -85,7 +84,7 @@ public class Libro implements Serializable {
     private List<Unidad> unidadList;
     @Transient
     private String portadabase64;
-    
+
     public Libro() {
     }
 
@@ -93,8 +92,6 @@ public class Libro implements Serializable {
         this.bestSeller = bestSeller;
     }
 
-    
-    
     public Libro(String isbn, String titulo, Date fechaPublicacion, Short bestSeller, byte[] portada, String descripcion, Editorial editorialidEditorial) {
         this.isbn = isbn;
         this.titulo = titulo;
@@ -125,8 +122,6 @@ public class Libro implements Serializable {
     public void setPortadabase64(String portadabase64) {
         this.portadabase64 = portadabase64;
     }
-    
-    
 
     public Libro(String isbn, String titulo) {
         this.isbn = isbn;
@@ -240,8 +235,6 @@ public class Libro implements Serializable {
         }
         return true;
     }
-
-
 
     @Override
     public String toString() {

@@ -57,7 +57,8 @@
                                     </form>
                                 </td>
                                 <td>
-                                    <form action="Unidad?accion=procesar" method="POST">
+                                    <form action="Unidad?accion=quitar" method="POST">
+                                        <input type="hidden" value="${unidad.idUnidad}" name="idUnidad">
                                         <button class="btn btn-danger"><i class="fa-solid fa-square-minus"></i> QUITAR</button>
 
                                     </form>
@@ -79,7 +80,7 @@
 
 
 
-        <jsp:include page="includes/footer.jsp"/>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
     </body>
+    <jsp:include page="includes/footer.jsp"/>
 </html>

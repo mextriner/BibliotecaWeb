@@ -2,6 +2,7 @@
 <%@page import="com.maximo.Dominio.Libro"%>
 <%@page import="com.maximo.Dominio.Usuario"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <%
@@ -39,7 +40,7 @@
 
 
                             <div class="mb-3">
-                                <label for="exampleFormControlInput1" class="form-label">Fecha Publicación: <%= libro.getFechaPublicacion()%></label>
+                                <label for="exampleFormControlInput1" class="form-label">Fecha Publicación: <p><fmt:formatDate value="<%= libro.getFechaPublicacion()%>" pattern="yyyy-MM-dd"/></p></label>
                                 <input type="date" class="form-control" name="fecha" placeholder="Fecha" required>
                             </div>
                             <div class="mb-3">

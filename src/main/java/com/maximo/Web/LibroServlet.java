@@ -24,7 +24,9 @@ import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Base64;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -137,8 +139,53 @@ public class LibroServlet extends HttpServlet {
                 System.out.println(i.getPortadabase64());
             }
         }
-        request.setAttribute("libros", libros);
+        int[] numPrest = this.prestamos(libros);
+        LinkedHashMap<Libro, Integer> librosOrdenados = this.LibrosOrdenados(libros, numPrest);
+        request.setAttribute("libros", librosOrdenados);
         request.getRequestDispatcher("/TablaLibro.jsp").forward(request, response);
+
+    }
+
+    private int[] prestamos(List<Libro> libros) {
+        int[] numPrest = new int[libros.size()];
+        int index = 0;
+        for (Libro i : libros) {
+            int x = 0;
+            for (Unidad u : i.getUnidadList()) {
+                x += u.getUsuarioHasUnidadList().size();
+            }
+            numPrest[index] = x;
+            index++;
+        }
+        return numPrest;
+    }
+
+    private LinkedHashMap<Libro, Integer> LibrosOrdenados(List<Libro> libros, int[] num) {
+        this.ordenDesc(libros, num);
+        LinkedHashMap<Libro, Integer> numPrest = new LinkedHashMap<>();
+        for (int i = 0; i < libros.size(); i++) {
+            numPrest.put(libros.get(i), num[i]);
+        }
+        return numPrest;
+    }
+
+    private void ordenDesc(List<Libro> libros, int[] num) {
+        int temp = 0;
+        Libro libroTemp = null;
+        for (int i = 0; i < (num.length - 1); i++) {
+            for (int j = 0; j < num.length - i - 1; j++) {
+                if (num[j] < num[j + 1]) {
+                    temp = num[j];
+                    libroTemp = libros.get(j);
+
+                    num[j] = num[j + 1];
+                    libros.set(j, libros.get(j + 1));
+
+                    num[j + 1] = temp;
+                    libros.set(j + 1, libroTemp);
+                }
+            }
+        }
 
     }
 
@@ -160,8 +207,9 @@ public class LibroServlet extends HttpServlet {
             request.setAttribute("vacio", msj);
             request.getRequestDispatcher("/miCarrito.jsp").forward(request, response);
         } else {
-            System.out.println("libros: " + libros);
-            request.setAttribute("libros", libros);
+            int[] numPrest = this.prestamos(libros);
+            LinkedHashMap<Libro, Integer> librosOrdenados = this.LibrosOrdenados(libros, numPrest);
+            request.setAttribute("libros", librosOrdenados);
             request.getRequestDispatcher("/miCarrito.jsp").forward(request, response);
         }
 
@@ -187,8 +235,9 @@ public class LibroServlet extends HttpServlet {
                     System.out.println(i.getPortadabase64());
                 }
             }
-            System.out.println("libros: " + libros);
-            request.setAttribute("libros", libros);
+            int[] numPrest = this.prestamos(libros);
+            LinkedHashMap<Libro, Integer> librosOrdenados = this.LibrosOrdenados(libros, numPrest);
+            request.setAttribute("libros", librosOrdenados);
             request.getRequestDispatcher("/TablaLibro.jsp").forward(request, response);
         } else if (bus.equals("") && !p.equals("BESTSELLER")) {
             short bestseller = Short.valueOf(request.getParameter("bestseller"));
@@ -206,8 +255,10 @@ public class LibroServlet extends HttpServlet {
                     System.out.println(i.getPortadabase64());
                 }
             }
-            System.out.println("libros: " + libros);
-            request.setAttribute("libros", libros);
+
+            int[] numPrest = this.prestamos(libros);
+            LinkedHashMap<Libro, Integer> librosOrdenados = this.LibrosOrdenados(libros, numPrest);
+            request.setAttribute("libros", librosOrdenados);
             request.getRequestDispatcher("/TablaLibro.jsp").forward(request, response);
         } else if (!bus.equals("") && !p.equals("BESTSELLER")) {
             short bestseller = Short.valueOf(request.getParameter("bestseller"));
@@ -224,8 +275,9 @@ public class LibroServlet extends HttpServlet {
                     System.out.println(i.getPortadabase64());
                 }
             }
-            System.out.println("libros: " + libros);
-            request.setAttribute("libros", libros);
+            int[] numPrest = this.prestamos(libros);
+            LinkedHashMap<Libro, Integer> librosOrdenados = this.LibrosOrdenados(libros, numPrest);
+            request.setAttribute("libros", librosOrdenados);
             request.getRequestDispatcher("/TablaLibro.jsp").forward(request, response);
         } else if (bus.equals("") && p.equals("BESTSELLER")) {
             this.listarLibro(request, response);
@@ -252,8 +304,9 @@ public class LibroServlet extends HttpServlet {
                     System.out.println(i.getPortadabase64());
                 }
             }
-            System.out.println("libros: " + libros);
-            request.setAttribute("libros", libros);
+            int[] numPrest = this.prestamos(libros);
+            LinkedHashMap<Libro, Integer> librosOrdenados = this.LibrosOrdenados(libros, numPrest);
+            request.setAttribute("libros", librosOrdenados);
             request.getRequestDispatcher("/index.jsp").forward(request, response);
         } else if (bus.equals("") && !p.equals("BESTSELLER")) {
             short bestseller = Short.valueOf(request.getParameter("bestseller"));
@@ -271,8 +324,9 @@ public class LibroServlet extends HttpServlet {
                     System.out.println(i.getPortadabase64());
                 }
             }
-            System.out.println("libros: " + libros);
-            request.setAttribute("libros", libros);
+            int[] numPrest = this.prestamos(libros);
+            LinkedHashMap<Libro, Integer> librosOrdenados = this.LibrosOrdenados(libros, numPrest);
+            request.setAttribute("libros", librosOrdenados);
             request.getRequestDispatcher("/index.jsp").forward(request, response);
         } else if (!bus.equals("") && !p.equals("BESTSELLER")) {
             short bestseller = Short.valueOf(request.getParameter("bestseller"));
@@ -289,8 +343,9 @@ public class LibroServlet extends HttpServlet {
                     System.out.println(i.getPortadabase64());
                 }
             }
-            System.out.println("libros: " + libros);
-            request.setAttribute("libros", libros);
+            int[] numPrest = this.prestamos(libros);
+            LinkedHashMap<Libro, Integer> librosOrdenados = this.LibrosOrdenados(libros, numPrest);
+            request.setAttribute("libros", librosOrdenados);
             request.getRequestDispatcher("/index.jsp").forward(request, response);
         } else if (bus.equals("") && p.equals("BESTSELLER")) {
             this.listarLibro(request, response);
@@ -399,8 +454,9 @@ public class LibroServlet extends HttpServlet {
                 portadaToBase64(i);
             }
         }
-        System.out.println("libros: " + libros);
-        request.setAttribute("libros", libros);
+        int[] numPrest = this.prestamos(libros);
+        LinkedHashMap<Libro, Integer> librosOrdenados = this.LibrosOrdenados(libros, numPrest);
+        request.setAttribute("libros", librosOrdenados);
         request.getRequestDispatcher("/index.jsp").forward(request, response);
     }
 

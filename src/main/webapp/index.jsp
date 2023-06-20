@@ -12,12 +12,15 @@
     if (request.getAttribute("msj") != null) {
         msj = "Resultado de: " + ((String) request.getAttribute("msj")).toUpperCase();
 
+    } else {
+        msj = "LOS MÁS SOLICITADOS";
     }
     if (sesion.getAttribute("usuario") != null) {
         user = (String) sesion.getAttribute("usuario");
     } else {
         response.sendRedirect("inicioSesion.jsp");
     }
+    boolean isAdmin = user.equals("admin");
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -112,20 +115,20 @@
             <!--AQUÍ VAN LAS CARDS-->
             <center>
                 <div class="col-sm-12 col-md-12" style="width: 100%;">
-                    <h1 style="font-family:monospace; font-size : 46px; color: aliceblue;"><%= msj%>
+                    <h1 style="color: #000 ; font-family:monospace; font-size : 46px;"><%= msj%>
                     </h1>
                     <div class="principal">
                         <!-- Swiper -->
-                        <div class="container-fluid" style="height: 650px; width:100%;border-radius: 5%;">
-                            <div class="row" style="height:100% ;">
+                        <div class="container-fluid" style="height: 650px; width:100%;border-radius: 1rem;">
+                            <div class="row" style="height:100% ;background-color: whitesmoke;">
                                 <div class="col-sm-12 col-md-12" style="height:100% ;">
                                     <div class="swiper mySwiper">
                                         <div class="swiper-wrapper">
-                                            <c:forEach items="${libros}" var="libro">
+                                            <c:forEach items="${libros.keySet()}" var="libro">
                                                 <div class="swiper-slide">
                                                     <div class="card" style="width: 25em; padding: 1rem">
                                                         <h5 class="card-title">${libro.titulo}</h5>
-                                                        <img src="data:image/jpg;base64,${libro.portadabase64}" class="card-img-top" alt="..." style="padding:5%">
+                                                        <img src="data:image/jpg;base64,${libro.portadabase64}" class="card-img-top"  style="padding:5%">
                                                         <div class="card-body">
                                                             <p>ISBN: ${libro.isbn} </p>
                                                             <form action="Libro?accion=detalleLibro" method="POST">
@@ -134,24 +137,19 @@
                                                             </form>
                                                         </div>
                                                     </div>
+                                                    <c:if test="<%= isAdmin%>">
+                                                        <div>
+                                                            <h4>${libros.get(libro)}</h4>
+                                                        </div> 
+                                                    </c:if>
                                                 </div>
                                             </c:forEach>
-
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="row d-flex align-items-center" style="background-color: whitesmoke; margin: 3rem">
-                            <div class="col-md-2 col-sm-12 d-flex justify-content-left mt-2 mb-3">
-                                <img width="50%" src="foto/book-default.jpg" alt="alt" style="margin:0; padding: 0"/>
-                            </div>
-                            <div class="col-md-8 col-sm-12">
-                                <article>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed luctus leo non sem eleifend ornare. Donec in tellus in dui pretium vehicula. Vivamus eleifend risus finibus convallis tincidunt. Quisque vitae viverra nibh, ut mollis lacus. Aenean ac arcu non magna rhoncus accumsan vitae id lorem. Interdum et malesuada fames ac ante ipsum primis in faucibus. Aenean gravida justo sit amet tempor gravida. In eu massa diam.</p>
-                                </article>
-                            </div>
-                        </div>
+
 
 
 
@@ -186,15 +184,38 @@
                         </script>
                     </div>
                 </div>
-
             </center>
+            <div style="margin:3rem;">
+                <h3>Todos los libros</h3>
+                <c:forEach items="${libros.keySet()}" var="libro">
+
+                    <div class="row d-flex align-items-center" style="background-color: whitesmoke; margin: 3rem">
+                        <div class="col-md-2 col-sm-12 d-flex justify-content-left mt-2 mb-3">
+                            <img width="180rem" style="margin:0; padding: 0" src="data:image/jpg;base64,${libro.portadabase64}">
+                        </div>
+                        <div class="col-md-8 col-sm-12">
+                            <article>
+                                <h3>${libro.titulo}. ISBN: ${libro.isbn}</h3>
+                                <p>${libro.descripcion}</p>
+                            </article>
+                        </div>
+                        <div class="col-md-2 col-sm-12">
+                            <form action="Libro?accion=detalleLibro" method="POST">
+                                <input type="hidden" name="ISBN" value='${libro.getIsbn()}'>
+                                <button class="btn btn-outline-success mt-3" type="submit" name="verDetalle" id="button-addon2">Ver más</button>
+                            </form>
+                        </div>
+                    </div>
+                </c:forEach>
+
+            </div>
 
 
 
 
         </main>
-        <jsp:include page="includes/footer.jsp"/>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
     </body>
+    <jsp:include page="includes/footer.jsp"/>
 
 </html>
