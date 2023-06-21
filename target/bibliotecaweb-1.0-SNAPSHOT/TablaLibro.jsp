@@ -7,7 +7,7 @@
     HttpSession sesion = request.getSession();
     String msj = "";
     if (request.getAttribute("msj") != null) {
-        msj = "Resultado de: " + ((String) request.getAttribute("msj")).toUpperCase();
+        msj = ((String) request.getAttribute("msj")).toUpperCase();
 
     }
     if (sesion.getAttribute("usuario") != null) {
@@ -25,6 +25,17 @@
 
         <div class="container-fluid" style="margin-top: 10rem">
             <h2><%= msj%></h2>
+            <c:if test="<%= isAdmin%>">
+                <div style="text-align: end; font-size: 3em">
+                    <span class="badge bg-warning">
+                        <a class="text-dark" href="Libro?accion=grafico">
+                            Gráfico de libros <i class="fa-solid fa-chart-simple"></i></a>
+                    </span>
+
+
+                </div>
+
+            </c:if>
             <c:forEach items="${libros.keySet()}" var="libro">
                 <div class="row d-flex align-items-center" style="background-color: whitesmoke; margin: 3rem">
                     <div class="col-md-2 col-sm-12 d-flex justify-content-left mt-2 mb-3">

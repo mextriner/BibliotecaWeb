@@ -10,23 +10,21 @@ import com.maximo.Dominio.Categoria;
 import com.maximo.Dominio.Editorial;
 import com.maximo.Dominio.Libro;
 import com.maximo.Dominio.Unidad;
+import com.maximo.Dominio.UsuarioHasUnidad;
 import com.maximo.Service.Interfaz.iAutorService;
 import com.maximo.Service.Interfaz.iCategoriaService;
 import com.maximo.Service.Interfaz.iLibroService;
 import com.maximo.Service.Interfaz.iUnidadService;
 import java.io.ByteArrayOutputStream;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Date;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Base64;
 import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -81,9 +79,12 @@ public class LibroServlet extends HttpServlet {
                 case "carrito":
                     this.carrito(request, response);
                     break;
+                case "grafico":
+                    this.graficoLibros(request, response);
+                    break;
                 default:
-                //this.accionDefault(request, response);
-                }
+                    this.accionDefault(request, response);
+            }
         } else {
             //this.accionDefault(request, response);
         }
@@ -278,6 +279,7 @@ public class LibroServlet extends HttpServlet {
             int[] numPrest = this.prestamos(libros);
             LinkedHashMap<Libro, Integer> librosOrdenados = this.LibrosOrdenados(libros, numPrest);
             request.setAttribute("libros", librosOrdenados);
+            request.setAttribute("msj", bus);
             request.getRequestDispatcher("/TablaLibro.jsp").forward(request, response);
         } else if (bus.equals("") && p.equals("BESTSELLER")) {
             this.listarLibro(request, response);
@@ -346,6 +348,7 @@ public class LibroServlet extends HttpServlet {
             int[] numPrest = this.prestamos(libros);
             LinkedHashMap<Libro, Integer> librosOrdenados = this.LibrosOrdenados(libros, numPrest);
             request.setAttribute("libros", librosOrdenados);
+            request.setAttribute("msj", bus);
             request.getRequestDispatcher("/index.jsp").forward(request, response);
         } else if (bus.equals("") && p.equals("BESTSELLER")) {
             this.listarLibro(request, response);
@@ -460,6 +463,21 @@ public class LibroServlet extends HttpServlet {
         request.getRequestDispatcher("/index.jsp").forward(request, response);
     }
 
+    private void graficoLibros(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        List<Libro> libros = libroService.findAllLibro();
+        for (Libro i : libros) {
+            byte[] imagen = i.getPortada();
+            if (imagen != null) {
+                portadaToBase64(i);
+            }
+        }
+        int[] numPrest = this.prestamos(libros);
+        LinkedHashMap<Libro, Integer> librosOrdenados = this.LibrosOrdenados(libros, numPrest);
+        request.setAttribute("libros", librosOrdenados);
+        request.getRequestDispatcher("/graficoLibro.jsp").forward(request, response);
+    }
+
     private void editarLibro(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         String isbn = request.getParameter("isbn");
@@ -488,27 +506,61 @@ public class LibroServlet extends HttpServlet {
         String e = request.getParameter("editorial");
         Editorial editorial = new Editorial(Integer.valueOf(e));
         Libro libro = new Libro(isbn, titulo, fecha, bestseller, portada, descripcion, editorial);
-        List<Unidad> unidad = new ArrayList<>();
+        List<Unidad> unidades = new ArrayList<>();
         for (int i = 0; i < u; i++) {
-            unidad.add(new Unidad((short) 1, "administración", libro));
+            unidades.add(new Unidad((short) 1, "administración", libro));
         }
 
+        List<Unidad> unidades2 = libroAnterior.getUnidadList();
         List<Autor> autores = libroAnterior.getAutorList();
         List<Categoria> categorias = libroAnterior.getCategoriaList();
 
-        libro.setUnidadList(unidad);
+        unidades.addAll(unidades2);
+
+        libro.setUnidadList(unidades);
         libro.setAutorList(autores);
         libro.setCategoriaList(categorias);
         libroService.updateLibro(libro);
         this.listarLibro(request, response);
     }
 
+    private float mediaTiempoPorLibro(Libro libro) {
+        long suma = 0;
+        int numPrestamos = 0;
+        float media = 0;
+        for (Unidad u : libro.getUnidadList()) {
+            for (UsuarioHasUnidad p : u.getUsuarioHasUnidadList()) {
+                if (p.getFechaEntrega() != null) {
+                    suma += this.diferenciaFechasSegundos(p.getFecha(), p.getFechaEntrega());
+                    numPrestamos++;
+                }
+
+            }
+        }
+
+        suma = suma / 60;
+        if (numPrestamos != 0) {
+            suma = suma / numPrestamos;
+
+        }
+        media = suma / 60;
+        return media / 60;
+    }
+
+    private float diferenciaFechasSegundos(Date fecha1, Date fecha2) {
+        long date = fecha1.getTime();
+        long date2 = fecha2.getTime();
+        float resul = Math.abs(date - date2);
+        return resul / 1000;
+    }
+
     private void verDetalleLibro(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Libro isbn = new Libro(request.getParameter("ISBN"));
         Libro libro = libroService.findByIsbn(isbn);
         portadaToBase64(libro);
+        float media = this.mediaTiempoPorLibro(libro);
+        request.setAttribute("media", String.valueOf(media));
         request.setAttribute("libro", libro);
         request.getRequestDispatcher("Unidad?accion=unidadesPorIsbn").forward(request, response);
     }
-
 }

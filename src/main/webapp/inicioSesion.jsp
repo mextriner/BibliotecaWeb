@@ -22,10 +22,10 @@
         <div style="margin: 10rem" class="container-fluid bg-dark align-item-center">
             <!--en esta linea se reparten los elementos-->
             <div class="row d-flex justify-content-center">
-                <div class="col-sm-5 col-md-4 mt-3 mb-3 text-light d-flex align-items-center">
+                <div class="col-sm-12 col-md-4 mt-3 mb-3 text-light d-flex align-items-center">
                     <img src="foto/bibliLogoRec.png" height="80%" alt="alt"/>
                 </div>
-                <div class="col-sm-5 col-md-4 mt-3 mb-3 text-light">
+                <div class="col-sm-12 col-md-4 mt-3 mb-3 text-light">
                     <form method="POST" action="Usuario?accion=sesion">
                         <h1 style="font-size: 30px; margin-top:27px;"><strong>INICIAR SESIÓN</strong></h1>¿NO TIENES CUENTA? <a class="text-light" href="registro.jsp">REGÍSTRATE</a><br>
                         <div class="mt-3 mb-3">

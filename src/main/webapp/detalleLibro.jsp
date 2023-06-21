@@ -8,6 +8,7 @@
 <%@page import="com.maximo.Dominio.Libro"%>
 <%
     Libro libro = (Libro) request.getAttribute("libro");
+    String media = request.getAttribute("media").toString();
 %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -45,7 +46,7 @@
                 </div>
                 <div>
                     <h3>FECHA DE PUBLICACIÓN:</h3>
-                    <p><fmt:formatDate value="<%= libro.getFechaPublicacion()%>" pattern="yyyy-MM-dd"/></p>
+                    <p><fmt:formatDate value="<%= libro.getFechaPublicacion()%>"  pattern="dd-MM-yyyy"/></p>
                 </div>
                 <div class="mt-5 mb-2">
                     <h3>CATEGORÍAS</h3>
@@ -66,6 +67,12 @@
 
                 </div>
             </div>
+            <div class="text-center">
+                <p>Media de horas por préstamo: <%= media%> horas / préstamo</p>
+
+            </div>
+
+
             <div class="row d-flex p-5">
                 <div class="col-sm-12 col-md-12 p-5">
 
@@ -113,6 +120,7 @@
                     </table>
                 </div>
             </div>
+
         </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
     </body>

@@ -131,17 +131,13 @@
                                                         <img src="data:image/jpg;base64,${libro.portadabase64}" class="card-img-top"  style="padding:5%">
                                                         <div class="card-body">
                                                             <p>ISBN: ${libro.isbn} </p>
+                                                            <p>${libro.unidadList.size()} unidades</p>
                                                             <form action="Libro?accion=detalleLibro" method="POST">
                                                                 <input type="hidden" name="ISBN" value='${libro.getIsbn()}'>
                                                                 <button class="btn btn-outline-info mt-3" type="submit" name="verDetalle" id="button-addon2">VER MÁS</button>
                                                             </form>
                                                         </div>
                                                     </div>
-                                                    <c:if test="<%= isAdmin%>">
-                                                        <div>
-                                                            <h4>${libros.get(libro)}</h4>
-                                                        </div> 
-                                                    </c:if>
                                                 </div>
                                             </c:forEach>
                                         </div>

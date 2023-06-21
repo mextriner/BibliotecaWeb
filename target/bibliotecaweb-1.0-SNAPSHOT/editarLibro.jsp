@@ -40,7 +40,7 @@
 
 
                             <div class="mb-3">
-                                <label for="exampleFormControlInput1" class="form-label">Fecha Publicación: <p><fmt:formatDate value="<%= libro.getFechaPublicacion()%>" pattern="yyyy-MM-dd"/></p></label>
+                                <label for="exampleFormControlInput1" class="form-label">Fecha Publicación: <p><fmt:formatDate value="<%= libro.getFechaPublicacion()%>" pattern="dd-MM-yyyy"/></p></label>
                                 <input type="date" class="form-control" name="fecha" placeholder="Fecha" required>
                             </div>
                             <div class="mb-3">
@@ -64,7 +64,7 @@
                                 <textarea class="form-control" name="descripcion" id="exampleFormControlTextarea1" rows="3" required><%= libro.getDescripcion()%></textarea>
                             </div>
                             <div class="mb-3">
-                                <label for="inputState" class="form-label">Editorial</label>
+                                <label for="inputState" class="form-label">Editorial: <%= libro.getEditorialidEditorial() %></label>
                                 <div class="form-floating">
 
                                     <select name="editorial" class="form-select" required>

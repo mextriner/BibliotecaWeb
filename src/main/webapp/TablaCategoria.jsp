@@ -22,6 +22,7 @@
                             <td>ID CATEGORIA</td>
                             <td>Nombre</td>
                             <td>Descripción</td>
+                            <td>Número de libros</td>
                             <td>Eliminar</td>
                             <td>Editar</td>
                         </tr>
@@ -30,6 +31,7 @@
                                 <td style="border: solid black 2px;">${categoria.getIdCategoria()}</td>
                                 <td style="border: solid black 2px;">${categoria.getNombre()}</td>
                                 <td style="border: solid black 2px;">${categoria.getDescripcion()}</td>
+                                <td style="border: solid black 2px;">${categoria.getLibroList().size()} libros</td>
                                 <td style="border: solid black 2px;"><a class="text-danger" href=""><i class="fa-solid fa-trash"></i></a></td>
                                 <td style="border: solid black 2px;"><a class="text-primary" href="cargarModifica?clase=categoria&categoriaId=${categoria.getIdCategoria()}"><i class="fa-solid fa-pen"></i></a></td>
 

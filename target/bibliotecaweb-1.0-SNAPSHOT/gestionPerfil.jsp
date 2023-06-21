@@ -65,7 +65,7 @@
                                 <input type="text" class="form-control" name="direccion" value="<%= usuario.getDireccion()%>" required>
                             </div>
                             <div class="mt-5 mb-5 pb-3">
-                                <label for="exampleFormControlInput1" class="form-label">Fecha de Nacimiento: <fmt:formatDate value="${usuario.getFechaNac()}" pattern="yyyy-MM-dd"/> (<%= years%> años) </label>
+                                <label for="exampleFormControlInput1" class="form-label">Fecha de Nacimiento: <fmt:formatDate value="${usuario.getFechaNac()}" pattern="dd-MM-yyyy"/> (<%= years%> años) </label>
                                 <input type="date" class="form-control" name="fechaNac" value="" required>
                             </div>
 

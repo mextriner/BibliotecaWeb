@@ -24,7 +24,7 @@
 <div class="container-fluid bg-dark fixed-top" style="padding:0;width:100%;">
     <nav class="navbar navbar-expand-lg navbar-light ">
         <div class="container-fluid" style="margin-left:5rem; margin-right:5rem">
-            <a class="navbar-brand" href="Libro?accion=listar"><img src="foto/bibliLogoRec.png" alt="" style="width:35% ;"></a>
+            <a class="navbar-brand" href="Libro?accion=default"><img src="foto/bibliLogoRec.png" style="width:35% ;"></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <div class="bg-ligth">
                     <span class="navbar-toggler-icon"></span>

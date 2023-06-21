@@ -32,7 +32,7 @@
                             <td style="border: solid black 2px;">${usuario.getNombre()}</td>
                             <td style="border: solid black 2px;">${usuario.getApellido()}</td>
                             <td style="border: solid black 2px;">${usuario.getDireccion()}</td>
-                            <td style="border: solid black 2px;"><fmt:formatDate value="${usuario.getFechaNac()}" pattern="yyyy-MM-dd"/></td>
+                            <td style="border: solid black 2px;"><fmt:formatDate value="${usuario.getFechaNac()}" pattern="dd-MM-yyyy"/></td>
                         </tr>
                     </c:forEach>
 

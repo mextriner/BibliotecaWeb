@@ -41,7 +41,7 @@
                                 <td style="border: solid black 2px;">${autor.getIdAutor()}</td>
                                 <td style="border: solid black 2px;">${autor.getNombre()}</td>
                                 <td style="border: solid black 2px;">${autor.getApellido()}</td>
-                                <td style="border: solid black 2px;"><fmt:formatDate value="${autor.getFechaNac()}" pattern="yyyy-MM-dd"/></td>
+                                <td style="border: solid black 2px;"><fmt:formatDate value="${autor.getFechaNac()}"  pattern="dd-MM-yyyy"/></td>
                                 <td style="border: solid black 2px;">${autor.getNacionalidad()}</td>
                                 <td style="border: solid black 2px;"><a class="text-danger" href=""><i class="fa-solid fa-trash"></i></a></td>
                                 <td style="border: solid black 2px;"><a class="text-primary" href="cargarModifica?clase=autor&autorId=${autor.getIdAutor()}"><i class="fa-solid fa-pen"></i></a></td>

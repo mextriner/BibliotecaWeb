@@ -1,6 +1,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
+<%
+
+    String media = request.getAttribute("media").toString();
+
+%>
+
+
 <html lang="en">
 
     <jsp:include page="includes/head.jsp"/>
@@ -17,7 +24,7 @@
 
             <!--Comenzamos a mostrar los datos-->
             <h2>Listado de PRÉSTAMOS <a class="text-dark" href="usuarioPdf.php"><i class="fa-solid fa-file-circle-plus"></i></a></h2>
-
+            <h3>Media de horas por préstamo: <%= media%> horas / préstamo</h3>
             <table>
                 <tr>
                     <th>Fecha</th>
@@ -29,22 +36,22 @@
                 </tr>
                 <c:forEach items="${prestamos}" var="prestamo">
                     <tr>
-                        <td style="border: solid black 2px;"><fmt:formatDate value="${prestamo.getFecha()}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
-                    <td style="border: solid black 2px;">${prestamo.getUnidadidUnidad().getIdUnidad()}</td>
-                    <td style="border: solid black 2px;">${prestamo.getUsuarioidUsuario().getIdUsuario()}</td>
-                    <c:choose>
-                        <c:when test="${prestamo.getFechaEntrega()!=null}">
-                            <td style="border: solid black 2px;"><fmt:formatDate value="${prestamo.getFechaEntrega()}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
+                        <td style="border: solid black 2px;"><fmt:formatDate value="${prestamo.getFecha()}" pattern="dd-MM-yyyy HH:mm:ss"/></td>
+                        <td style="border: solid black 2px;">${prestamo.getUnidadidUnidad().getIdUnidad()}</td>
+                        <td style="border: solid black 2px;">${prestamo.getUsuarioidUsuario().getIdUsuario()}</td>
+                        <c:choose>
+                            <c:when test="${prestamo.getFechaEntrega()!=null}">
+                                <td style="border: solid black 2px;"><fmt:formatDate value="${prestamo.getFechaEntrega()}" pattern="dd-MM-yyyy HH:mm:ss"/></td>
 
 
-                        </c:when>
-                        <c:otherwise>
-                            <td style="border: solid black 2px;">Sin entregar</td>
+                            </c:when>
+                            <c:otherwise>
+                                <td style="border: solid black 2px;">Sin entregar</td>
 
-                        </c:otherwise>
-                    </c:choose>
-                    <td style="border: solid black 2px;"><a class="text-danger" href=""><i class="fa-solid fa-trash"></i></a></td>
-                    <td style="border: solid black 2px;"><a class="text-primary" href=""><i class="fa-solid fa-pen"></i></a></td>
+                            </c:otherwise>
+                        </c:choose>
+                        <td style="border: solid black 2px;"><a class="text-danger" href=""><i class="fa-solid fa-trash"></i></a></td>
+                        <td style="border: solid black 2px;"><a class="text-primary" href=""><i class="fa-solid fa-pen"></i></a></td>
 
                     </tr>
                 </c:forEach>

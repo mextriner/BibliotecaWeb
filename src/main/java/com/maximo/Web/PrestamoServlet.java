@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -132,7 +133,9 @@ public class PrestamoServlet extends HttpServlet {
 
     private void listarPrestamo(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<UsuarioHasUnidad> prestamos = usuarioHasUnidad.findAll();
+        float media = this.mediaTiempoPorPrestamo(prestamos);
         request.setAttribute("prestamos", prestamos);
+        request.setAttribute("media", String.valueOf(media));
         request.getRequestDispatcher("/TablaPrestamo.jsp").forward(request, response);
     }
 
@@ -146,5 +149,24 @@ public class PrestamoServlet extends HttpServlet {
         unidad.setEstado((short) 1);
         unidadService.updateUnidad(unidad);
         request.getRequestDispatcher("cargarModifica?clase=usuario").forward(request, response);
+    }
+
+    private float mediaTiempoPorPrestamo(List<UsuarioHasUnidad> prestamos) {
+        long suma = 0;
+        float media = 0;
+        for (UsuarioHasUnidad p : prestamos) {
+            if (p.getFechaEntrega() != null) {
+                suma += this.diferenciaFechas(p.getFecha(), p.getFechaEntrega());
+            }
+        }
+        suma = suma / prestamos.size();
+        media = TimeUnit.MINUTES.convert(suma, TimeUnit.MILLISECONDS);
+        return media / 60;
+    }
+
+    private long diferenciaFechas(Date fecha1, Date fecha2) {
+        long date = fecha1.getTime();
+        long date2 = fecha2.getTime();
+        return Math.abs(date - date2);
     }
 }

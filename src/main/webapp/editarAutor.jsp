@@ -45,7 +45,7 @@
                         </div>
 
                         <div class="mb-4">
-                            <label for="exampleFormControlInput1" class="form-label"><%= autor.getFechaNac()%></label>
+                            <label for="exampleFormControlInput1" class="form-label"><fmt:formatDate value="<%= autor.getFechaNac()%>"  pattern="dd-MM-yyyy"/></label>
                             <input type="date" class="form-control" name="fecha"  placeholder="Fecha de nacimiento">
                         </div>
                         <div class="mb-3">
