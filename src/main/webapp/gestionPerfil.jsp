@@ -106,7 +106,7 @@
                                     <th>
                                         <form action="Prestamo?accion=entregar" method="post">
                                             <input type="hidden" name="prestamo" value="${prestamo.getIdPrestamo()}">
-                                            <button>ENTREGAR</button>
+                                            <button class="btn btn-outline-warning">ENTREGAR</button>
                                         </form>
                                     </th>
                                 </c:otherwise>

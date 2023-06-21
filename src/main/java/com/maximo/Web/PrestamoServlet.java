@@ -155,7 +155,7 @@ public class PrestamoServlet extends HttpServlet {
     }
 
     private float mediaTiempoPorPrestamo(List<UsuarioHasUnidad> prestamos) {
-        long suma = 0;
+        float suma = 0;
         float media = 0;
         for (UsuarioHasUnidad p : prestamos) {
             if (p.getFechaEntrega() != null) {
@@ -168,10 +168,10 @@ public class PrestamoServlet extends HttpServlet {
         return media;
     }
 
-    private long diferenciaFechas(Date fecha1, Date fecha2) {
+    private float diferenciaFechas(Date fecha1, Date fecha2) {
         final int miliAHoras = 3600000;
-        long date = fecha1.getTime();
-        long date2 = fecha2.getTime();
+        float date = fecha1.getTime();
+        float date2 = fecha2.getTime();
         return (Math.abs(date - date2)) / miliAHoras;
     }
 

@@ -118,8 +118,8 @@ public class CategoriaServlet extends HttpServlet {
     private void graficoCategoria(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         List<Categoria> categorias = categoriaService.findAllCategoria();
-        int prestamos[] = this.prestamos(categorias);
-        LinkedHashMap<Categoria, Integer> categoriasOrdendas = this.categoriasOrdenados(categorias, prestamos);
+        float prestamos[] = this.prestamos(categorias);
+        LinkedHashMap<Categoria, Float> categoriasOrdendas = this.categoriasOrdenados(categorias, prestamos);
         request.setAttribute("categorias", categoriasOrdendas);
         request.getRequestDispatcher("/graficoCategorias.jsp").forward(request, response);
     }
@@ -135,38 +135,38 @@ public class CategoriaServlet extends HttpServlet {
         this.litarCategorias(request, response);
     }
 
-    private LinkedHashMap<Categoria, Integer> categoriasOrdenados(List<Categoria> categorias, int[] num) {
+    private LinkedHashMap<Categoria, Float> categoriasOrdenados(List<Categoria> categorias, float[] num) {
         this.ordenDesc(categorias, num);
-        LinkedHashMap<Categoria, Integer> numPrest = new LinkedHashMap<>();
+        LinkedHashMap<Categoria, Float> numPrest = new LinkedHashMap<>();
         for (int i = 0; i < categorias.size(); i++) {
             numPrest.put(categorias.get(i), num[i]);
         }
         return numPrest;
     }
 
-    private int[] prestamos(List<Categoria> categorias) {
-        int[] numPrest = new int[categorias.size()];
+    private float[] prestamos(List<Categoria> categorias) {
+        float[] numPrest = new float[categorias.size()];
         int index = 0;
         for (Categoria c : categorias) {
-            int x = 0;
+            float horas = 0;
             for (Libro i : c.getLibroList()) {
                 for (Unidad u : i.getUnidadList()) {
                     for (UsuarioHasUnidad p : u.getUsuarioHasUnidadList()) {
                         if (p.getFechaEntrega() != null) {
-                            x += diferenciaFechasSegundos(p.getFecha(), p.getFechaEntrega());
+                            horas += diferenciaFechasSegundos(p.getFecha(), p.getFechaEntrega());
                         }
 
                     }
                 }
             }
-            numPrest[index] = x;
+            numPrest[index] = horas;
             index++;
         }
         return numPrest;
     }
 
-    private void ordenDesc(List<Categoria> categorias, int[] num) {
-        int temp = 0;
+    private void ordenDesc(List<Categoria> categorias, float[] num) {
+        float temp = 0;
         Categoria categoriaTemp = null;
         for (int i = 0; i < (num.length - 1); i++) {
             for (int j = 0; j < num.length - i - 1; j++) {

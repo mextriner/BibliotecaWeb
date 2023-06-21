@@ -525,7 +525,7 @@ public class LibroServlet extends HttpServlet {
     }
 
     private float mediaTiempoPorLibro(Libro libro) {
-        long suma = 0;
+        float suma = 0;
         int numPrestamos = 0;
         float media = 0;
         for (Unidad u : libro.getUnidadList()) {
@@ -538,20 +538,19 @@ public class LibroServlet extends HttpServlet {
             }
         }
 
-        suma = suma / 60;
         if (numPrestamos != 0) {
             suma = suma / numPrestamos;
 
         }
-        media = suma / 60;
-        return media / 60;
+        media = suma;
+        return media;
     }
 
     private float diferenciaFechasSegundos(Date fecha1, Date fecha2) {
-        long date = fecha1.getTime();
-        long date2 = fecha2.getTime();
+        float date = fecha1.getTime();
+        float date2 = fecha2.getTime();
         float resul = Math.abs(date - date2);
-        return resul / 1000;
+        return resul / 3600000;
     }
 
     private void verDetalleLibro(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
