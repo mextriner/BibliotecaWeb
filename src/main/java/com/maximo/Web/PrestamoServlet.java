@@ -159,14 +159,16 @@ public class PrestamoServlet extends HttpServlet {
                 suma += this.diferenciaFechas(p.getFecha(), p.getFechaEntrega());
             }
         }
-        media = suma / 60;
-        if (prestamos.size() != 0) media = suma / prestamos.size();
-        return media / 60;
+        if (prestamos.size() != 0) {
+            media = suma / prestamos.size();
+        }
+        return media;
     }
 
     private long diferenciaFechas(Date fecha1, Date fecha2) {
+        final int miliAHoras = 3600000;
         long date = fecha1.getTime();
         long date2 = fecha2.getTime();
-        return (Math.abs(date - date2)) / 1000;
+        return (Math.abs(date - date2)) / miliAHoras;
     }
 }

@@ -189,6 +189,6 @@ public class CategoriaServlet extends HttpServlet {
         long date = fecha1.getTime();
         long date2 = fecha2.getTime();
         float resul = Math.abs(date - date2);
-        return resul / 1000 / 60 / 60;
+        return resul / 3600000;
     }
 }
