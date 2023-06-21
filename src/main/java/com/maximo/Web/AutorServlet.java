@@ -96,7 +96,6 @@ public class AutorServlet extends HttpServlet {
         String nombre = request.getParameter("nombre");
         String apellido = request.getParameter("apellido");
         String nacionalidad = request.getParameter("nacionalidad");
-
         String f = request.getParameter("fecha");
         String fe[] = f.split("-");
         LocalDate fec = LocalDate.of(Integer.valueOf(fe[0]), Integer.valueOf(fe[1]), Integer.valueOf(fe[2]));

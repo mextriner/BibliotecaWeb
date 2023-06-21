@@ -32,7 +32,7 @@
                                 <td style="border: solid black 2px;">${editorial.getIdEditorial()}</td>
                                 <td style="border: solid black 2px;">${editorial.getNombre()}</td>
                                 <td style="border: solid black 2px;">${editorial.getDireccion()}</td>
-                                <td style="border: solid black 2px;">${editorial.getLibroList().size()}</td>
+                                <td style="border: solid black 2px;">${editorial.getLibroList().size()} libros</td>
                                 <td style="border: solid black 2px;"><a class="text-primary" href="cargarModifica?clase=editorial&editorialId=${editorial.getIdEditorial()}"><i class="fa-solid fa-pen"></i></a></td>
 
                             </tr>

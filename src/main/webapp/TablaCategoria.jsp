@@ -45,7 +45,7 @@
                                 <td style="border: solid black 2px;">${categoria.getIdCategoria()}</td>
                                 <td style="border: solid black 2px;">${categoria.getNombre()}</td>
                                 <td style="border: solid black 2px;">${categoria.getDescripcion()}</td>
-                                <td style="border: solid black 2px;">${categoria.getLibroList().size()} libros</td>
+                                <td style="border: solid black 2px;">${categoria.libroList.size()} libros</td>
                                 <td style="border: solid black 2px;"><a class="text-primary" href="cargarModifica?clase=categoria&categoriaId=${categoria.getIdCategoria()}"><i class="fa-solid fa-pen"></i></a></td>
 
                             </tr>
