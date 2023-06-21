@@ -32,7 +32,6 @@
                     <th>Usuario</th>
                     <th>Fecha de Entrega</th>
                     <th>Eliminar</th>
-                    <th>Editar</th>
                 </tr>
                 <c:forEach items="${prestamos}" var="prestamo">
                     <tr>
@@ -50,9 +49,9 @@
 
                             </c:otherwise>
                         </c:choose>
-                        <td style="border: solid black 2px;"><a class="text-danger" href=""><i class="fa-solid fa-trash"></i></a></td>
-                        <td style="border: solid black 2px;"><a class="text-primary" href=""><i class="fa-solid fa-pen"></i></a></td>
-
+                        <td style="border: solid black 2px;">
+                            <a class="text-danger" href="Prestamo?accion=eliminar&idPrestamo=${prestamo.idPrestamo}" ><i class="fa-solid fa-trash"></i></a>
+                        </td>
                     </tr>
                 </c:forEach>
             </table>

@@ -20,7 +20,6 @@
     </head>
 
     <body style = "margin-top:8rem">
-        <jsp:include page="includes/navbar.jsp"/>
         <div class="container-fluid bg-dark align-item-center">
             <!--en esta linea se reparten los elementos-->
             <div class="row d-flex justify-content-center">

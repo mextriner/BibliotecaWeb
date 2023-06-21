@@ -14,9 +14,9 @@
         <title> Categoría: <%= c.getNombre()%>
         </title>
     </head>
-    <body class="bg-secondary" style="font-family:monospace;">
+    <body style="font-family:monospace;">
         <jsp:include page="includes/navbar.jsp"/>
-        <div class="container-fluid bg-dark align-item-center">
+        <div class="container-fluid bg-dark align-item-center" style="margin-top: 10rem">
             <!--en esta linea se reparten los elementos-->
             <div class="row d-flex justify-content-center">
                 <div class="col-sm-12 col-md-4 mt-3 mb-3 text-light">

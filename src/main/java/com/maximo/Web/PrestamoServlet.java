@@ -29,7 +29,7 @@ import javax.servlet.http.HttpServletResponse;
 public class PrestamoServlet extends HttpServlet {
 
     @Inject
-    iUsuarioHasUnidadService usuarioHasUnidad;
+    iUsuarioHasUnidadService usuarioHasUnidadService;
     @Inject
     iUnidadService unidadService;
 
@@ -76,6 +76,9 @@ public class PrestamoServlet extends HttpServlet {
             switch (accion) {
                 case "listar":
                     this.listarPrestamo(request, response);
+                    break;
+                case "eliminar":
+                    this.eliminarPrestamo(request, response);
                     break;
                 case "listarU":
                     //this.procesarPrestamo(request, response);
@@ -132,7 +135,7 @@ public class PrestamoServlet extends HttpServlet {
     }// </editor-fold>
 
     private void listarPrestamo(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<UsuarioHasUnidad> prestamos = usuarioHasUnidad.findAll();
+        List<UsuarioHasUnidad> prestamos = usuarioHasUnidadService.findAll();
         float media = this.mediaTiempoPorPrestamo(prestamos);
         request.setAttribute("prestamos", prestamos);
         request.setAttribute("media", String.valueOf(media));
@@ -141,9 +144,9 @@ public class PrestamoServlet extends HttpServlet {
 
     private void finalizarPrestamo(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         UsuarioHasUnidad uhu = new UsuarioHasUnidad(Integer.valueOf(request.getParameter("prestamo")));
-        UsuarioHasUnidad prestamo = usuarioHasUnidad.findByIdPrestamo(uhu);
+        UsuarioHasUnidad prestamo = usuarioHasUnidadService.findByIdPrestamo(uhu);
         prestamo.setFechaEntrega(new Date());
-        usuarioHasUnidad.updateUsuarioHasUnidad(prestamo);
+        usuarioHasUnidadService.updateUsuarioHasUnidad(prestamo);
 
         Unidad unidad = unidadService.findByIdUnidad(prestamo.getUnidadidUnidad());
         unidad.setEstado((short) 1);
@@ -171,4 +174,12 @@ public class PrestamoServlet extends HttpServlet {
         long date2 = fecha2.getTime();
         return (Math.abs(date - date2)) / miliAHoras;
     }
+
+    private void eliminarPrestamo(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        UsuarioHasUnidad uhu = new UsuarioHasUnidad(Integer.valueOf(request.getParameter("idPrestamo")));
+        UsuarioHasUnidad prestamo = usuarioHasUnidadService.findByIdPrestamo(uhu);
+        usuarioHasUnidadService.deleteUsuarioHasUnidad(prestamo);
+        request.getRequestDispatcher("Libro?accion=default").forward(request, response);
+    }
+
 }
