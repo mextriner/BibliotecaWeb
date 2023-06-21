@@ -6,9 +6,14 @@
 package com.maximo.Web;
 
 import com.maximo.Dominio.Categoria;
+import com.maximo.Dominio.Libro;
+import com.maximo.Dominio.Unidad;
+import com.maximo.Dominio.UsuarioHasUnidad;
 import com.maximo.Service.Interfaz.iCategoriaService;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Date;
+import java.util.LinkedHashMap;
 import java.util.List;
 import javax.inject.Inject;
 import javax.servlet.ServletException;
@@ -35,12 +40,15 @@ public class CategoriaServlet extends HttpServlet {
                 case "insertar":
                     this.insertarCategoria(request, response);
                     break;
-                
+
                 case "eliminar":
                     //this.eliminarCliente(request, response);
                     break;
                 case "listar":
                     this.litarCategorias(request, response);
+                    break;
+                case "grafico":
+                    this.graficoCategoria(request, response);
                     break;
                 default:
                 //this.accionDefault(request, response);
@@ -103,9 +111,17 @@ public class CategoriaServlet extends HttpServlet {
     private void litarCategorias(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         List<Categoria> categorias = categoriaService.findAllCategoria();
-        System.out.println("categorias: " + categorias);
         request.setAttribute("categorias", categorias);
         request.getRequestDispatcher("/TablaCategoria.jsp").forward(request, response);
+    }
+
+    private void graficoCategoria(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        List<Categoria> categorias = categoriaService.findAllCategoria();
+        int prestamos[] = this.prestamos(categorias);
+        LinkedHashMap<Categoria, Integer> categoriasOrdendas = this.categoriasOrdenados(categorias, prestamos);
+        request.setAttribute("categorias", categoriasOrdendas);
+        request.getRequestDispatcher("/graficoCategorias.jsp").forward(request, response);
     }
 
     private void editarCategoria(HttpServletRequest request, HttpServletResponse response)
@@ -114,8 +130,65 @@ public class CategoriaServlet extends HttpServlet {
         String nombre = request.getParameter("nombre");
         String descripcion = request.getParameter("descripcion");
 
-        Categoria categoria = new Categoria(id,nombre, descripcion);
+        Categoria categoria = new Categoria(id, nombre, descripcion);
         categoriaService.updateCategoria(categoria);
         this.litarCategorias(request, response);
+    }
+
+    private LinkedHashMap<Categoria, Integer> categoriasOrdenados(List<Categoria> categorias, int[] num) {
+        this.ordenDesc(categorias, num);
+        LinkedHashMap<Categoria, Integer> numPrest = new LinkedHashMap<>();
+        for (int i = 0; i < categorias.size(); i++) {
+            numPrest.put(categorias.get(i), num[i]);
+        }
+        return numPrest;
+    }
+
+    private int[] prestamos(List<Categoria> categorias) {
+        int[] numPrest = new int[categorias.size()];
+        int index = 0;
+        for (Categoria c : categorias) {
+            int x = 0;
+            for (Libro i : c.getLibroList()) {
+                for (Unidad u : i.getUnidadList()) {
+                    for (UsuarioHasUnidad p : u.getUsuarioHasUnidadList()) {
+                        if (p.getFechaEntrega() != null) {
+                            x += diferenciaFechasSegundos(p.getFecha(), p.getFechaEntrega());
+                        }
+
+                    }
+                }
+            }
+            numPrest[index] = x;
+            index++;
+        }
+        return numPrest;
+    }
+
+    private void ordenDesc(List<Categoria> categorias, int[] num) {
+        int temp = 0;
+        Categoria categoriaTemp = null;
+        for (int i = 0; i < (num.length - 1); i++) {
+            for (int j = 0; j < num.length - i - 1; j++) {
+                if (num[j] < num[j + 1]) {
+                    temp = num[j];
+                    categoriaTemp = categorias.get(j);
+
+                    num[j] = num[j + 1];
+                    categorias.set(j, categorias.get(j + 1));
+
+                    num[j + 1] = temp;
+                    categorias.set(j + 1, categoriaTemp);
+                }
+            }
+        }
+
+    }
+
+    private float diferenciaFechasSegundos(Date fecha1, Date fecha2) {
+        long date = fecha1.getTime();
+        long date2 = fecha2.getTime();
+        float resul = Math.abs(date - date2);
+        return resul / 1000 / 60 / 60;
     }
 }

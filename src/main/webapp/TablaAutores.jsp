@@ -24,7 +24,7 @@
                 <div class="col-md-4 col-sm-12" style="width:66%;">
 
                     <!--Comenzamos a mostrar los datos-->
-                    <h2>Listado de AUTORES <a class="text-dark" href="usuarioPdf.php"><i class="fa-solid fa-file-circle-plus"></i></a></h2>
+                    <h2>Listado de AUTORES <a class="text-dark" href="#"><i class="fa-solid fa-file-circle-plus"></i></a></h2>
                     <table class="table" style="border: solid darkgray 1px;">
 
                         <tr>
@@ -33,7 +33,7 @@
                             <td>Apellido</td>
                             <td>Fecha Nacimiento</td>
                             <td>Nacionalidad</td>
-                            <td>Eliminar</td>
+                            <td>Num. Libros</td>
                             <td>Editar</td>
                         </tr>
                         <c:forEach items="${autores}" var="autor">
@@ -43,7 +43,7 @@
                                 <td style="border: solid black 2px;">${autor.getApellido()}</td>
                                 <td style="border: solid black 2px;"><fmt:formatDate value="${autor.getFechaNac()}"  pattern="dd-MM-yyyy"/></td>
                                 <td style="border: solid black 2px;">${autor.getNacionalidad()}</td>
-                                <td style="border: solid black 2px;"><a class="text-danger" href=""><i class="fa-solid fa-trash"></i></a></td>
+                                <td style="border: solid black 2px;">${autor.getLibroList().size()}</td>
                                 <td style="border: solid black 2px;"><a class="text-primary" href="cargarModifica?clase=autor&autorId=${autor.getIdAutor()}"><i class="fa-solid fa-pen"></i></a></td>
 
                             </tr>

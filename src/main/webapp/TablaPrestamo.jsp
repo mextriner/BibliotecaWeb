@@ -23,7 +23,7 @@
 
 
             <!--Comenzamos a mostrar los datos-->
-            <h2>Listado de PRÉSTAMOS <a class="text-dark" href="usuarioPdf.php"><i class="fa-solid fa-file-circle-plus"></i></a></h2>
+            <h2>Listado de PRÉSTAMOS <a class="text-dark" href="#"><i class="fa-solid fa-file-circle-plus"></i></a></h2>
             <h3>Media de horas por préstamo: <%= media%> horas / préstamo</h3>
             <table>
                 <tr>

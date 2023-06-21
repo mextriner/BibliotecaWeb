@@ -17,14 +17,14 @@
                 <div class="col-md-4 col-sm-12" style="width:66%;">
 
                     <!--Comenzamos a mostrar los datos-->
-                    <h2>Listado de EDITORIALES <a class="text-dark" href="usuarioPdf.php"><i class="fa-solid fa-file-circle-plus"></i></a></h2>
+                    <h2>Listado de EDITORIALES <a class="text-dark" href="Categoria?accion=grafico"><i class="fa-solid fa-file-circle-plus"></i></a></h2>
                     <table class="table" style="border: solid darkgray 1px;">
 
                         <tr>
                             <td>ID EDITORIAL</td>
                             <td>Nombre</td>
                             <td>Dirección</td>
-                            <td>Eliminar</td>
+                            <td>Num. Libros</td>
                             <td>Editar</td>
                         </tr>
                         <c:forEach items="${editoriales}" var="editorial">
@@ -32,7 +32,7 @@
                                 <td style="border: solid black 2px;">${editorial.getIdEditorial()}</td>
                                 <td style="border: solid black 2px;">${editorial.getNombre()}</td>
                                 <td style="border: solid black 2px;">${editorial.getDireccion()}</td>
-                                <td style="border: solid black 2px;"><a class="text-danger" href=""><i class="fa-solid fa-trash"></i></a></td>
+                                <td style="border: solid black 2px;">${editorial.getLibroList().size()}</td>
                                 <td style="border: solid black 2px;"><a class="text-primary" href="cargarModifica?clase=editorial&editorialId=${editorial.getIdEditorial()}"><i class="fa-solid fa-pen"></i></a></td>
 
                             </tr>

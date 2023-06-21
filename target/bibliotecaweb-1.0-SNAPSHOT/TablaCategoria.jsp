@@ -1,4 +1,19 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%
+    String user = "";
+    HttpSession sesion = request.getSession();
+    String msj = "";
+    if (request.getAttribute("msj") != null) {
+        msj = ((String) request.getAttribute("msj")).toUpperCase();
+
+    }
+    if (sesion.getAttribute("usuario") != null) {
+        user = (String) sesion.getAttribute("usuario");
+    } else {
+        response.sendRedirect("inicioSesion.jsp");
+    }
+    boolean isAdmin = user.equals("admin");
+%>
 <!DOCTYPE html>
 <html lang="en">
     <jsp:include page="includes/head.jsp"/>
@@ -15,7 +30,7 @@
                 <div class="col-md-4 col-sm-12" style="width:66%;">
 
                     <!--Comenzamos a mostrar los datos-->
-                    <h2>Listado de CATEGORÍAS <a class="text-dark" href="usuarioPdf.php"><i class="fa-solid fa-file-circle-plus"></i></a></h2>
+                    <h2>Listado de CATEGORÍAS <a class="text-dark" href="Categoria?accion=grafico"><i class="fa-solid fa-chart-simple"></i></a></h2>
                     <table class="table" style="border: solid darkgray 1px;">
 
                         <tr>

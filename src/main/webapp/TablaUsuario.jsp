@@ -16,7 +16,7 @@
             <div class="col-md-4 col-sm-12" style="width:66%;">
 
                 <!--Comenzamos a mostrar los datos-->
-                <h2>Listado de USUARIOS <a class="text-dark" href="usuarioPdf.php"><i class="fa-solid fa-file-circle-plus"></i></a></h2>
+                <h2>Listado de USUARIOS <a class="text-dark" href="#"><i class="fa-solid fa-file-circle-plus"></i></a></h2>
                 <table class="table" style="border: solid darkgray 1px;">
 
                     <tr>
