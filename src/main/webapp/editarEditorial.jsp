@@ -36,7 +36,7 @@
                         </div>
                         <input type="hidden" name="id" value="<%= request.getAttribute("id")%>">
                         <div class="mt-5 col-12 d-flex justify-content-center align-item-center">
-                            <button class="btn btn-outline-success Hadow rounded border" type="submit">REGISTRARSE</button>
+                            <button class="btn btn-outline-success Hadow rounded border" type="submit">ACTUALIZAR</button>
 
                         </div>
 

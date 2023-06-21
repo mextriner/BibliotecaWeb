@@ -64,7 +64,7 @@
                                 <textarea class="form-control" name="descripcion" id="exampleFormControlTextarea1" rows="3" required><%= libro.getDescripcion()%></textarea>
                             </div>
                             <div class="mb-3">
-                                <label for="inputState" class="form-label">Editorial: <%= libro.getEditorialidEditorial() %></label>
+                                <label for="inputState" class="form-label">Editorial: <%= libro.getEditorialidEditorial()%></label>
                                 <div class="form-floating">
 
                                     <select name="editorial" class="form-select" required>
@@ -80,7 +80,7 @@
                             <button class="btn btn-outline-info Hadow rounded border" type="submit">ACTUALIZAR</button>
                         </div>
                     </form>
-                    <a class="mt-2 text-danger" href="">ELIMINAR LIBRO</a>
+
                 </div>
             </div>
 
